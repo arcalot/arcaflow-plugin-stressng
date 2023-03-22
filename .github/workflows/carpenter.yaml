@@ -1,5 +1,8 @@
 name: Carpenter
 on:
+  pull_request:
+    branches:
+      - "main"
   push:
     branches:
       - "**"
