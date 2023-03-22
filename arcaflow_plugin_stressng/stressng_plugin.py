@@ -19,6 +19,7 @@ class Stressors(enum.Enum):
     VM = "vm"
     MATRIX = "matrix"
     MQ = "mq"
+    HDD = "hdd"
 
 
 @dataclass
@@ -44,10 +45,20 @@ class CpuStressorParams:
         },
     )
 
+    cpu_load: typing.Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "CPU load",
+            "description": "load CPU by percentage",
+        },
+    )
+
     def to_jobfile(self) -> str:
         result = "cpu {}\n".format(self.cpu_count)
         if self.cpu_method is not None:
             result = result + "cpu-method {}\n".format(self.cpu_method)
+        if self.cpu_load is not None:
+            result = result + "cpu-load {}\n".format(self.cpu_load)
         return result
 
 
@@ -140,6 +151,39 @@ class MqStressorParams:
 
 
 @dataclass
+class HDDStressorParams:
+    stressor: str
+    hdd: int = field(
+        metadata={
+            "name": "HDD workers",
+            "description": "start N workers continually writing, reading and removing temporary files"
+        }
+    )
+
+    hdd_bytes: str = field(
+        metadata={"name": "Bytes per worker",
+                  "description": ("write  N  bytes for each hdd process, the default is 1 GB. "
+                                  "One can specify the size in units of Bytes, KBytes, "
+                                  "MBytes and GBytes using the suffix b, k, m or g."
+                                  )
+                  }
+    )
+
+    hdd_write_size: str = field(
+        metadata={"name": "Write Size",
+                  "description": "specify size of each write in bytes. Size can be from 1 byte to 4MB"
+                  }
+    )
+
+    def to_jobfile(self) -> str:
+        hdd = "hdd {}\n".format(self.hdd)
+        hdd_bytes = "hdd-bytes {}\n".format(self.hdd_bytes)
+        hdd_write_size = "hdd-write-size {}\n".format(self.hdd_write_size)
+        result = hdd + hdd_bytes + hdd_write_size
+        return result
+
+
+@dataclass
 class StressNGParams:
     """
     The parameters in this schema will be passed through to the stressng
@@ -158,6 +202,9 @@ class StressNGParams:
             "description": "Cleanup after the benchmark run"
         }
     )
+
+
+
     items: typing.List[
         typing.Annotated[
             typing.Union[
@@ -173,6 +220,9 @@ class StressNGParams:
                 ],
                 typing.Annotated[
                     MqStressorParams, annotations.discriminator_value("mq")
+                ],
+                typing.Annotated[
+                    HDDStressorParams, annotations.discriminator_value("hdd")
                 ],
             ],
             annotations.discriminator("stressor"),
@@ -191,6 +241,14 @@ class StressNGParams:
             "name": "brief metrics",
             "description": "Brief version of the metrics output",
         },
+    )
+
+    workdir: typing.Optional[str] = field (
+        default=None,
+        metadata={
+            "name": "Working Dir",
+            "description": "Path were stress-ng will be executed (example to target a specific volume)"
+        }
     )
 
     def to_jobfile(self) -> str:
@@ -471,6 +529,32 @@ mq_output_schema = plugin.build_object_schema(MQOutput)
 
 
 @dataclass
+class HDDOutput:
+    """
+    This is the data structure that holds the results for the MQ stressor
+    """
+
+    stressor: str
+    bogo_ops: int = dataclasses.field(metadata={"id": "bogo-ops"})
+    bogo_ops_per_second_usr_sys_time: float = dataclasses.field(
+        metadata={"id": "bogo-ops-per-second-usr-sys-time"}
+    )
+    bogo_ops_per_second_real_time: float = dataclasses.field(
+        metadata={"id": "bogo-ops-per-second-real-time"}
+    )
+    wall_clock_time: float = dataclasses.field(
+        metadata={"id": "wall-clock-time"}
+    )
+    user_time: float = dataclasses.field(metadata={"id": "user-time"})
+    system_time: float = dataclasses.field(metadata={"id": "system-time"})
+    cpu_usage_per_instance: float = dataclasses.field(
+        metadata={"id": "cpu-usage-per-instance"}
+    )
+
+
+hdd_output_schema = plugin.build_object_schema(HDDOutput)
+
+@dataclass
 class WorkloadResults:
     """
     This is the output data structure for the success case
@@ -481,6 +565,7 @@ class WorkloadResults:
     cpuinfo: typing.Optional[CPUOutput] = None
     matrixinfo: typing.Optional[MatrixOutput] = None
     mqinfo: typing.Optional[MQOutput] = None
+    hddinfo: typing.Optional[HDDOutput] = None
 
 
 @dataclass
@@ -543,11 +628,14 @@ def stressng_run(
     ]
 
     print("==>> Running stress-ng with the temporary jobfile...")
+    workdir = "/tmp"
+    if params.StressNGParams.workdir is not None:
+        workdir = params.StressNGParams.workdir
     try:
         print(
             subprocess.check_output(
                 stressng_command,
-                cwd="/tmp",
+                cwd=workdir,
                 text=True,
                 stderr=subprocess.STDOUT
             )
@@ -579,6 +667,7 @@ def stressng_run(
     vminfo_un = None
     matrixinfo_un = None
     mqinfo_un = None
+    hddinfo_un = None
 
     system_un = system_info_output_schema.unserialize(system_info)
     for metric in metrics:
@@ -590,6 +679,9 @@ def stressng_run(
             matrixinfo_un = matrix_output_schema.unserialize(metric)
         if metric["stressor"] == "mq":
             mqinfo_un = mq_output_schema.unserialize(metric)
+        if metric["stressor"] == "hdd":
+            hddinfo_un = hdd_output_schema.unserialize(metric)
+
 
     print("==>> Workload run complete!")
     os.close(stressng_jobfile[0])
@@ -601,7 +693,7 @@ def stressng_run(
         os.remove(stressng_jobfile[1])
 
     return "success", WorkloadResults(
-        system_un, vminfo_un, cpuinfo_un, matrixinfo_un, mqinfo_un
+        system_un, vminfo_un, cpuinfo_un, matrixinfo_un, mqinfo_un, hddinfo_un
     )
 
 
