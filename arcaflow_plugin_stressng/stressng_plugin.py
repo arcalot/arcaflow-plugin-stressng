@@ -729,7 +729,7 @@ class HDDOutput:
             "id": "cpu-usage-per-instance",
             "name": "CPU usage per instance",
             "description": (
-                "is the amount of CPU used by " "each stressor instance"
+                "is the amount of CPU used by each stressor instance"
             ),
         }
     )
