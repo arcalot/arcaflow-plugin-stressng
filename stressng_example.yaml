@@ -3,7 +3,7 @@ cleanup: true
 StressNGParams:
   timeout: 1m
   workdir: /tmp
-  items:
+  stressors:
     - stressor: cpu
       cpu_count: 2
       cpu_method: "all"

@@ -38,13 +38,13 @@ class StressNGTest(unittest.TestCase):
             stressor="cpu", cpu_count=2, cpu_method="all"
         )
 
-        stress = stressng_schema.StressNGParams(timeout="10s", items=[cpu])
+        stress = stressng_schema.StressNGParams(timeout="10s", stressors=[cpu])
 
         reference_jobfile = "tests/reference_jobfile_cpu"
 
         result = stress.to_jobfile()
 
-        for item in stress.items:
+        for item in stress.stressors:
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
@@ -65,13 +65,13 @@ class StressNGTest(unittest.TestCase):
             stressor="vm", vm=1, vm_bytes="100m", mmap="1", mmap_bytes="10m"
         )
 
-        stress = stressng_schema.StressNGParams(timeout="10s", items=[vm])
+        stress = stressng_schema.StressNGParams(timeout="10s", stressors=[vm])
 
         reference_jobfile = "tests/reference_jobfile_vm"
 
         result = stress.to_jobfile()
 
-        for item in stress.items:
+        for item in stress.stressors:
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
@@ -93,13 +93,15 @@ class StressNGTest(unittest.TestCase):
             matrix=1,
         )
 
-        stress = stressng_schema.StressNGParams(timeout="10s", items=[matrix])
+        stress = stressng_schema.StressNGParams(
+            timeout="10s", stressors=[matrix]
+        )
 
         reference_jobfile = "tests/reference_jobfile_matrix"
 
         result = stress.to_jobfile()
 
-        for item in stress.items:
+        for item in stress.stressors:
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
@@ -118,13 +120,13 @@ class StressNGTest(unittest.TestCase):
     def test_functional_mq(self):
         mq = stressng_schema.MqStressorParams(stressor="mq", mq=1)
 
-        stress = stressng_schema.StressNGParams(timeout="10s", items=[mq])
+        stress = stressng_schema.StressNGParams(timeout="10s", stressors=[mq])
 
         reference_jobfile = "tests/reference_jobfile_mq"
 
         result = stress.to_jobfile()
 
-        for item in stress.items:
+        for item in stress.stressors:
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
@@ -145,13 +147,13 @@ class StressNGTest(unittest.TestCase):
             stressor="hdd", hdd=1, hdd_bytes="100m", hdd_write_size="4m"
         )
 
-        stress = stressng_schema.StressNGParams(timeout="10s", items=[hdd])
+        stress = stressng_schema.StressNGParams(timeout="10s", stressors=[hdd])
 
         reference_jobfile = "tests/reference_jobfile_hdd"
 
         result = stress.to_jobfile()
 
-        for item in stress.items:
+        for item in stress.stressors:
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:

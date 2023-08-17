@@ -34,8 +34,8 @@ def stressng_run(
     print("==>> Generating temporary jobfile...")
     # generic parameters are in the StressNGParams class (e.g. the timeout)
     result = params.StressNGParams.to_jobfile()
-    # now we need to iterate of the list of items
-    for item in params.StressNGParams.items:
+    # now we need to iterate of the list of stressors
+    for item in params.StressNGParams.stressors:
         result = result + item.to_jobfile()
 
     stressng_jobfile = tempfile.mkstemp()

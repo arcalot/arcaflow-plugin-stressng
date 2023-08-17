@@ -212,7 +212,7 @@ class StressNGParams:
         }
     )
 
-    items: typing.List[
+    stressors: typing.List[
         typing.Annotated[
             typing.Union[
                 typing.Annotated[
