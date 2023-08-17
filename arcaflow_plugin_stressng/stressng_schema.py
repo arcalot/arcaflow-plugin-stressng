@@ -18,12 +18,16 @@ class Stressors(enum.Enum):
 
 
 @dataclass
-class CpuStressorParams:
-    """
-    The parameters for the CPU stressor
-    """
+class CommonStressorParams:
+    stressor: typing.Annotated[
+        Stressors,
+        schema.name("Stressor"),
+        schema.description("Stressor for the benchmark workload"),
+    ]
 
-    stressor: str
+
+@dataclass
+class CpuStressorParams(CommonStressorParams):
     cpu_count: int = field(
         metadata={
             "name": "CPU count",
@@ -60,14 +64,7 @@ class CpuStressorParams:
 
 
 @dataclass
-class VmStressorParams:
-    """
-    The parameters for the vm (virtual memory) stressor
-    vm: number of virtual-memory stressors
-    vm_bytes: amount of vm stressor memory
-    """
-
-    stressor: str
+class VmStressorParams(CommonStressorParams):
     vm: int = field(
         metadata={
             "name": "VM count",
@@ -107,14 +104,7 @@ class VmStressorParams:
 
 
 @dataclass
-class MatrixStressorParams:
-    """
-    This is the data structure that holds the results for the Matrix stressor.
-    This stressor is a good way to exercise the CPU floating point operations
-    as well as memory and processor data cache
-    """
-
-    stressor: str
+class MatrixStressorParams(CommonStressorParams):
     matrix: int = field(
         metadata={
             "name": "Matrix count",
@@ -132,12 +122,7 @@ class MatrixStressorParams:
 
 
 @dataclass
-class MqStressorParams:
-    """
-    This is the data structure that holds the results for the MQ stressor
-    """
-
-    stressor: str
+class MqStressorParams(CommonStressorParams):
     mq: int = field(
         metadata={
             "name": "MQ count",
@@ -155,8 +140,7 @@ class MqStressorParams:
 
 
 @dataclass
-class HDDStressorParams:
-    stressor: str
+class HDDStressorParams(CommonStressorParams):
     hdd: int = field(
         metadata={
             "name": "HDD workers",
@@ -295,11 +279,6 @@ class StressNGParams:
 
 @dataclass
 class WorkloadParams:
-    """
-    This is the data structure for the input parameters of the step
-    defined below
-    """
-
     StressNGParams: typing.Annotated[
         StressNGParams,
         schema.name("Stress-NG Job Parameters"),
@@ -319,11 +298,6 @@ class WorkloadParams:
 
 @dataclass
 class SystemInfoOutput:
-    """
-    This is the data structure that holds the generic info for the
-    tested system
-    """
-
     stress_ng_version: str = dataclasses.field(
         metadata={
             "id": "stress-ng-version",
@@ -595,10 +569,6 @@ hdd_output_schema = plugin.build_object_schema(HDDOutput)
 
 @dataclass
 class WorkloadResults:
-    """
-    This is the output data structure for the success case
-    """
-
     systeminfo: typing.Annotated[
         SystemInfoOutput,
         schema.name("System Info"),
@@ -633,8 +603,4 @@ class WorkloadResults:
 
 @dataclass
 class WorkloadError:
-    """
-    This is the output data structure for the failure case
-    """
-
     error: str
