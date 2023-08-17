@@ -11,20 +11,20 @@ class StressNGTest(unittest.TestCase):
     @staticmethod
     def test_serialization():
         plugin.test_object_serialization(
-            stressng_schema.CpuStressorParams(stressor="cpu", cpu_count=2)
+            stressng_schema.CpuStressorParams(stressor=stressng_schema.Stressors.CPU, cpu_count=2)
         )
 
         plugin.test_object_serialization(
             stressng_schema.VmStressorParams(
-                stressor="vm", vm=2, vm_bytes="2G"
+                stressor=stressng_schema.Stressors.VM, vm=2, vm_bytes="2G"
             )
         )
 
         plugin.test_object_serialization(
-            stressng_schema.MatrixStressorParams(stressor="matrix", matrix=2)
+            stressng_schema.MatrixStressorParams(stressor=stressng_schema.Stressors.MATRIX, matrix=2)
         )
         plugin.test_object_serialization(
-            stressng_schema.MqStressorParams(stressor="mq", mq=2)
+            stressng_schema.MqStressorParams(stressor=stressng_schema.Stressors.MQ, mq=2)
         )
 
     def test_functional_cpu(self):
