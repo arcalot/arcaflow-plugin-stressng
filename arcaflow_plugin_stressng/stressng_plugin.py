@@ -30,7 +30,7 @@ from stressng_schema import (
 def stressng_run(
     params: WorkloadParams,
 ) -> typing.Tuple[str, typing.Union[WorkloadResults, WorkloadError]]:
-    
+
     print("==>> Generating temporary jobfile...")
     # generic parameters are in the StressNGParams class (e.g. the timeout)
     result = params.StressNGParams.to_jobfile()
