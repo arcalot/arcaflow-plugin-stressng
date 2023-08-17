@@ -257,6 +257,8 @@ class StressNGParams:
                 ],
             ],
             annotations.discriminator("stressor"),
+            schema.name("Stressors List"),
+            schema.description("List of stress-ng stressors and parameters"),
         ]
     ]
     verbose: typing.Optional[bool] = field(
@@ -308,12 +310,11 @@ class WorkloadParams:
             """
         ),
     ]
-    cleanup: bool = field(
-        metadata={
-            "name": "Cleanup",
-            "description": "Cleanup artifacts after the plugin run",
-        }
-    )
+    cleanup: typing.Annotated[
+        typing.Optional[bool],
+        schema.name("Cleanup"),
+        schema.description("Cleanup artifacts after the plugin run"),
+    ] = False
 
 
 @dataclass
@@ -466,9 +467,26 @@ system_info_output_schema = plugin.build_object_schema(SystemInfoOutput)
 
 @dataclass
 class CommonOutput:
-    stressor: str
-    max_rss: str = dataclasses.field(metadata={"id": "max-rss"})
-    bogo_ops: int = dataclasses.field(metadata={"id": "bogo-ops"})
+    stressor: str = dataclass.field(
+        metadata={
+            "name": "Stressor",
+            "description": "Type of stressor for workload",
+        }
+    )
+    max_rss: str = dataclasses.field(
+        metadata={
+            "id": "max-rss",
+            "name": "Max RSS",
+            "description": "Maximum resident set size",
+        }
+    )
+    bogo_ops: int = dataclasses.field(
+        metadata={
+            "id": "bogo-ops",
+            "name": "Bogus Operations",
+            "description": "Number of stressor loop iterations",
+        }
+    )
     bogo_ops_per_second_usr_sys_time: float = dataclasses.field(
         metadata={
             "id": "bogo-ops-per-second-usr-sys-time",
@@ -496,12 +514,24 @@ class CommonOutput:
     wall_clock_time: float = dataclasses.field(
         metadata={
             "id": "wall-clock-time",
-            "name": "Wall clock time",
-            "description": "the time the stressor took to run",
+            "name": "Wall Clock Time",
+            "description": "The time the stressor took to run",
         }
     )
-    user_time: float = dataclasses.field(metadata={"id": "user-time"})
-    system_time: float = dataclasses.field(metadata={"id": "system-time"})
+    user_time: float = dataclasses.field(
+        metadata={
+            "id": "user-time",
+            "name": "CPU User Time",
+            "description": "The CPU time spent in user space",
+        }
+    )
+    system_time: float = dataclasses.field(
+        metadata={
+            "id": "system-time",
+            "name": "CPU System Time",
+            "description": "The CPU time spent in kernel space",
+        }
+    )
     cpu_usage_per_instance: float = dataclasses.field(
         metadata={
             "id": "cpu-usage-per-instance",
@@ -569,12 +599,36 @@ class WorkloadResults:
     This is the output data structure for the success case
     """
 
-    systeminfo: SystemInfoOutput
-    vminfo: typing.Optional[VMOutput] = None
-    cpuinfo: typing.Optional[CPUOutput] = None
-    matrixinfo: typing.Optional[MatrixOutput] = None
-    mqinfo: typing.Optional[MQOutput] = None
-    hddinfo: typing.Optional[HDDOutput] = None
+    systeminfo: typing.Annotated[
+        SystemInfoOutput,
+        schema.name("System Info"),
+        schema.description("System info output object"),
+    ]
+    vminfo: typing.Annotated[
+        typing.Optional[VMOutput],
+        schema.name("VM Output"),
+        schema.description("VM stressor output object"),
+    ] = None
+    cpuinfo: typing.Annotated[
+        typing.Optional[CPUOutput],
+        schema.name("CPU Output"),
+        schema.description("CPU stressor output object"),
+    ] = None
+    matrixinfo: typing.Annotated[
+        typing.Optional[MatrixOutput],
+        schema.name("Matrix Output"),
+        schema.description("Matrix stressor output object"),
+    ] = None
+    mqinfo: typing.Annotated[
+        typing.Optional[MQOutput],
+        schema.name("MQ Output"),
+        schema.description("MQ stressor output object"),
+    ] = None
+    hddinfo: typing.Annotated[
+        typing.Optional[HDDOutput],
+        schema.name("HDD Output"),
+        schema.description("HDD stressor output object"),
+    ] = None
 
 
 @dataclass
