@@ -5,7 +5,7 @@ import enum
 import dataclasses
 from dataclasses import dataclass, field
 
-from arcaflow_plugin_sdk import plugin
+from arcaflow_plugin_sdk import plugin, schema
 from arcaflow_plugin_sdk import annotations
 
 
@@ -216,20 +216,44 @@ class StressNGParams:
         typing.Annotated[
             typing.Union[
                 typing.Annotated[
-                    CpuStressorParams, annotations.discriminator_value("cpu")
+                    CpuStressorParams,
+                    annotations.discriminator_value("cpu"),
+                    schema.name("CPU Stressor Parameters"),
+                    schema.description(
+                        "Parameters for running the cpu stressor"
+                    ),
                 ],
                 typing.Annotated[
-                    VmStressorParams, annotations.discriminator_value("vm")
+                    VmStressorParams,
+                    annotations.discriminator_value("vm"),
+                    schema.name("VM Stressor Parameters"),
+                    schema.description(
+                        "Parameters for running the vm stressor"
+                    ),
                 ],
                 typing.Annotated[
                     MatrixStressorParams,
                     annotations.discriminator_value("matrix"),
+                    schema.name("Matrix Stressor Parameters"),
+                    schema.description(
+                        "Parameters for running the matrix stressor"
+                    ),
                 ],
                 typing.Annotated[
-                    MqStressorParams, annotations.discriminator_value("mq")
+                    MqStressorParams,
+                    annotations.discriminator_value("mq"),
+                    schema.name("MQ Stressor Parameters"),
+                    schema.description(
+                        "Parameters for running the mq stressor"
+                    ),
                 ],
                 typing.Annotated[
-                    HDDStressorParams, annotations.discriminator_value("hdd")
+                    HDDStressorParams,
+                    annotations.discriminator_value("hdd"),
+                    schema.name("HDD Stressor Parameters"),
+                    schema.description(
+                        "Parameters for running the hdd stressor"
+                    ),
                 ],
             ],
             annotations.discriminator("stressor"),
@@ -274,11 +298,17 @@ class WorkloadParams:
     defined below
     """
 
-    StressNGParams: StressNGParams
+    StressNGParams: typing.Annotated[
+        StressNGParams,
+        schema.name("Stress-NG Job Parameters"),
+        schema.description(
+            "Global workload parameters and list of stressors for the stress-ng job"
+        ),
+    ]
     cleanup: bool = field(
         metadata={
             "name": "Cleanup",
-            "description": "Cleanup after the benchmark run",
+            "description": "Cleanup artifacts after the plugin run",
         }
     )
 
