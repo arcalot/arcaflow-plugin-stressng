@@ -323,7 +323,7 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>cpus_online</td></tr><tr><th>Description:</th><td>number of online CPUs the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>date-yyyy-mm-dd (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>data</td></tr><tr><th>Description:</th><td>date on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>date</td></tr><tr><th>Description:</th><td>date on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>epoch-secs (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>epoch</td></tr><tr><th>Description:</th><td>epoch at which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -331,7 +331,7 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>freeram</td></tr><tr><th>Description:</th><td>amount of free RAM the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>freeswap (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>bufferram</td></tr><tr><th>Description:</th><td>amount of free swap the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>freeswap</td></tr><tr><th>Description:</th><td>amount of free swap the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>hostname (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>hostname</td></tr><tr><th>Description:</th><td>host on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
