@@ -441,7 +441,7 @@ system_info_output_schema = plugin.build_object_schema(SystemInfoOutput)
 
 @dataclass
 class CommonOutput:
-    stressor: str = dataclass.field(
+    stressor: str = dataclasses.field(
         metadata={
             "name": "Stressor",
             "description": "Type of stressor for workload",
