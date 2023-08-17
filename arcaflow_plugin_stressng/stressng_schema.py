@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 
-import sys
 import typing
-import tempfile
-import yaml
-import subprocess
-import os
 import enum
 import dataclasses
 from dataclasses import dataclass, field
@@ -216,12 +211,6 @@ class StressNGParams:
             "description": "Time to run the benchmark test",
         }
     )
-    cleanup: bool = field(
-        metadata={
-            "name": "Cleanup",
-            "description": "Cleanup after the benchmark run",
-        }
-    )
 
     items: typing.List[
         typing.Annotated[
@@ -286,7 +275,12 @@ class WorkloadParams:
     """
 
     StressNGParams: StressNGParams
-    cleanup: typing.Optional[bool] = True
+    cleanup: bool = field(
+        metadata={
+            "name": "Cleanup",
+            "description": "Cleanup after the benchmark run",
+        }
+    )
 
 
 @dataclass
@@ -759,139 +753,3 @@ class WorkloadError:
     """
 
     error: str
-
-
-# The following is a decorator (starting with @).
-# We add this in front of our function to define the medadata for our step.
-@plugin.step(
-    id="workload",
-    name="stress-ng workload",
-    description="Run the stress-ng workload with the given parameters",
-    outputs={"success": WorkloadResults, "error": WorkloadError},
-)
-def stressng_run(
-    params: WorkloadParams,
-) -> typing.Tuple[str, typing.Union[WorkloadResults, WorkloadError]]:
-    """
-    This function is implementing the step.
-    It needs the decorator to turn it into a step.
-    The type hints for the params are required.
-    """
-
-    print("==>> Generating temporary jobfile...")
-    # generic parameters are in the StressNGParams class (e.g. the timeout)
-    result = params.StressNGParams.to_jobfile()
-    # now we need to iterate of the list of items
-    for item in params.StressNGParams.items:
-        result = result + item.to_jobfile()
-
-    stressng_jobfile = tempfile.mkstemp()
-    stressng_outfile = tempfile.mkstemp()
-
-    # write the temporary jobfile
-    try:
-        with open(stressng_jobfile[1], "w") as jobfile:
-            try:
-                jobfile.write(result)
-            except IOError as error:
-                return "error", WorkloadError(
-                    f"{error} while trying to write {stressng_jobfile[1]}"
-                )
-    except EnvironmentError as error:
-        return "error", WorkloadError(
-            f"{error} while trying to open {stressng_jobfile[1]}"
-        )
-
-    stressng_command = [
-        "/usr/bin/stress-ng",
-        "-j",
-        stressng_jobfile[1],
-        "--metrics",
-        "-Y",
-        stressng_outfile[1],
-    ]
-
-    print("==>> Running stress-ng with the temporary jobfile...")
-    workdir = "/tmp"
-    if params.StressNGParams.workdir is not None:
-        workdir = params.StressNGParams.workdir
-    try:
-        print(
-            subprocess.check_output(
-                stressng_command,
-                cwd=workdir,
-                text=True,
-                stderr=subprocess.STDOUT,
-            )
-        )
-    except subprocess.CalledProcessError as error:
-        return "error", WorkloadError(
-            f"""{error.cmd[0]} failed with return code
-                {error.returncode}:\n{error.output}"""
-        )
-
-    try:
-        with open(stressng_outfile[1], "r") as output:
-            try:
-                stressng_yaml = yaml.safe_load(output)
-            except yaml.YAMLError as error:
-                print(error)
-                return "error", WorkloadError(
-                    f"""{error} in
-                                                  {stressng_outfile[1]}"""
-                )
-    except EnvironmentError as error:
-        return "error", WorkloadError(
-            f"{error} while trying to open {stressng_outfile[1]}"
-        )
-
-    system_info = stressng_yaml["system-info"]
-    metrics = stressng_yaml["metrics"]
-
-    # allocate all stressor information with None in case they don't get called
-    cpuinfo_un = None
-    vminfo_un = None
-    matrixinfo_un = None
-    mqinfo_un = None
-    hddinfo_un = None
-
-    system_un = system_info_output_schema.unserialize(system_info)
-    for metric in metrics:
-        if metric["stressor"] == "cpu":
-            cpuinfo_un = cpu_output_schema.unserialize(metric)
-        if metric["stressor"] == "vm":
-            vminfo_un = vm_output_schema.unserialize(metric)
-        if metric["stressor"] == "matrix":
-            matrixinfo_un = matrix_output_schema.unserialize(metric)
-        if metric["stressor"] == "mq":
-            mqinfo_un = mq_output_schema.unserialize(metric)
-        if metric["stressor"] == "hdd":
-            hddinfo_un = hdd_output_schema.unserialize(metric)
-
-    print("==>> Workload run complete!")
-    os.close(stressng_jobfile[0])
-    os.close(stressng_outfile[0])
-
-    # TODO: if cleanup is set to true, remove the temporary files
-    if params.StressNGParams.cleanup:
-        print("==>> Cleaning up operation files...")
-        os.remove(stressng_jobfile[1])
-
-    return "success", WorkloadResults(
-        system_un,
-        vminfo_un,
-        cpuinfo_un,
-        matrixinfo_un,
-        mqinfo_un,
-        hddinfo_un,
-    )
-
-
-if __name__ == "__main__":
-    sys.exit(
-        plugin.run(
-            plugin.build_schema(
-                stressng_run,
-            )
-        )
-    )
