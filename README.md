@@ -47,9 +47,12 @@ Run the stress-ng workload with the given parameters
 <table><tbody>
 <tr><th>Type:</th><td><code>scope</code></td><tr><th>Root object:</th><td>WorkloadParams</td></tr>
 <tr><th>Properties</th><td><details><summary>StressNGParams (<code>reference[StressNGParams]</code>)</summary>
-                <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[StressNGParams]</code></td><tr><th>Referenced object:</th><td>StressNGParams</td></tr></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>Stress-NG Job Parameters</td></tr><tr><th>Description:</th><td>
+            Global workload parameters and list of stressors
+            for the stress-ng job
+            </td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[StressNGParams]</code></td><tr><th>Referenced object:</th><td>StressNGParams</td></tr></tbody></table>
             </details><details><summary>cleanup (<code>bool</code>)</summary>
-                <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>true</code></pre></td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td>Cleanup artifacts after the plugin run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
             </details></td></tr>
 <tr><td colspan="2"><details><summary><strong>Objects</strong></summary><details><summary>CpuStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>cpu_count (<code>int</code>)</summary>
@@ -93,17 +96,15 @@ Run the stress-ng workload with the given parameters
         </details></td></tr>
 </tbody></table>
         </details><details><summary>StressNGParams (<code>object</code>)</summary>
-            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>cleanup (<code>bool</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td>Cleanup after the benchmark run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
-        </details><details><summary>items (<code>list[<code>one of[string]</code>]</code>)</summary>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>metrics_brief (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>brief metrics</td></tr><tr><th>Description:</th><td>Brief version of the metrics output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>stressors (<code>list[<code>one of[string]</code>]</code>)</summary>
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>list[<code>one of[string]</code>]</code></td><tr><td colspan="2">
     <details>
         <summary>List items</summary>
         <table><tbody><tr><th>Type:</th><td><code>one of[string]</code></td></tbody></table>
     </details>
 </td></tr></tbody></table>
-        </details><details><summary>metrics_brief (<code>bool</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>brief metrics</td></tr><tr><th>Description:</th><td>Brief version of the metrics output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>timeout (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Runtime</td></tr><tr><th>Description:</th><td>Time to run the benchmark test</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>verbose (<code>bool</code>)</summary>
@@ -128,9 +129,12 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>WorkloadParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>StressNGParams (<code>reference[StressNGParams]</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[StressNGParams]</code></td><tr><th>Referenced object:</th><td>StressNGParams</td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Stress-NG Job Parameters</td></tr><tr><th>Description:</th><td>
+            Global workload parameters and list of stressors
+            for the stress-ng job
+            </td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[StressNGParams]</code></td><tr><th>Referenced object:</th><td>StressNGParams</td></tr></tbody></table>
         </details><details><summary>cleanup (<code>bool</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>true</code></pre></td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td>Cleanup artifacts after the plugin run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details></details></td></tr>
@@ -184,6 +188,8 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
+        </details><details><summary>max-rss (<code>string</code>)</summary>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
@@ -210,13 +216,15 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
+        </details><details><summary>max-rss (<code>string</code>)</summary>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>system tyme</td></tr><tr><th>Description:</th><td>measurement is the amount of CPU used in the kernel</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>user-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>user time</td></tr><tr><th>Description:</th><td>is the amount of CPU used running as a normal user process.Note with 4 CPUs this is about 4 x the wall clock time (since no sys time is being used).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>wall-clock-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Wall clock time</td></tr><tr><th>Description:</th><td>the time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -236,13 +244,15 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
+        </details><details><summary>max-rss (<code>string</code>)</summary>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>system tyme</td></tr><tr><th>Description:</th><td>measurement is the amount of CPU used in the kernel</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>user-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>user time</td></tr><tr><th>Description:</th><td>is the amount of CPU used running as a normal user process.Note with 4 CPUs this is about 4 x the wall clock time (since no sys time is being used).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>wall-clock-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Wall clock time</td></tr><tr><th>Description:</th><td>the time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -262,13 +272,15 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
+        </details><details><summary>max-rss (<code>string</code>)</summary>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>system tyme</td></tr><tr><th>Description:</th><td>measurement is the amount of CPU used in the kernel</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>user-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>user time</td></tr><tr><th>Description:</th><td>is the amount of CPU used running as a normal user process.Note with 4 CPUs this is about 4 x the wall clock time (since no sys time is being used).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>wall-clock-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Wall clock time</td></tr><tr><th>Description:</th><td>the time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -339,14 +351,16 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td>real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-usr-sys-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td>is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
+        </details><details><summary>max-rss (<code>string</code>)</summary>
+        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
@@ -356,7 +370,7 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>wall-clock-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Wall clock time</td></tr><tr><th>Description:</th><td>the time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
