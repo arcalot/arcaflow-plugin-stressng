@@ -52,7 +52,7 @@ Run the stress-ng workload with the given parameters
             for the stress-ng job
             </td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[StressNGParams]</code></td><tr><th>Referenced object:</th><td>StressNGParams</td></tr></tbody></table>
             </details><details><summary>cleanup (<code>bool</code>)</summary>
-                <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td>Cleanup artifacts after the plugin run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td>Cleanup artifacts after the plugin run</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>false</code></pre></td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
             </details></td></tr>
 <tr><td colspan="2"><details><summary><strong>Objects</strong></summary><details><summary>CpuStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>cpu_count (<code>int</code>)</summary>
@@ -63,8 +63,13 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>cpu_method (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU stressor method</td></tr><tr><th>Description:</th><td>fine grained control of which cpu stressors to use (ackermann, cfloat etc.</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;all&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
-        </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>HDDStressorParams (<code>object</code>)</summary>
@@ -75,24 +80,39 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bytes per worker</td></tr><tr><th>Description:</th><td>write  N  bytes for each hdd process, the default is 1 GB. One can specify the size in units of Bytes, KBytes, MBytes and GBytes using the suffix b, k, m or g.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>hdd_write_size (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Write Size</td></tr><tr><th>Description:</th><td>specify size of each write in bytes. Size can be from 1 byte to 4MBOne can specify the size in units of Bytes, KBytes, MBytes using the suffix b, k, m</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
-        </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>MatrixStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>matrix (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Matrix count</td></tr><tr><th>Description:</th><td>Number of Matrix stressors to be run (0 means 1 stressor per CPU</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
-        </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>MqStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mq (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>MQ count</td></tr><tr><th>Description:</th><td>Number of MQ stressors to be run (0 means 1 stressor per CPU)</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
-        </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>StressNGParams (<code>object</code>)</summary>
@@ -118,8 +138,13 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>mmap</td></tr><tr><th>Description:</th><td>Number of stressors per CPU</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>mmap_bytes (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Allocation of memory per stressor</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
-        </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
         </details><details><summary>vm (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>VM count</td></tr><tr><th>Description:</th><td>Number of VM stressors to be run (0 means 1 stressor per CPU</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -134,7 +159,7 @@ Run the stress-ng workload with the given parameters
             for the stress-ng job
             </td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[StressNGParams]</code></td><tr><th>Referenced object:</th><td>StressNGParams</td></tr></tbody></table>
         </details><details><summary>cleanup (<code>bool</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td>Cleanup artifacts after the plugin run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td>Cleanup artifacts after the plugin run</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>false</code></pre></td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details></details></td></tr>
@@ -163,21 +188,21 @@ Run the stress-ng workload with the given parameters
 <table><tbody>
 <tr><th>Type:</th><td><code>scope</code></td><tr><th>Root object:</th><td>WorkloadResults</td></tr>
 <tr><th>Properties</th><td><details><summary>cpuinfo (<code>reference[CPUOutput]</code>)</summary>
-                <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[CPUOutput]</code></td><tr><th>Referenced object:</th><td>CPUOutput</td></tr></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>CPU Output</td></tr><tr><th>Description:</th><td>CPU stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[CPUOutput]</code></td><tr><th>Referenced object:</th><td>CPUOutput</td></tr></tbody></table>
             </details><details><summary>hddinfo (<code>reference[HDDOutput]</code>)</summary>
-                <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[HDDOutput]</code></td><tr><th>Referenced object:</th><td>HDDOutput</td></tr></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>HDD Output</td></tr><tr><th>Description:</th><td>HDD stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[HDDOutput]</code></td><tr><th>Referenced object:</th><td>HDDOutput</td></tr></tbody></table>
             </details><details><summary>matrixinfo (<code>reference[MatrixOutput]</code>)</summary>
-                <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MatrixOutput]</code></td><tr><th>Referenced object:</th><td>MatrixOutput</td></tr></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>Matrix Output</td></tr><tr><th>Description:</th><td>Matrix stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MatrixOutput]</code></td><tr><th>Referenced object:</th><td>MatrixOutput</td></tr></tbody></table>
             </details><details><summary>mqinfo (<code>reference[MQOutput]</code>)</summary>
-                <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MQOutput]</code></td><tr><th>Referenced object:</th><td>MQOutput</td></tr></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>MQ Output</td></tr><tr><th>Description:</th><td>MQ stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MQOutput]</code></td><tr><th>Referenced object:</th><td>MQOutput</td></tr></tbody></table>
             </details><details><summary>systeminfo (<code>reference[SystemInfoOutput]</code>)</summary>
-                <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[SystemInfoOutput]</code></td><tr><th>Referenced object:</th><td>SystemInfoOutput</td></tr></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>System Info</td></tr><tr><th>Description:</th><td>System info output object</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[SystemInfoOutput]</code></td><tr><th>Referenced object:</th><td>SystemInfoOutput</td></tr></tbody></table>
             </details><details><summary>vminfo (<code>reference[VMOutput]</code>)</summary>
-                <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[VMOutput]</code></td><tr><th>Referenced object:</th><td>VMOutput</td></tr></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>VM Output</td></tr><tr><th>Description:</th><td>VM stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[VMOutput]</code></td><tr><th>Referenced object:</th><td>VMOutput</td></tr></tbody></table>
             </details></td></tr>
 <tr><td colspan="2"><details><summary><strong>Objects</strong></summary><details><summary>CPUOutput (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>bogo-ops (<code>int</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td>Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td>real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -189,23 +214,23 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU System Time</td></tr><tr><th>Description:</th><td>The CPU time spent in kernel space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>user-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU User Time</td></tr><tr><th>Description:</th><td>The CPU time spent in user space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>wall-clock-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Wall clock time</td></tr><tr><th>Description:</th><td>the time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Wall Clock Time</td></tr><tr><th>Description:</th><td>The time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>HDDOutput (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>bogo-ops (<code>int</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td>Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td>real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -217,23 +242,23 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU System Time</td></tr><tr><th>Description:</th><td>The CPU time spent in kernel space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>user-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU User Time</td></tr><tr><th>Description:</th><td>The CPU time spent in user space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>wall-clock-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Wall clock time</td></tr><tr><th>Description:</th><td>the time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Wall Clock Time</td></tr><tr><th>Description:</th><td>The time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>MQOutput (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>bogo-ops (<code>int</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td>Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td>real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -245,23 +270,23 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU System Time</td></tr><tr><th>Description:</th><td>The CPU time spent in kernel space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>user-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU User Time</td></tr><tr><th>Description:</th><td>The CPU time spent in user space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>wall-clock-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Wall clock time</td></tr><tr><th>Description:</th><td>the time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Wall Clock Time</td></tr><tr><th>Description:</th><td>The time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>MatrixOutput (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>bogo-ops (<code>int</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td>Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td>real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -273,17 +298,17 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU System Time</td></tr><tr><th>Description:</th><td>The CPU time spent in kernel space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>user-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU User Time</td></tr><tr><th>Description:</th><td>The CPU time spent in user space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>wall-clock-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Wall clock time</td></tr><tr><th>Description:</th><td>the time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Wall Clock Time</td></tr><tr><th>Description:</th><td>The time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -348,7 +373,7 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>VMOutput (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>bogo-ops (<code>int</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td>Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td>real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -360,33 +385,33 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU System Time</td></tr><tr><th>Description:</th><td>The CPU time spent in kernel space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>user-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU User Time</td></tr><tr><th>Description:</th><td>The CPU time spent in user space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>wall-clock-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Wall clock time</td></tr><tr><th>Description:</th><td>the time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Wall Clock Time</td></tr><tr><th>Description:</th><td>The time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>WorkloadResults (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>cpuinfo (<code>reference[CPUOutput]</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[CPUOutput]</code></td><tr><th>Referenced object:</th><td>CPUOutput</td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>CPU Output</td></tr><tr><th>Description:</th><td>CPU stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[CPUOutput]</code></td><tr><th>Referenced object:</th><td>CPUOutput</td></tr></tbody></table>
         </details><details><summary>hddinfo (<code>reference[HDDOutput]</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[HDDOutput]</code></td><tr><th>Referenced object:</th><td>HDDOutput</td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>HDD Output</td></tr><tr><th>Description:</th><td>HDD stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[HDDOutput]</code></td><tr><th>Referenced object:</th><td>HDDOutput</td></tr></tbody></table>
         </details><details><summary>matrixinfo (<code>reference[MatrixOutput]</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MatrixOutput]</code></td><tr><th>Referenced object:</th><td>MatrixOutput</td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Matrix Output</td></tr><tr><th>Description:</th><td>Matrix stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MatrixOutput]</code></td><tr><th>Referenced object:</th><td>MatrixOutput</td></tr></tbody></table>
         </details><details><summary>mqinfo (<code>reference[MQOutput]</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MQOutput]</code></td><tr><th>Referenced object:</th><td>MQOutput</td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>MQ Output</td></tr><tr><th>Description:</th><td>MQ stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MQOutput]</code></td><tr><th>Referenced object:</th><td>MQOutput</td></tr></tbody></table>
         </details><details><summary>systeminfo (<code>reference[SystemInfoOutput]</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[SystemInfoOutput]</code></td><tr><th>Referenced object:</th><td>SystemInfoOutput</td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>System Info</td></tr><tr><th>Description:</th><td>System info output object</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>reference[SystemInfoOutput]</code></td><tr><th>Referenced object:</th><td>SystemInfoOutput</td></tr></tbody></table>
         </details><details><summary>vminfo (<code>reference[VMOutput]</code>)</summary>
-        <table><tbody><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[VMOutput]</code></td><tr><th>Referenced object:</th><td>VMOutput</td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>VM Output</td></tr><tr><th>Description:</th><td>VM stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[VMOutput]</code></td><tr><th>Referenced object:</th><td>VMOutput</td></tr></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details></details></td></tr>
