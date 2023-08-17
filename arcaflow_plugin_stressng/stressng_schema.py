@@ -315,7 +315,7 @@ class SystemInfoOutput:
     date: str = dataclasses.field(
         metadata={
             "id": "date-yyyy-mm-dd",
-            "name": "data",
+            "name": "date",
             "description": "date on which the test was run",
         }
     )
@@ -404,7 +404,7 @@ class SystemInfoOutput:
     )
     freeswap: int = field(
         metadata={
-            "name": "bufferram",
+            "name": "freeswap",
             "description": "amount of free swap the test machine had",
         }
     )
