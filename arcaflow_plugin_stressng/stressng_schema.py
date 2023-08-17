@@ -302,7 +302,10 @@ class WorkloadParams:
         StressNGParams,
         schema.name("Stress-NG Job Parameters"),
         schema.description(
-            "Global workload parameters and list of stressors for the stress-ng job"
+            """
+            Global workload parameters and list of stressors
+            for the stress-ng job
+            """
         ),
     ]
     cleanup: bool = field(
