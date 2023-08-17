@@ -125,7 +125,6 @@ def stressng_run(
     os.close(stressng_jobfile[0])
     os.close(stressng_outfile[0])
 
-    
     if params.cleanup:
         print("==>> Cleaning up operation files...")
         os.remove(stressng_jobfile[1])

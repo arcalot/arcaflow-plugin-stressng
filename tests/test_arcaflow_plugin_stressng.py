@@ -3,6 +3,7 @@
 import unittest
 import yaml
 import stressng_schema
+import stressng_plugin
 from arcaflow_plugin_sdk import plugin
 
 
@@ -37,9 +38,7 @@ class StressNGTest(unittest.TestCase):
             stressor="cpu", cpu_count=2, cpu_method="all"
         )
 
-        stress = stressng_schema.StressNGParams(
-            timeout="10s", cleanup=True, items=[cpu]
-        )
+        stress = stressng_schema.StressNGParams(timeout="10s", items=[cpu])
 
         reference_jobfile = "tests/reference_jobfile_cpu"
 
@@ -56,7 +55,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_schema.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].cpuinfo.stressor, "cpu")
         self.assertGreaterEqual(res[1].cpuinfo.wall_clock_time, 10)
@@ -66,9 +65,7 @@ class StressNGTest(unittest.TestCase):
             stressor="vm", vm=1, vm_bytes="100m", mmap="1", mmap_bytes="10m"
         )
 
-        stress = stressng_schema.StressNGParams(
-            timeout="10s", cleanup=True, items=[vm]
-        )
+        stress = stressng_schema.StressNGParams(timeout="10s", items=[vm])
 
         reference_jobfile = "tests/reference_jobfile_vm"
 
@@ -85,7 +82,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_schema.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].vminfo.stressor, "vm")
         self.assertGreaterEqual(res[1].vminfo.wall_clock_time, 10)
@@ -96,9 +93,7 @@ class StressNGTest(unittest.TestCase):
             matrix=1,
         )
 
-        stress = stressng_schema.StressNGParams(
-            timeout="10s", cleanup=True, items=[matrix]
-        )
+        stress = stressng_schema.StressNGParams(timeout="10s", items=[matrix])
 
         reference_jobfile = "tests/reference_jobfile_matrix"
 
@@ -115,7 +110,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_schema.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].matrixinfo.stressor, "matrix")
         self.assertGreaterEqual(res[1].matrixinfo.wall_clock_time, 9)
@@ -123,9 +118,7 @@ class StressNGTest(unittest.TestCase):
     def test_functional_mq(self):
         mq = stressng_schema.MqStressorParams(stressor="mq", mq=1)
 
-        stress = stressng_schema.StressNGParams(
-            timeout="10s", cleanup=True, items=[mq]
-        )
+        stress = stressng_schema.StressNGParams(timeout="10s", items=[mq])
 
         reference_jobfile = "tests/reference_jobfile_mq"
 
@@ -142,7 +135,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_schema.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].mqinfo.stressor, "mq")
         self.assertGreaterEqual(res[1].mqinfo.wall_clock_time, 10)
@@ -152,9 +145,7 @@ class StressNGTest(unittest.TestCase):
             stressor="hdd", hdd=1, hdd_bytes="100m", hdd_write_size="4m"
         )
 
-        stress = stressng_schema.StressNGParams(
-            timeout="10s", cleanup=True, items=[hdd]
-        )
+        stress = stressng_schema.StressNGParams(timeout="10s", items=[hdd])
 
         reference_jobfile = "tests/reference_jobfile_hdd"
 
@@ -171,7 +162,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_schema.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].hddinfo.stressor, "hdd")
         self.assertGreaterEqual(res[1].hddinfo.wall_clock_time, 10)

@@ -3,6 +3,14 @@
 This plugin provides the functionality of [stress-ng](https://github.com/ColinIanKing/stress-ng) with various stressors using the
 [Arcaflow python SDK](https://github.com/arcalot/arcaflow-plugin-sdk-python).
 
+## Currently-supported stressors
+
+- cpu
+- vm
+- matrix
+- mq
+- hdd
+
 ## To run directly with the Arcaflow engine:
 
 In order to run the [arca-stressng plugin](stressng_plugin.py) follow these steps:
