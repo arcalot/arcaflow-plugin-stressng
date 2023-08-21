@@ -447,7 +447,7 @@ class CommonOutput:
             "description": "Type of stressor for workload",
         }
     )
-    max_rss: str = dataclasses.field(
+    max_rss: int = dataclasses.field(
         metadata={
             "id": "max-rss",
             "name": "Max RSS",
