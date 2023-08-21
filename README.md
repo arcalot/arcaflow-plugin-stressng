@@ -213,8 +213,9 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
-        </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>max-rss (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
@@ -241,8 +242,9 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
-        </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>max-rss (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
@@ -269,8 +271,9 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
-        </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>max-rss (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
@@ -297,8 +300,9 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
-        </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>max-rss (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
@@ -384,8 +388,9 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td>is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
-        </details><details><summary>max-rss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>max-rss (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td>Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td>Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
