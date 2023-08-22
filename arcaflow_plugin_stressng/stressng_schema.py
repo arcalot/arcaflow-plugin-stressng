@@ -9,7 +9,7 @@ from arcaflow_plugin_sdk import plugin, schema
 from arcaflow_plugin_sdk import annotations
 
 
-class Stressors(enum.Enum):
+class Stressors(str, enum.Enum):
     CPU = "cpu"
     VM = "vm"
     MATRIX = "matrix"
@@ -447,7 +447,7 @@ class CommonOutput:
             "description": "Type of stressor for workload",
         }
     )
-    max_rss: str = dataclasses.field(
+    max_rss: int = dataclasses.field(
         metadata={
             "id": "max-rss",
             "name": "Max RSS",
