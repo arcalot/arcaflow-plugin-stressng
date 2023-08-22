@@ -9,7 +9,7 @@ from arcaflow_plugin_sdk import plugin, schema
 from arcaflow_plugin_sdk import annotations
 
 
-class Stressors(enum.Enum):
+class Stressors(str, enum.Enum):
     CPU = "cpu"
     VM = "vm"
     MATRIX = "matrix"
