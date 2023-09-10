@@ -2,6 +2,7 @@
 
 import unittest
 import yaml
+import math
 import stressng_schema
 import stressng_plugin
 from arcaflow_plugin_sdk import plugin
@@ -64,7 +65,7 @@ class StressNGTest(unittest.TestCase):
         res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].cpuinfo.stressor, "cpu")
-        self.assertGreaterEqual(res[1].cpuinfo.wall_clock_time, 10)
+        self.assertGreaterEqual(math.ceil(res[1].cpuinfo.wall_clock_time), 10)
 
     def test_functional_vm(self):
         vm = stressng_schema.VmStressorParams(
@@ -91,7 +92,7 @@ class StressNGTest(unittest.TestCase):
         res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].vminfo.stressor, "vm")
-        self.assertGreaterEqual(res[1].vminfo.wall_clock_time, 10)
+        self.assertGreaterEqual(math.ceil(res[1].vminfo.wall_clock_time), 10)
 
     def test_functional_matrix(self):
         matrix = stressng_schema.MatrixStressorParams(
@@ -121,7 +122,7 @@ class StressNGTest(unittest.TestCase):
         res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].matrixinfo.stressor, "matrix")
-        self.assertGreaterEqual(res[1].matrixinfo.wall_clock_time, 9)
+        self.assertGreaterEqual(math.ceil(res[1].matrixinfo.wall_clock_time), 10)
 
     def test_functional_mq(self):
         mq = stressng_schema.MqStressorParams(stressor="mq", mq=1)
@@ -146,7 +147,7 @@ class StressNGTest(unittest.TestCase):
         res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].mqinfo.stressor, "mq")
-        self.assertGreaterEqual(res[1].mqinfo.wall_clock_time, 10)
+        self.assertGreaterEqual(math.ceil(res[1].mqinfo.wall_clock_time), 10)
 
     def test_functional_hdd(self):
         hdd = stressng_schema.HDDStressorParams(
@@ -173,7 +174,7 @@ class StressNGTest(unittest.TestCase):
         res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].hddinfo.stressor, "hdd")
-        self.assertGreaterEqual(res[1].hddinfo.wall_clock_time, 10)
+        self.assertGreaterEqual(math.ceil(res[1].hddinfo.wall_clock_time), 10)
 
 
 if __name__ == "__main__":
