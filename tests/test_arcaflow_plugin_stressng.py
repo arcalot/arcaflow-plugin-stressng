@@ -122,7 +122,9 @@ class StressNGTest(unittest.TestCase):
         res = stressng_plugin.stressng_run(workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].matrixinfo.stressor, "matrix")
-        self.assertGreaterEqual(math.ceil(res[1].matrixinfo.wall_clock_time), 10)
+        self.assertGreaterEqual(
+            math.ceil(res[1].matrixinfo.wall_clock_time), 10
+        )
 
     def test_functional_mq(self):
         mq = stressng_schema.MqStressorParams(stressor="mq", mq=1)
