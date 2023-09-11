@@ -5,7 +5,7 @@ ARG stressng_version=stress-ng-0.15.00-1.el8
 # STAGE 1 -- Build module dependencies and run tests
 # The 'poetry' and 'coverage' modules are installed and verson-controlled in the
 # quay.io/arcalot/arcaflow-plugin-baseimage-python-buildbase image to limit drift
-FROM quay.io/arcalot/arcaflow-plugin-baseimage-python-buildbase:0.2.0 as build
+FROM quay.io/arcalot/arcaflow-plugin-baseimage-python-buildbase:0.3.1 as build
 ARG package
 ARG stressng_version
 RUN dnf -y install ${stressng_version}
@@ -30,7 +30,7 @@ RUN python -m coverage run tests/test_${package}.py \
 
 
 # STAGE 2 -- Build final plugin image
-FROM quay.io/arcalot/arcaflow-plugin-baseimage-python-osbase:0.2.0
+FROM quay.io/arcalot/arcaflow-plugin-baseimage-python-osbase:0.3.1
 ARG package
 ARG stressng_version
 RUN dnf -y install ${stressng_version}
