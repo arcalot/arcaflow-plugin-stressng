@@ -62,7 +62,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_plugin.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(self.id(), workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].cpuinfo.stressor, "cpu")
         self.assertGreaterEqual(math.ceil(res[1].cpuinfo.wall_clock_time), 10)
@@ -89,7 +89,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_plugin.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(self.id(), workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].vminfo.stressor, "vm")
         self.assertGreaterEqual(math.ceil(res[1].vminfo.wall_clock_time), 10)
@@ -119,7 +119,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_plugin.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(self.id(), workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].matrixinfo.stressor, "matrix")
         self.assertGreaterEqual(
@@ -146,7 +146,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_plugin.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(self.id(), workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].mqinfo.stressor, "mq")
         self.assertGreaterEqual(math.ceil(res[1].mqinfo.wall_clock_time), 10)
@@ -173,7 +173,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         workload_params = stressng_schema.WorkloadParams(stress, True)
-        res = stressng_plugin.stressng_run(workload_params)
+        res = stressng_plugin.stressng_run(self.id(), workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].hddinfo.stressor, "hdd")
         self.assertGreaterEqual(math.ceil(res[1].hddinfo.wall_clock_time), 10)
