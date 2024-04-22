@@ -100,9 +100,7 @@ class StressNGTest(unittest.TestCase):
             matrix=1,
         )
 
-        stress = stressng_schema.StressNGParams(
-            timeout="10s", stressors=[matrix]
-        )
+        stress = stressng_schema.StressNGParams(timeout="10s", stressors=[matrix])
 
         reference_jobfile = "tests/reference_jobfile_matrix"
 
@@ -122,9 +120,7 @@ class StressNGTest(unittest.TestCase):
         res = stressng_plugin.stressng_run(self.id(), workload_params)
         self.assertIn("success", res)
         self.assertEqual(res[1].matrixinfo.stressor, "matrix")
-        self.assertGreaterEqual(
-            math.ceil(res[1].matrixinfo.wall_clock_time), 10
-        )
+        self.assertGreaterEqual(math.ceil(res[1].matrixinfo.wall_clock_time), 10)
 
     def test_functional_mq(self):
         mq = stressng_schema.MqStressorParams(stressor="mq", mq=1)

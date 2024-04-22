@@ -9,7 +9,7 @@ import os
 
 from arcaflow_plugin_sdk import plugin
 from stressng_schema import (
-    WorkloadParams,
+    StressNGParams,
     WorkloadResults,
     WorkloadError,
     system_info_output_schema,
@@ -28,13 +28,13 @@ from stressng_schema import (
     outputs={"success": WorkloadResults, "error": WorkloadError},
 )
 def stressng_run(
-    params: WorkloadParams,
+    params: StressNGParams,
 ) -> typing.Tuple[str, typing.Union[WorkloadResults, WorkloadError]]:
     print("==>> Generating temporary jobfile...")
     # generic parameters are in the StressNGParams class (e.g. the timeout)
-    result = params.StressNGParams.to_jobfile()
+    result = params.to_jobfile()
     # now we need to iterate of the list of stressors
-    for item in params.StressNGParams.stressors:
+    for item in params.stressors:
         result = result + item.to_jobfile()
 
     stressng_jobfile = tempfile.mkstemp()
@@ -65,8 +65,8 @@ def stressng_run(
 
     print("==>> Running stress-ng with the temporary jobfile...")
     workdir = "/tmp"
-    if params.StressNGParams.workdir is not None:
-        workdir = params.StressNGParams.workdir
+    if params.workdir is not None:
+        workdir = params.workdir
     try:
         print(
             subprocess.check_output(
