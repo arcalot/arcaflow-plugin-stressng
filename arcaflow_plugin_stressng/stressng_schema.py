@@ -176,7 +176,7 @@ class StressNGParams:
                     schema.description("Parameters for running the hdd stressor"),
                 ],
             ],
-            annotations.discriminator("stressor"),
+            annotations.discriminator("stressor", discriminator_inlined=True),
             schema.name("Stressors List"),
             schema.description("List of stress-ng stressors and parameters"),
         ]
