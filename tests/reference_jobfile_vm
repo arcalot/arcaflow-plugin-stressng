@@ -1,4 +1,4 @@
-timeout 10s
+timeout 5s
 vm 1
 vm-bytes 100m
 mmap 1

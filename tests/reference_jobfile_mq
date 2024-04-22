@@ -1,2 +1,2 @@
-timeout 10s
+timeout 5s
 mq 1
