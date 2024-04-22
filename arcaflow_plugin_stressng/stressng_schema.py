@@ -227,6 +227,11 @@ class SystemInfoOutput:
         schema.description("version of the stressng tool used"),
     ]
 
+    compiler: typing.Annotated[
+        str,
+        schema.name("compiler"),
+    ]
+
     run_by: typing.Annotated[
         str,
         schema.id("run-by"),
@@ -462,6 +467,90 @@ class MatrixOutput(CommonOutput):
     This is the data structure that holds the results for the Matrix stressor
     """
 
+    add_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("add-matrix-ops-per-sec"),
+        schema.name("Add matrix operations per second"),
+    ]
+
+    copy_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("copy-matrix-ops-per-sec"),
+        schema.name("Copy matrix operations per second"),
+    ]
+
+    div_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("div-matrix-ops-per-sec"),
+        schema.name("Div matrix operations per second"),
+    ]
+
+    frobenius_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("frobenius-matrix-ops-per-sec"),
+        schema.name("Frobenius matrix operations per second"),
+    ]
+
+    hadamard_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("hadamard-matrix-ops-per-sec"),
+        schema.name("Hadamard matrix operations per second"),
+    ]
+
+    identity_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("identity-matrix-ops-per-sec"),
+        schema.name("Identity matrix operations per second"),
+    ]
+
+    mean_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("mean-matrix-ops-per-sec"),
+        schema.name("Mean matrix operations per second"),
+    ]
+
+    mult_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("mult-matrix-ops-per-sec"),
+        schema.name("Mult matrix operations per second"),
+    ]
+
+    negate_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("negate-matrix-ops-per-sec"),
+        schema.name("Negate matrix operations per second"),
+    ]
+
+    prod_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("prod-matrix-ops-per-sec"),
+        schema.name("Prod matrix operations per second"),
+    ]
+
+    sub_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("sub-matrix-ops-per-sec"),
+        schema.name("Sub matrix operations per second"),
+    ]
+
+    square_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("square-matrix-ops-per-sec"),
+        schema.name("Square matrix operations per second"),
+    ]
+
+    trans_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("trans-matrix-ops-per-sec"),
+        schema.name("Trans matrix operations per second"),
+    ]
+
+    zero_matrix_ops_per_sec: typing.Annotated[
+        float,
+        schema.id("zero-matrix-ops-per-sec"),
+        schema.name("Zero matrix operations per second"),
+    ]
+
 
 matrix_output_schema = plugin.build_object_schema(MatrixOutput)
 
@@ -481,6 +570,24 @@ class HDDOutput(CommonOutput):
     """
     This is the data structure that holds the results for the HDD stressor
     """
+
+    mbsec_read_rate: typing.Annotated[
+        float,
+        schema.id("mbsec-read-rate"),
+        schema.name("MB/s read rate"),
+    ]
+
+    mbsec_write_rate: typing.Annotated[
+        float,
+        schema.id("mbsec-write-rate"),
+        schema.name("MB/s write rate"),
+    ]
+
+    mbsec_readwrite_combined_rate: typing.Annotated[
+        float,
+        schema.id("mbsec-readwrite-combined-rate"),
+        schema.name("MB/s read-write combined rate"),
+    ]
 
 
 hdd_output_schema = plugin.build_object_schema(HDDOutput)
