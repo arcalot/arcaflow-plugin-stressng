@@ -3,9 +3,9 @@
 import sys
 import typing
 import tempfile
-import yaml
 import subprocess
 import os
+import yaml
 
 from arcaflow_plugin_sdk import plugin
 from stressng_schema import (
