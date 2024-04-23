@@ -216,7 +216,6 @@ class CpuStressorParams(CommonStressorParams):
         ),
     ] = CpuMethod.ALL
 
-
     def to_jobfile(self) -> str:
         result = f"cpu {self.workers}\n"
         if self.cpu_ops is not None:
@@ -325,7 +324,8 @@ class MmapStressorParams(CommonStressorParams):
         schema.id("mmap-async"),
         schema.name("Mmap Async"),
         schema.description(
-            "Enable file based memory mapping and use asynchronous msync'ing on each page"
+            "Enable file based memory mapping and use asynchronous msync'ing "
+            "on each page"
         ),
     ] = None
 
@@ -424,7 +424,8 @@ class MatrixStressorParams(CommonStressorParams):
         schema.id("matrix-method"),
         schema.name("Matrix Stressor Method"),
         schema.description(
-            "Fine grained control of which matrix stressors to use (add, copy, etc.)"
+            "Fine grained control of which matrix stressors to use "
+            "(add, copy, etc.)"
         ),
     ] = MatrixMethod.ALL
 
@@ -440,7 +441,8 @@ class MatrixStressorParams(CommonStressorParams):
         schema.id("matrix-yx"),
         schema.name("Matrix YX"),
         schema.description(
-            "Perform matrix operations in order y by x rather than the default x by y"
+            "Perform matrix operations in order y by x rather than the "
+            "default x by y"
         ),
     ] = None
 
@@ -489,12 +491,13 @@ class MqStressorParams(CommonStressorParams):
 
 
 @dataclass
-class HDDOptsParams():
+class HDDOptsParams:
     hdd_opts: typing.Annotated[
         typing.Optional[HddOpts],
         schema.name("HDD Options"),
         schema.description("HDD stress test options"),
     ] = None
+
 
 @dataclass
 class HDDStressorParams(CommonStressorParams):
@@ -502,9 +505,7 @@ class HDDStressorParams(CommonStressorParams):
         typing.Optional[str],
         schema.id("hdd-bytes"),
         schema.name("Bytes Per Worker"),
-        schema.description(
-            "Write N bytes for each hdd process, the default is 1 GB"
-        ),
+        schema.description("Write N bytes for each hdd process, the default is 1 GB"),
     ] = None
 
     hdd_opts: typing.Annotated[
@@ -518,18 +519,14 @@ class HDDStressorParams(CommonStressorParams):
         typing.Optional[int],
         schema.id("hdd-ops"),
         schema.name("HDD Operations"),
-        schema.description(
-            "Stop hdd stress workers after N bogo operations"
-        ),
+        schema.description("Stop hdd stress workers after N bogo operations"),
     ] = None
 
     hdd_write_size: typing.Annotated[
         typing.Optional[str],
         schema.id("hdd-write-size"),
         schema.name("HDD Write Size"),
-        schema.description(
-            "Size of each write in bytes"
-        ),
+        schema.description("Size of each write in bytes"),
     ] = None
 
     def to_jobfile(self) -> str:
