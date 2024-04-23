@@ -16,6 +16,140 @@ class Stressors(str, enum.Enum):
     HDD = "hdd"
 
 
+class CpuMethod(str, enum.Enum):
+    ALL = "all"
+    ACKERMANN = "ackermann"
+    APERY = "apery"
+    BITOPS = "bitops"
+    CALLFUNC = "callfunc"
+    CFLOAT = "cfloat"
+    CDOUBLE = "cdouble"
+    CLONGDOUBLE = "clongdouble"
+    COLLATZ = "collatz"
+    CORRELATE = "correlate"
+    CPUID = "cpuid"
+    CRC16 = "crc16"
+    DECIMAL32 = "decimal32"
+    DECIMAL64 = "decimal64"
+    DECIMAL128 = "decimal128"
+    DITHER = "dither"
+    DIV64 = "div64"
+    DJB2A = "djb2a"
+    DOUBLE = "double"
+    EULER = "euler"
+    EXPLOG = "explog"
+    FACTORIAL = "factorial"
+    FIBONACCI = "fibonacci"
+    FFT = "fft"
+    FLETCHER16 = "fletcher16"
+    FLOAT = "float"
+    FLOAT16 = "float16"
+    FLOAT32 = "float32"
+    FLOAT80 = "float80"
+    FLOAT128 = "float128"
+    FLOATCONVERSION = "floatconversion"
+    FNV1A = "fnv1a"
+    GAMMA = "gamma"
+    GCD = "gcd"
+    GRAY = "gray"
+    HAMMING = "hamming"
+    HANOI = "hanoi"
+    HYPERBOLIC = "hyperbolic"
+    IDCT = "idct"
+    INT8 = "int8"
+    INT16 = "int16"
+    INT32 = "int32"
+    INT64 = "int64"
+    INT128 = "int128"
+    INT32FLOAT = "int32float"
+    INT32DOUBLE = "int32double"
+    INT32LONGDOUBLE = "int32longdouble"
+    INT64FLOAT = "int64float"
+    INT64DOUBLE = "int64double"
+    INT64LONGDOUBLE = "int64longdouble"
+    INT128FLOAT = "int128float"
+    INT128DOUBLE = "int128double"
+    INT128LONGDOUBLE = "int128longdouble"
+    INT128DECIMAL32 = "int128decimal32"
+    INT128DECIMAL64 = "int128decimal64"
+    INT128DECIMAL128 = "int128decimal128"
+    INTCONVERSION = "intconversion"
+    IPV4CHECKSUM = "ipv4checksum"
+    JENKIN = "jenkin"
+    JMP = "jmp"
+    LN2 = "ln2"
+    LONGDOUBLE = "longdouble"
+    LOOP = "loop"
+    MATRIXPROD = "matrixprod"
+    MURMUR3_32 = "murmur3_32"
+    NHASH = "nhash"
+    NSQRT = "nsqrt"
+    OMEGA = "omega"
+    PARITY = "parity"
+    PHI = "phi"
+    PI = "pi"
+    PJW = "pjw"
+    PRIME = "prime"
+    PSI = "psi"
+    QUEENS = "queens"
+    RAND = "rand"
+    RAND48 = "rand48"
+    RGB = "rgb"
+    SDBM = "sdbm"
+    SIEVE = "sieve"
+    STATS = "stats"
+    SQRT = "sqrt"
+    TRIG = "trig"
+    UNION = "union"
+    ZETA = "zeta"
+
+
+class MatrixMethod(str, enum.Enum):
+    ALL = "all"
+    ADD = "add"
+    COPY = "copy"
+    DIV = "div"
+    FROBENIUS = "frobenius"
+    HADAMARD = "hadamard"
+    IDENTITY = "identity"
+    MEAN = "mean"
+    MULT = "mult"
+    NEGATE = "negate"
+    PROD = "prod"
+    SUB = "sub"
+    SQUARE = "square"
+    TRANS = "trans"
+    ZERO = "zero"
+
+
+class VmMethod(str, enum.Enum):
+    ALL = "all"
+    FLIP = "flip"
+    GALPAT_0 = "galpat-0"
+    GALPAT_1 = "galpat-1"
+    GRAY = "gray"
+    INCDEC = "incdec"
+    INC_NYBBLE = "inc-nybble"
+    RAND_SET = "rand-set"
+    RAND_SUM = "rand-sum"
+    READ64 = "read64"
+    ROR = "ror"
+    SWAP = "swap"
+    MOVE_INV = "move-inv"
+    MODULO_X = "modulo-x"
+    PRIME_0 = "prime-0"
+    PRIME_1 = "prime-1"
+    PRIME_GRAY_0 = "prime-gray-0"
+    PRIME_GRAY_1 = "prime-gray-1"
+    ROWHAMMER = "rowhammer"
+    WALK_0D = "walk-0d"
+    WALK_1D = "walk-1d"
+    WALK_0A = "walk-0a"
+    WALK_1A = "walk-1a"
+    WRITE64 = "write64"
+    ZERO_ONE = "zero-one"
+
+
 @dataclass
 class CommonStressorParams:
     stressor: typing.Annotated[
@@ -33,62 +167,148 @@ class CommonStressorParams:
 
 @dataclass
 class CpuStressorParams(CommonStressorParams):
-    cpu_method: typing.Annotated[
-        typing.Optional[str],
-        schema.name("CPU Stressor Method"),
-        schema.description(
-            "Fine grained control of which "
-            "CPU stressors to use (ackermann, "
-            "cfloat etc.)"
-        ),
-    ] = "all"
+    cpu_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("cpu-ops"),
+        schema.name("CPU Operations"),
+        schema.description("Stop CPU stress workers after N bogo operations"),
+    ] = None
 
     cpu_load: typing.Annotated[
         typing.Optional[int],
+        schema.id("cpu-load"),
         schema.name("CPU Load"),
-        schema.description("Load CPU by percentage"),
+        schema.description(
+            "Load CPU with P percent loading for the CPU stress workers"
+        ),
     ] = None
 
+    cpu_method: typing.Annotated[
+        typing.Optional[CpuMethod],
+        schema.id("cpu-method"),
+        schema.name("CPU Stressor Method"),
+        schema.description(
+            "Specify a cpu stress method; by default, all stress methods "
+            "are exercised sequentially"
+        ),
+    ] = CpuMethod.ALL
+
+
     def to_jobfile(self) -> str:
-        result = "cpu {}\n".format(self.workers)
-        if self.cpu_method is not None:
-            result = result + "cpu-method {}\n".format(self.cpu_method)
+        result = f"cpu {self.workers}\n"
+        if self.cpu_ops is not None:
+            result += f"cpu-ops {self.cpu_ops}\n"
         if self.cpu_load is not None:
-            result = result + "cpu-load {}\n".format(self.cpu_load)
+            result += f"cpu-load {self.cpu_load}\n"
+        if self.cpu_method is not None:
+            result += f"cpu-method {CpuMethod(self.cpu_method)}\n"
         return result
 
 
 @dataclass
 class VmStressorParams(CommonStressorParams):
     vm_bytes: typing.Annotated[
-        str,
-        schema.name("VM Memory"),
-        schema.description("Amount of memory a single VM stressor will use"),
-    ]
-
-    mmap: typing.Annotated[
         typing.Optional[str],
-        schema.name("Mmap"),
-        schema.description("Number of stressors per CPU"),
+        schema.id("vm-bytes"),
+        schema.name("VM Memory Bytes"),
+        schema.description("mmap N bytes per vm worker, the default is 256MB"),
     ] = None
 
-    mmap_bytes: typing.Annotated[
-        typing.Optional[str], schema.name("Memory Per Stressor")
+    vm_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("vm-ops"),
+        schema.name("VM Operations"),
+        schema.description("Stop vm workers after N bogo operations"),
     ] = None
+
+    vm_hang: typing.Annotated[
+        typing.Optional[int],
+        schema.id("vm-hang"),
+        schema.name("VM Hang"),
+        schema.description(
+            "Sleep N seconds before unmapping memory, the default is zero seconds"
+        ),
+    ] = None
+
+    vm_keep: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("vm-keep"),
+        schema.name("VM Keep"),
+        schema.description(
+            "Do not continually unmap and map memory, just keep on re-writing to it"
+        ),
+    ] = None
+
+    vm_locked: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("vm-locked"),
+        schema.name("VM Locked"),
+        schema.description(
+            "Lock the pages of the mapped region into memory using mmap "
+            "MAP_LOCKED (since Linux 2.5.37)"
+        ),
+    ] = None
+
+    vm_method: typing.Annotated[
+        typing.Optional[VmMethod],
+        schema.id("vm-method"),
+        schema.name("VM Method"),
+        schema.description(
+            "Specify a vm stress method; by default, all the stress methods "
+            "are exercised sequentially"
+        ),
+    ] = VmMethod.ALL
+
+    vm_populate: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("vm-populate"),
+        schema.name("VM Populate"),
+        schema.description(
+            "populate (prefault) page tables for the memory mappings; "
+            "this can stress swapping"
+        ),
+    ] = None
+
+    # # mmap: typing.Annotated[
+    # #     typing.Optional[str],
+    # #     schema.name("Mmap"),
+    # #     schema.description("Number of stressors per CPU"),
+    # # ] = None
+
+    # # mmap_bytes: typing.Annotated[
+    # #     typing.Optional[str], schema.name("Memory Per Stressor")
+    # # ] = None
 
     def to_jobfile(self) -> str:
-        vm = "vm {}\n".format(self.workers)
-        vm_bytes = "vm-bytes {}\n".format(self.vm_bytes)
-        result = vm + vm_bytes
-        if self.mmap is not None:
-            result = result + "mmap {}\n".format(self.mmap)
-        if self.mmap_bytes is not None:
-            result = result + "mmap-bytes {}\n".format(self.mmap_bytes)
+        result = f"vm {self.workers}\n"
+        if self.vm_bytes is not None:
+            result += f"vm-bytes {self.vm_bytes}\n"
+        if self.vm_ops is not None:
+            result += f"vm-ops {self.vm_ops}\n"
+        if self.vm_hang is not None:
+            result += f"vm-hang {self.vm_hang}\n"
+        if self.vm_keep is not None:
+            result += f"vm-keep {self.vm_keep}\n"
+        if self.vm_locked is not None:
+            result += f"vm-locked {self.vm_locked}\n"
+        if self.vm_method is not None:
+            result += f"vm-method {VmMethod(self.vm_method)}\n"
+        if self.vm_populate is not None:
+            result += f"vm-populate {self.vm_populate}\n"
         return result
 
 
 @dataclass
 class MatrixStressorParams(CommonStressorParams):
+    matrix_method: typing.Annotated[
+        typing.Optional[MatrixMethod],
+        schema.id("matrix-method"),
+        schema.name("Matrix Stressor Method"),
+        schema.description(
+            "Fine grained control of which matrix stressors to use (add, copy, etc.)"
+        ),
+    ] = MatrixMethod.ALL
+
     def to_jobfile(self) -> str:
         matrix = "matrix {}\n".format(self.workers)
         result = matrix
@@ -437,7 +657,7 @@ class CommonOutput:
         float,
         schema.id("cpu-usage-per-instance"),
         schema.name("CPU usage per instance"),
-        schema.description("is the amount of CPU used by each stressor instance"),
+        schema.description("The amount of CPU used by each stressor instance"),
     ]
 
 
@@ -574,19 +794,19 @@ class HDDOutput(CommonOutput):
     mbsec_read_rate: typing.Annotated[
         float,
         schema.id("mbsec-read-rate"),
-        schema.name("MB/s read rate"),
+        schema.name("Read rate in MB/s"),
     ]
 
     mbsec_write_rate: typing.Annotated[
         float,
         schema.id("mbsec-write-rate"),
-        schema.name("MB/s write rate"),
+        schema.name("Write rate in MB/s"),
     ]
 
     mbsec_readwrite_combined_rate: typing.Annotated[
         float,
         schema.id("mbsec-readwrite-combined-rate"),
-        schema.name("MB/s read-write combined rate"),
+        schema.name("Read-write combined rate in MB/s"),
     ]
 
 

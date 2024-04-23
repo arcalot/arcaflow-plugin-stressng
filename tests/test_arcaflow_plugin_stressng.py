@@ -19,7 +19,7 @@ class StressNGTest(unittest.TestCase):
 
         plugin.test_object_serialization(
             stressng_schema.VmStressorParams(
-                stressor=stressng_schema.Stressors.VM, workers=2, vm_bytes="2G"
+                stressor=stressng_schema.Stressors.VM, workers=2, vm_bytes="2G", vm_method=stressng_schema.VmMethod.ALL
             )
         )
 
@@ -42,7 +42,7 @@ class StressNGTest(unittest.TestCase):
         # comparison of the returned values
 
         cpu = stressng_schema.CpuStressorParams(
-            stressor="cpu", workers=2, cpu_method="all"
+            stressor="cpu", workers=2
         )
 
         stress = stressng_schema.StressNGParams(timeout="5s", stressors=[cpu])
@@ -68,7 +68,7 @@ class StressNGTest(unittest.TestCase):
 
     def test_functional_vm(self):
         vm = stressng_schema.VmStressorParams(
-            stressor="vm", workers=1, vm_bytes="100m", mmap="1", mmap_bytes="10m"
+            stressor="vm", workers=1, vm_bytes="100m"
         )
 
         stress = stressng_schema.StressNGParams(timeout="5s", stressors=[vm])
