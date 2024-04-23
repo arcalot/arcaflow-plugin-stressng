@@ -1,6 +1,6 @@
 timeout 5s
 mmap 1
-mmap-ops 1000
+mmap-ops 10000000
 mmap-async
 mmap-bytes 100M
 mmap-file

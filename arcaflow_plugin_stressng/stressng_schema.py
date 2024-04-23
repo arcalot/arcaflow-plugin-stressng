@@ -952,12 +952,6 @@ class MatrixOutput(CommonOutput):
         schema.name("Prod matrix operations per second"),
     ]
 
-    sub_matrix_ops_per_sec: typing.Annotated[
-        float,
-        schema.id("sub-matrix-ops-per-sec"),
-        schema.name("Sub matrix operations per second"),
-    ]
-
     square_matrix_ops_per_sec: typing.Annotated[
         float,
         schema.id("square-matrix-ops-per-sec"),
@@ -975,6 +969,12 @@ class MatrixOutput(CommonOutput):
         schema.id("zero-matrix-ops-per-sec"),
         schema.name("Zero matrix operations per second"),
     ]
+
+    sub_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("sub-matrix-ops-per-sec"),
+        schema.name("Sub matrix operations per second"),
+    ] = None
 
 
 matrix_output_schema = plugin.build_object_schema(MatrixOutput)

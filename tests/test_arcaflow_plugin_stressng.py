@@ -69,6 +69,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
+        print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].cpuinfo.stressor, "cpu")
         self.assertGreaterEqual(math.ceil(res[1].cpuinfo.wall_clock_time), 5)
@@ -103,6 +104,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
+        print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].vminfo.stressor, "vm")
         self.assertGreaterEqual(math.ceil(res[1].vminfo.wall_clock_time), 5)
@@ -111,7 +113,7 @@ class StressNGTest(unittest.TestCase):
         mmap = stressng_schema.MmapStressorParams(
             stressor="mmap",
             workers=1,
-            mmap_ops=1000,
+            mmap_ops=10000000,
             mmap_async=True,
             mmap_bytes="100M",
             mmap_file=True,
@@ -138,6 +140,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
+        print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].mmapinfo.stressor, "mmap")
         self.assertGreaterEqual(math.ceil(res[1].mmapinfo.wall_clock_time), 5)
@@ -169,6 +172,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
+        print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].matrixinfo.stressor, "matrix")
         self.assertGreaterEqual(math.ceil(res[1].matrixinfo.wall_clock_time), 5)
@@ -195,6 +199,7 @@ class StressNGTest(unittest.TestCase):
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
+        print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].mqinfo.stressor, "mq")
         self.assertGreaterEqual(math.ceil(res[1].mqinfo.wall_clock_time), 5)
@@ -232,6 +237,7 @@ class StressNGTest(unittest.TestCase):
 
     #     self.assertEqual(yaml.safe_load(result), reference)
     #     res = stressng_plugin.stressng_run(self.id(), stress)
+    #     print(res)
     #     self.assertIn("success", res)
     #     self.assertEqual(res[1].hddinfo.stressor, "hdd")
     #     self.assertGreaterEqual(math.ceil(res[1].hddinfo.wall_clock_time), 5)
