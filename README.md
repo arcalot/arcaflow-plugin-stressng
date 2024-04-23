@@ -77,15 +77,23 @@ Run the stress-ng workload with the given parameters
                 <table><tbody><tr><th>Name:</th><td>Working Dir</td></tr><tr><th>Description:</th><td width="500">Path were stress-ng will be executed (example to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
             </details></td></tr>
 <tr><td colspan="2"><details><summary><strong>Objects</strong></summary><details><summary>CpuStressorParams (<code>object</code>)</summary>
-            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>cpu_load (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>CPU Load</td></tr><tr><th>Description:</th><td width="500">Load CPU by percentage</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>cpu-load (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>CPU Load</td></tr><tr><th>Description:</th><td width="500">Load CPU with P percent loading for the CPU stress workers</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
-        </details><details><summary>cpu_method (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>CPU Stressor Method</td></tr><tr><th>Description:</th><td width="500">Fine grained control of which CPU stressors to use (ackermann, cfloat etc.)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;all&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>cpu-method (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>CPU Stressor Method</td></tr><tr><th>Description:</th><td width="500">Specify a cpu stress method; by default, all stress methods are exercised sequentially</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;all&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>ackermann</code>:</strong> ACKERMANN</li><li><strong><code>all</code>:</strong> ALL</li><li><strong><code>apery</code>:</strong> APERY</li><li><strong><code>bitops</code>:</strong> BITOPS</li><li><strong><code>callfunc</code>:</strong> CALLFUNC</li><li><strong><code>cdouble</code>:</strong> CDOUBLE</li><li><strong><code>cfloat</code>:</strong> CFLOAT</li><li><strong><code>clongdouble</code>:</strong> CLONGDOUBLE</li><li><strong><code>collatz</code>:</strong> COLLATZ</li><li><strong><code>correlate</code>:</strong> CORRELATE</li><li><strong><code>cpuid</code>:</strong> CPUID</li><li><strong><code>crc16</code>:</strong> CRC16</li><li><strong><code>decimal128</code>:</strong> DECIMAL128</li><li><strong><code>decimal32</code>:</strong> DECIMAL32</li><li><strong><code>decimal64</code>:</strong> DECIMAL64</li><li><strong><code>dither</code>:</strong> DITHER</li><li><strong><code>div64</code>:</strong> DIV64</li><li><strong><code>djb2a</code>:</strong> DJB2A</li><li><strong><code>double</code>:</strong> DOUBLE</li><li><strong><code>euler</code>:</strong> EULER</li><li><strong><code>explog</code>:</strong> EXPLOG</li><li><strong><code>factorial</code>:</strong> FACTORIAL</li><li><strong><code>fft</code>:</strong> FFT</li><li><strong><code>fibonacci</code>:</strong> FIBONACCI</li><li><strong><code>fletcher16</code>:</strong> FLETCHER16</li><li><strong><code>float</code>:</strong> FLOAT</li><li><strong><code>float128</code>:</strong> FLOAT128</li><li><strong><code>float16</code>:</strong> FLOAT16</li><li><strong><code>float32</code>:</strong> FLOAT32</li><li><strong><code>float80</code>:</strong> FLOAT80</li><li><strong><code>floatconversion</code>:</strong> FLOATCONVERSION</li><li><strong><code>fnv1a</code>:</strong> FNV1A</li><li><strong><code>gamma</code>:</strong> GAMMA</li><li><strong><code>gcd</code>:</strong> GCD</li><li><strong><code>gray</code>:</strong> GRAY</li><li><strong><code>hamming</code>:</strong> HAMMING</li><li><strong><code>hanoi</code>:</strong> HANOI</li><li><strong><code>hyperbolic</code>:</strong> HYPERBOLIC</li><li><strong><code>idct</code>:</strong> IDCT</li><li><strong><code>int128</code>:</strong> INT128</li><li><strong><code>int128decimal128</code>:</strong> INT128DECIMAL128</li><li><strong><code>int128decimal32</code>:</strong> INT128DECIMAL32</li><li><strong><code>int128decimal64</code>:</strong> INT128DECIMAL64</li><li><strong><code>int128double</code>:</strong> INT128DOUBLE</li><li><strong><code>int128float</code>:</strong> INT128FLOAT</li><li><strong><code>int128longdouble</code>:</strong> INT128LONGDOUBLE</li><li><strong><code>int16</code>:</strong> INT16</li><li><strong><code>int32</code>:</strong> INT32</li><li><strong><code>int32double</code>:</strong> INT32DOUBLE</li><li><strong><code>int32float</code>:</strong> INT32FLOAT</li><li><strong><code>int32longdouble</code>:</strong> INT32LONGDOUBLE</li><li><strong><code>int64</code>:</strong> INT64</li><li><strong><code>int64double</code>:</strong> INT64DOUBLE</li><li><strong><code>int64float</code>:</strong> INT64FLOAT</li><li><strong><code>int64longdouble</code>:</strong> INT64LONGDOUBLE</li><li><strong><code>int8</code>:</strong> INT8</li><li><strong><code>intconversion</code>:</strong> INTCONVERSION</li><li><strong><code>ipv4checksum</code>:</strong> IPV4CHECKSUM</li><li><strong><code>jenkin</code>:</strong> JENKIN</li><li><strong><code>jmp</code>:</strong> JMP</li><li><strong><code>ln2</code>:</strong> LN2</li><li><strong><code>longdouble</code>:</strong> LONGDOUBLE</li><li><strong><code>loop</code>:</strong> LOOP</li><li><strong><code>matrixprod</code>:</strong> MATRIXPROD</li><li><strong><code>murmur3_32</code>:</strong> MURMUR3_32</li><li><strong><code>nhash</code>:</strong> NHASH</li><li><strong><code>nsqrt</code>:</strong> NSQRT</li><li><strong><code>omega</code>:</strong> OMEGA</li><li><strong><code>parity</code>:</strong> PARITY</li><li><strong><code>phi</code>:</strong> PHI</li><li><strong><code>pi</code>:</strong> PI</li><li><strong><code>pjw</code>:</strong> PJW</li><li><strong><code>prime</code>:</strong> PRIME</li><li><strong><code>psi</code>:</strong> PSI</li><li><strong><code>queens</code>:</strong> QUEENS</li><li><strong><code>rand</code>:</strong> RAND</li><li><strong><code>rand48</code>:</strong> RAND48</li><li><strong><code>rgb</code>:</strong> RGB</li><li><strong><code>sdbm</code>:</strong> SDBM</li><li><strong><code>sieve</code>:</strong> SIEVE</li><li><strong><code>sqrt</code>:</strong> SQRT</li><li><strong><code>stats</code>:</strong> STATS</li><li><strong><code>trig</code>:</strong> TRIG</li><li><strong><code>union</code>:</strong> UNION</li><li><strong><code>zeta</code>:</strong> ZETA</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
+        </details><details><summary>cpu-ops (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>CPU Operations</td></tr><tr><th>Description:</th><td width="500">Stop CPU stress workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -94,15 +102,35 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details></td></tr>
 </tbody></table>
+        </details><details><summary>HDDOptsParams (<code>object</code>)</summary>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd_opts (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>HDD Options</td></tr><tr><th>Description:</th><td width="500">HDD stress test options</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>direct</code>:</strong> DIRECT</li><li><strong><code>dsync</code>:</strong> DSYNC</li><li><strong><code>fadv-dontneed</code>:</strong> FADV_DONTNEED</li><li><strong><code>fadv-noreuse</code>:</strong> FADV_NOREUSE</li><li><strong><code>fadv-normal</code>:</strong> FADV_NORMAL</li><li><strong><code>fadv-rnd</code>:</strong> FADV_RND</li><li><strong><code>fadv-seq</code>:</strong> FADV_SEQ</li><li><strong><code>fadv-willneed</code>:</strong> FADV_WILLNEED</li><li><strong><code>fdatasync</code>:</strong> FDATASYNC</li><li><strong><code>fsync</code>:</strong> FSYNC</li><li><strong><code>iovec</code>:</strong> IOVEC</li><li><strong><code>noatime</code>:</strong> NOATIME</li><li><strong><code>rd-rnd</code>:</strong> RD_RND</li><li><strong><code>rd-seq</code>:</strong> RD_SEQ</li><li><strong><code>sync</code>:</strong> SYNC</li><li><strong><code>syncfs</code>:</strong> SYNCFS</li><li><strong><code>utimes</code>:</strong> UTIMES</li><li><strong><code>wr-rnd</code>:</strong> WR_RND</li><li><strong><code>wr-seq</code>:</strong> WR_SEQ</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
+        </details></td></tr>
+</tbody></table>
         </details><details><summary>HDDStressorParams (<code>object</code>)</summary>
-            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd_bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">write  N  bytes for each hdd process, the default is 1 GB. One can specify the size in units of Bytes, KBytes, MBytes and GBytes using the suffix b, k, m or g.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
-        </details><details><summary>hdd_write_size (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Write Size</td></tr><tr><th>Description:</th><td width="500">specify size of each write in bytes. Size can be from 1 byte to 4MBOne can specify the size in units of Bytes, KBytes, MBytes using the suffix b, k, m</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd-bytes (<code>string</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Write N bytes for each hdd process, the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>hdd-ops (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>HDD Operations</td></tr><tr><th>Description:</th><td width="500">Stop hdd stress workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>hdd-opts (<code>list[<code>reference[HDDOptsParams]</code>]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>HDD Options</td></tr><tr><th>Description:</th><td width="500">Various stress test options as a list</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>list[<code>reference[HDDOptsParams]</code>]</code></td><tr><td colspan="2">
+    <details>
+        <summary>List items</summary>
+        <table><tbody><tr><th>Type:</th><td><code>reference[HDDOptsParams]</code></td><tr><th>Referenced object:</th><td>HDDOptsParams</td></tr></tbody></table>
+    </details>
+</td></tr></tbody></table>
+        </details><details><summary>hdd-write-size (<code>string</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>HDD Write Size</td></tr><tr><th>Description:</th><td width="500">Size of each write in bytes</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -112,10 +140,55 @@ Run the stress-ng workload with the given parameters
         </details></td></tr>
 </tbody></table>
         </details><details><summary>MatrixStressorParams (<code>object</code>)</summary>
-            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>stressor (<code>enum[string]</code>)</summary>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>matrix-method (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Matrix Stressor Method</td></tr><tr><th>Description:</th><td width="500">Fine grained control of which matrix stressors to use (add, copy, etc.)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;all&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>add</code>:</strong> ADD</li><li><strong><code>all</code>:</strong> ALL</li><li><strong><code>copy</code>:</strong> COPY</li><li><strong><code>div</code>:</strong> DIV</li><li><strong><code>frobenius</code>:</strong> FROBENIUS</li><li><strong><code>hadamard</code>:</strong> HADAMARD</li><li><strong><code>identity</code>:</strong> IDENTITY</li><li><strong><code>mean</code>:</strong> MEAN</li><li><strong><code>mult</code>:</strong> MULT</li><li><strong><code>negate</code>:</strong> NEGATE</li><li><strong><code>prod</code>:</strong> PROD</li><li><strong><code>square</code>:</strong> SQUARE</li><li><strong><code>sub</code>:</strong> SUB</li><li><strong><code>trans</code>:</strong> TRANS</li><li><strong><code>zero</code>:</strong> ZERO</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
+        </details><details><summary>matrix-ops (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Matrix Operations</td></tr><tr><th>Description:</th><td width="500">Stop matrix stress workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>matrix-size (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Matrix Size</td></tr><tr><th>Description:</th><td width="500">Specify the N x N size of the matrices</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>matrix-yx (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Matrix YX</td></tr><tr><th>Description:</th><td width="500">Perform matrix operations in order y by x rather than the default x by y</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
+        </details><details><summary>workers (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details></td></tr>
+</tbody></table>
+        </details><details><summary>MmapStressorParams (<code>object</code>)</summary>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mmap-async (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Mmap Async</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and use asynchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>mmap-bytes (<code>string</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">allocate N bytes per mmap stress worker, the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>mmap-file (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Mmap File</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and by default use synchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>mmap-mmap2 (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Mmap mmap2</td></tr><tr><th>Description:</th><td width="500">Use mmap2 for 4K page aligned offsets if mmap2 is available, otherwise fall back to mmap</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>mmap-mprotect (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Mmap mprotect</td></tr><tr><th>Description:</th><td width="500">Change protection settings on each page of memory; Each time a page or a group of pages are mapped or remapped then this option will make the pages read-only, write-only, exec-only, and read-write</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>mmap-odirect (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Mmap odirect</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and use O_DIRECT direct I/O</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>mmap-ops (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Mmap Operations</td></tr><tr><th>Description:</th><td width="500">Stop mmap stress workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>mmap-osync (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Mmap osync</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and used O_SYNC synchronous I/O integrity completion</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -125,10 +198,16 @@ Run the stress-ng workload with the given parameters
         </details></td></tr>
 </tbody></table>
         </details><details><summary>MqStressorParams (<code>object</code>)</summary>
-            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>stressor (<code>enum[string]</code>)</summary>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mq-ops (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>MQ Operations</td></tr><tr><th>Description:</th><td width="500">Stop after N bogo POSIX message send operations completed</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>mq-size (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>MQ Size</td></tr><tr><th>Description:</th><td width="500">Specify size of POSIX message queue; the default size is 10 messages and most Linux systems this is the maximum allowed size for normal users</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -158,19 +237,34 @@ Run the stress-ng workload with the given parameters
         </details></td></tr>
 </tbody></table>
         </details><details><summary>VmStressorParams (<code>object</code>)</summary>
-            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mmap (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Mmap</td></tr><tr><th>Description:</th><td width="500">Number of stressors per CPU</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
-        </details><details><summary>mmap_bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Memory Per Stressor</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
-        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
-        </details><details><summary>vm_bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>VM Memory</td></tr><tr><th>Description:</th><td width="500">Amount of memory a single VM stressor will use</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>vm-bytes (<code>string</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>VM Memory Bytes</td></tr><tr><th>Description:</th><td width="500">mmap N bytes per vm worker, the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>vm-hang (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>VM Hang</td></tr><tr><th>Description:</th><td width="500">Sleep N seconds before unmapping memory, the default is zero seconds</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>vm-keep (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>VM Keep</td></tr><tr><th>Description:</th><td width="500">Do not continually unmap and map memory, just keep on re-writing to it</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>vm-locked (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>VM Locked</td></tr><tr><th>Description:</th><td width="500">Lock the pages of the mapped region into memory using mmap MAP_LOCKED (since Linux 2.5.37)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>vm-method (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>VM Method</td></tr><tr><th>Description:</th><td width="500">Specify a vm stress method; by default, all the stress methods are exercised sequentially</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;all&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>all</code>:</strong> ALL</li><li><strong><code>flip</code>:</strong> FLIP</li><li><strong><code>galpat-0</code>:</strong> GALPAT_0</li><li><strong><code>galpat-1</code>:</strong> GALPAT_1</li><li><strong><code>gray</code>:</strong> GRAY</li><li><strong><code>inc-nybble</code>:</strong> INC_NYBBLE</li><li><strong><code>incdec</code>:</strong> INCDEC</li><li><strong><code>modulo-x</code>:</strong> MODULO_X</li><li><strong><code>move-inv</code>:</strong> MOVE_INV</li><li><strong><code>prime-0</code>:</strong> PRIME_0</li><li><strong><code>prime-1</code>:</strong> PRIME_1</li><li><strong><code>prime-gray-0</code>:</strong> PRIME_GRAY_0</li><li><strong><code>prime-gray-1</code>:</strong> PRIME_GRAY_1</li><li><strong><code>rand-set</code>:</strong> RAND_SET</li><li><strong><code>rand-sum</code>:</strong> RAND_SUM</li><li><strong><code>read64</code>:</strong> READ64</li><li><strong><code>ror</code>:</strong> ROR</li><li><strong><code>rowhammer</code>:</strong> ROWHAMMER</li><li><strong><code>swap</code>:</strong> SWAP</li><li><strong><code>walk-0a</code>:</strong> WALK_0A</li><li><strong><code>walk-0d</code>:</strong> WALK_0D</li><li><strong><code>walk-1a</code>:</strong> WALK_1A</li><li><strong><code>walk-1d</code>:</strong> WALK_1D</li><li><strong><code>write64</code>:</strong> WRITE64</li><li><strong><code>zero-one</code>:</strong> ZERO_ONE</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
+        </details><details><summary>vm-ops (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>VM Operations</td></tr><tr><th>Description:</th><td width="500">Stop vm workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>vm-populate (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>VM Populate</td></tr><tr><th>Description:</th><td width="500">populate (prefault) page tables for the memory mappings; this can stress swapping</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -207,6 +301,8 @@ Run the stress-ng workload with the given parameters
                 <table><tbody><tr><th>Name:</th><td>HDD Output</td></tr><tr><th>Description:</th><td width="500">HDD stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[HDDOutput]</code></td><tr><th>Referenced object:</th><td>HDDOutput</td></tr></tbody></table>
             </details><details><summary>matrixinfo (<code>reference[MatrixOutput]</code>)</summary>
                 <table><tbody><tr><th>Name:</th><td>Matrix Output</td></tr><tr><th>Description:</th><td width="500">Matrix stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MatrixOutput]</code></td><tr><th>Referenced object:</th><td>MatrixOutput</td></tr></tbody></table>
+            </details><details><summary>mmapinfo (<code>reference[MmapOutput]</code>)</summary>
+                <table><tbody><tr><th>Name:</th><td>Mmap Output</td></tr><tr><th>Description:</th><td width="500">mmap stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MmapOutput]</code></td><tr><th>Referenced object:</th><td>MmapOutput</td></tr></tbody></table>
             </details><details><summary>mqinfo (<code>reference[MQOutput]</code>)</summary>
                 <table><tbody><tr><th>Name:</th><td>MQ Output</td></tr><tr><th>Description:</th><td width="500">MQ stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MQOutput]</code></td><tr><th>Referenced object:</th><td>MQOutput</td></tr></tbody></table>
             </details><details><summary>systeminfo (<code>reference[SystemInfoOutput]</code>)</summary>
@@ -225,7 +321,7 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td width="500">Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
@@ -254,19 +350,19 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td width="500">Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>mbsec-read-rate (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>MB/s read rate</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Read rate in MB/s</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>mbsec-readwrite-combined-rate (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>MB/s read-write combined rate</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Read-write combined rate in MB/s</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>mbsec-write-rate (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>MB/s write rate</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Write rate in MB/s</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
@@ -292,7 +388,7 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td width="500">Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
@@ -312,7 +408,7 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>MatrixOutput (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>add-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Add matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Add matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td width="500">Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
@@ -324,51 +420,51 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>copy-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Copy matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Copy matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>div-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Div matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Div matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>frobenius-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Frobenius matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Frobenius matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>hadamard-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Hadamard matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Hadamard matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>identity-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Identity matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Identity matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td width="500">Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>mean-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Mean matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Mean matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>mult-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Mult matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Mult matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>negate-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Negate matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Negate matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>prod-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Prod matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Prod matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>square-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Square matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Square matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>stressor (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>sub-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Sub matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Sub matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>system-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU System Time</td></tr><tr><th>Description:</th><td width="500">The CPU time spent in kernel space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>trans-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Trans matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Trans matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>user-time (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU User Time</td></tr><tr><th>Description:</th><td width="500">The CPU time spent in user space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -377,7 +473,36 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Wall Clock Time</td></tr><tr><th>Description:</th><td width="500">The time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>zero-matrix-ops-per-sec (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Zero matrix operations per second</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Zero matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
+</tbody></table>
+        </details></td></tr>
+</tbody></table>
+        </details><details><summary>MmapOutput (<code>object</code>)</summary>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>bogo-ops (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td width="500">Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+</tbody></table>
+        </details><details><summary>bogo-ops-per-second-usr-sys-time (<code>float</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+</tbody></table>
+        </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+</tbody></table>
+        </details><details><summary>max-rss (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td width="500">Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>stressor (<code>string</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Type of stressor for workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>system-time (<code>float</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>CPU System Time</td></tr><tr><th>Description:</th><td width="500">The CPU time spent in kernel space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+</tbody></table>
+        </details><details><summary>user-time (<code>float</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>CPU User Time</td></tr><tr><th>Description:</th><td width="500">The CPU time spent in user space</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+</tbody></table>
+        </details><details><summary>wall-clock-time (<code>float</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Wall Clock Time</td></tr><tr><th>Description:</th><td width="500">The time the stressor took to run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -453,7 +578,7 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">is the amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>max-rss (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Max RSS</td></tr><tr><th>Description:</th><td width="500">Maximum resident set size</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
@@ -478,6 +603,8 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>HDD Output</td></tr><tr><th>Description:</th><td width="500">HDD stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[HDDOutput]</code></td><tr><th>Referenced object:</th><td>HDDOutput</td></tr></tbody></table>
         </details><details><summary>matrixinfo (<code>reference[MatrixOutput]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Matrix Output</td></tr><tr><th>Description:</th><td width="500">Matrix stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MatrixOutput]</code></td><tr><th>Referenced object:</th><td>MatrixOutput</td></tr></tbody></table>
+        </details><details><summary>mmapinfo (<code>reference[MmapOutput]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Mmap Output</td></tr><tr><th>Description:</th><td width="500">mmap stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MmapOutput]</code></td><tr><th>Referenced object:</th><td>MmapOutput</td></tr></tbody></table>
         </details><details><summary>mqinfo (<code>reference[MQOutput]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>MQ Output</td></tr><tr><th>Description:</th><td width="500">MQ stressor output object</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>reference[MQOutput]</code></td><tr><th>Referenced object:</th><td>MQOutput</td></tr></tbody></table>
         </details><details><summary>systeminfo (<code>reference[SystemInfoOutput]</code>)</summary>
