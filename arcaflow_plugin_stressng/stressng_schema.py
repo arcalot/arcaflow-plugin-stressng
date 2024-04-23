@@ -151,6 +151,28 @@ class VmMethod(str, enum.Enum):
     ZERO_ONE = "zero-one"
 
 
+class HddOpts(str, enum.Enum):
+    DIRECT = "direct"
+    DSYNC = "dsync"
+    FADV_DONTNEED = "fadv-dontneed"
+    FADV_NOREUSE = "fadv-noreuse"
+    FADV_NORMAL = "fadv-normal"
+    FADV_RND = "fadv-rnd"
+    FADV_SEQ = "fadv-seq"
+    FADV_WILLNEED = "fadv-willneed"
+    FSYNC = "fsync"
+    FDATASYNC = "fdatasync"
+    IOVEC = "iovec"
+    NOATIME = "noatime"
+    SYNC = "sync"
+    RD_RND = "rd-rnd"
+    RD_SEQ = "rd-seq"
+    SYNCFS = "syncfs"
+    UTIMES = "utimes"
+    WR_RND = "wr-rnd"
+    WR_SEQ = "wr-seq"
+
+
 @dataclass
 class CommonStressorParams:
     stressor: typing.Annotated[
@@ -390,6 +412,13 @@ class MmapStressorParams(CommonStressorParams):
 
 @dataclass
 class MatrixStressorParams(CommonStressorParams):
+    matrix_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("matrix-ops"),
+        schema.name("Matrix Operations"),
+        schema.description("Stop matrix stress workers after N bogo operations"),
+    ] = None
+
     matrix_method: typing.Annotated[
         typing.Optional[MatrixMethod],
         schema.id("matrix-method"),
@@ -399,49 +428,121 @@ class MatrixStressorParams(CommonStressorParams):
         ),
     ] = MatrixMethod.ALL
 
+    matrix_size: typing.Annotated[
+        typing.Optional[int],
+        schema.id("matrix-size"),
+        schema.name("Matrix Size"),
+        schema.description("Specify the N x N size of the matrices"),
+    ] = None
+
+    matrix_yx: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("matrix-yx"),
+        schema.name("Matrix YX"),
+        schema.description(
+            "Perform matrix operations in order y by x rather than the default x by y"
+        ),
+    ] = None
+
     def to_jobfile(self) -> str:
         result = f"matrix {self.workers}\n"
+        if self.matrix_ops is not None:
+            result += f"matrix-ops {self.matrix_ops}\n"
         if self.matrix_method is not None:
             result += f"matrix-method {self.matrix_method}\n"
+        if self.matrix_size is not None:
+            result += f"matrix-size {self.matrix_size}\n"
+        if self.matrix_yx is True:
+            result += "matrix-yx\n"
         return result
 
 
 @dataclass
 class MqStressorParams(CommonStressorParams):
+    mq_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("mq-ops"),
+        schema.name("MQ Operations"),
+        schema.description(
+            "Stop after N bogo POSIX message send operations completed"
+        ),
+    ] = None
+
+    mq_size: typing.Annotated[
+        typing.Optional[int],
+        schema.id("mq-size"),
+        schema.name("MQ Size"),
+        schema.description(
+            "Specify size of POSIX message queue; the default size is "
+            "10 messages and most Linux systems this is the maximum allowed "
+            "size for normal users"
+        ),
+    ] = None
+
     def to_jobfile(self) -> str:
-        mq = "mq {}\n".format(self.workers)
-        result = mq
+        result = f"mq {self.workers}\n"
+        if self.mq_ops is not None:
+            result += f"mq-ops {self.mq_ops}\n"
+        if self.mq_size is not None:
+            result += f"mq-size {self.mq_size}\n"
         return result
 
 
 @dataclass
+class HDDOptsParams():
+    hdd_opts: typing.Annotated[
+        typing.Optional[HddOpts],
+        schema.name("HDD Options"),
+        schema.description("HDD stress test options"),
+    ] = None
+
+@dataclass
 class HDDStressorParams(CommonStressorParams):
     hdd_bytes: typing.Annotated[
-        str,
+        typing.Optional[str],
+        schema.id("hdd-bytes"),
         schema.name("Bytes Per Worker"),
         schema.description(
-            "write  N  bytes for each hdd process, the default is 1 GB. "
-            "One can specify the size in units of Bytes, KBytes, "
-            "MBytes and GBytes using the suffix b, k, m or g."
+            "Write N bytes for each hdd process, the default is 1 GB"
         ),
-    ]
+    ] = None
+
+    hdd_opts: typing.Annotated[
+        typing.Optional[typing.List[HDDOptsParams]],
+        schema.id("hdd-opts"),
+        schema.name("HDD Options"),
+        schema.description("Various stress test options as a list"),
+    ] = None
+
+    hdd_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("hdd-ops"),
+        schema.name("HDD Operations"),
+        schema.description(
+            "Stop hdd stress workers after N bogo operations"
+        ),
+    ] = None
 
     hdd_write_size: typing.Annotated[
-        str,
-        schema.name("Write Size"),
+        typing.Optional[str],
+        schema.id("hdd-write-size"),
+        schema.name("HDD Write Size"),
         schema.description(
-            "specify size of each write "
-            "in bytes. Size can be from 1 byte to 4MB"
-            "One can specify the size in units of Bytes, KBytes, "
-            "MBytes using the suffix b, k, m"
+            "Size of each write in bytes"
         ),
-    ]
+    ] = None
 
     def to_jobfile(self) -> str:
-        hdd = "hdd {}\n".format(self.workers)
-        hdd_bytes = "hdd-bytes {}\n".format(self.hdd_bytes)
-        hdd_write_size = "hdd-write-size {}\n".format(self.hdd_write_size)
-        result = hdd + hdd_bytes + hdd_write_size
+        result = f"hdd {self.workers}\n"
+        if self.hdd_bytes is not None:
+            result += f"hdd-bytes {self.hdd_bytes}\n"
+        if self.hdd_opts is not None:
+            hdd_opts_csv = ", ".join(self.hdd_opts)
+            result += f"hdd-opts {hdd_opts_csv}\n"
+        if self.hdd_ops is not None:
+            result += f"hdd-ops {self.hdd_ops}\n"
+        if self.hdd_write_size is not None:
+            result += f"hdd-write-size {self.hdd_write_size}\n"
         return result
 
 

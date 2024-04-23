@@ -1,3 +1,5 @@
 timeout 5s
 cpu 2
+cpu-ops 1000
+cpu-load 5
 cpu-method all

@@ -1,3 +1,6 @@
 timeout 5s
 matrix 1
+matrix-ops 1000
 matrix-method all
+matrix-size 1000
+matrix-yx
