@@ -115,7 +115,7 @@ class StressNGTest(unittest.TestCase):
             workers=1,
             mmap_ops=10000000,
             mmap_async=True,
-            mmap_bytes="100M",
+            mmap_bytes="10G",
             mmap_file=True,
             mmap_mmap2=True,
             mmap_mprotect=True,

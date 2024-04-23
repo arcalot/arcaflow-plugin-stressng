@@ -2,7 +2,7 @@ timeout 5s
 mmap 1
 mmap-ops 10000000
 mmap-async
-mmap-bytes 100M
+mmap-bytes 10G
 mmap-file
 mmap-mmap2
 mmap-mprotect

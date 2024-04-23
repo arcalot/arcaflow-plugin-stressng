@@ -893,87 +893,87 @@ class MatrixOutput(CommonOutput):
     """
 
     add_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("add-matrix-ops-per-sec"),
         schema.name("Add matrix operations per second"),
-    ]
+    ] = None
 
     copy_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("copy-matrix-ops-per-sec"),
         schema.name("Copy matrix operations per second"),
-    ]
+    ] = None
 
     div_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("div-matrix-ops-per-sec"),
         schema.name("Div matrix operations per second"),
-    ]
+    ] = None
 
     frobenius_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("frobenius-matrix-ops-per-sec"),
         schema.name("Frobenius matrix operations per second"),
-    ]
+    ] = None
 
     hadamard_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("hadamard-matrix-ops-per-sec"),
         schema.name("Hadamard matrix operations per second"),
-    ]
+    ] = None
 
     identity_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("identity-matrix-ops-per-sec"),
         schema.name("Identity matrix operations per second"),
-    ]
+    ] = None
 
     mean_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("mean-matrix-ops-per-sec"),
         schema.name("Mean matrix operations per second"),
-    ]
+    ] = None
 
     mult_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("mult-matrix-ops-per-sec"),
         schema.name("Mult matrix operations per second"),
-    ]
+    ] = None
 
     negate_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("negate-matrix-ops-per-sec"),
         schema.name("Negate matrix operations per second"),
-    ]
+    ] = None
 
     prod_matrix_ops_per_sec: typing.Annotated[
-        float,
+        typing.Optional[float],
         schema.id("prod-matrix-ops-per-sec"),
         schema.name("Prod matrix operations per second"),
-    ]
-
-    square_matrix_ops_per_sec: typing.Annotated[
-        float,
-        schema.id("square-matrix-ops-per-sec"),
-        schema.name("Square matrix operations per second"),
-    ]
-
-    trans_matrix_ops_per_sec: typing.Annotated[
-        float,
-        schema.id("trans-matrix-ops-per-sec"),
-        schema.name("Trans matrix operations per second"),
-    ]
-
-    zero_matrix_ops_per_sec: typing.Annotated[
-        float,
-        schema.id("zero-matrix-ops-per-sec"),
-        schema.name("Zero matrix operations per second"),
-    ]
+    ] = None
 
     sub_matrix_ops_per_sec: typing.Annotated[
         typing.Optional[float],
         schema.id("sub-matrix-ops-per-sec"),
         schema.name("Sub matrix operations per second"),
+    ] = None
+
+    square_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("square-matrix-ops-per-sec"),
+        schema.name("Square matrix operations per second"),
+    ] = None
+
+    trans_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("trans-matrix-ops-per-sec"),
+        schema.name("Trans matrix operations per second"),
+    ] = None
+
+    zero_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("zero-matrix-ops-per-sec"),
+        schema.name("Zero matrix operations per second"),
     ] = None
 
 
