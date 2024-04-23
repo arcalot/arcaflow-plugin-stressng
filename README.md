@@ -27,7 +27,7 @@ timeout: 60
 stressors:
   - stressor: vm
     workers: 4
-    vm_bytes: 10g
+    vm-bytes: 10g
   - stressor: cpu
     workers: 8
     cpu_method: all

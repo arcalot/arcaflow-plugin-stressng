@@ -2,14 +2,14 @@ timeout: 10
 stressors:
   - stressor: vm
     workers: 2
-    vm_bytes: 10g
+    vm-bytes: 10g
   - stressor: cpu
     workers: 2
-    cpu_method: all
+    cpu-method: all
   - stressor: hdd
     workers: 2
-    hdd_write_size: 4M
-    hdd_bytes: 1G
+    hdd-write-size: 4M
+    hdd-bytes: 1G
   - stressor: matrix
     workers: 2
   - stressor: mq
