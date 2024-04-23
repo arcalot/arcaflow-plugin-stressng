@@ -15,6 +15,7 @@ from stressng_schema import (
     system_info_output_schema,
     cpu_output_schema,
     vm_output_schema,
+    mmap_output_schema,
     matrix_output_schema,
     mq_output_schema,
     hdd_output_schema,
@@ -103,6 +104,7 @@ def stressng_run(
     # allocate all stressor information with None in case they don't get called
     cpuinfo_un = None
     vminfo_un = None
+    mmapinfo_un = None
     matrixinfo_un = None
     mqinfo_un = None
     hddinfo_un = None
@@ -113,6 +115,8 @@ def stressng_run(
             cpuinfo_un = cpu_output_schema.unserialize(metric)
         if metric["stressor"] == "vm":
             vminfo_un = vm_output_schema.unserialize(metric)
+        if metric["stressor"] == "mmap":
+            mmapinfo_un = mmap_output_schema.unserialize(metric)
         if metric["stressor"] == "matrix":
             matrixinfo_un = matrix_output_schema.unserialize(metric)
         if metric["stressor"] == "mq":
@@ -131,6 +135,7 @@ def stressng_run(
     return "success", WorkloadResults(
         system_un,
         vminfo_un,
+        mmapinfo_un,
         cpuinfo_un,
         matrixinfo_un,
         mqinfo_un,

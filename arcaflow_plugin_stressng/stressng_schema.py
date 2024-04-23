@@ -11,6 +11,7 @@ from arcaflow_plugin_sdk import annotations
 class Stressors(str, enum.Enum):
     CPU = "cpu"
     VM = "vm"
+    MMAP = "mmap"
     MATRIX = "matrix"
     MQ = "mq"
     HDD = "hdd"
@@ -269,16 +270,6 @@ class VmStressorParams(CommonStressorParams):
         ),
     ] = None
 
-    # # mmap: typing.Annotated[
-    # #     typing.Optional[str],
-    # #     schema.name("Mmap"),
-    # #     schema.description("Number of stressors per CPU"),
-    # # ] = None
-
-    # # mmap_bytes: typing.Annotated[
-    # #     typing.Optional[str], schema.name("Memory Per Stressor")
-    # # ] = None
-
     def to_jobfile(self) -> str:
         result = f"vm {self.workers}\n"
         if self.vm_bytes is not None:
@@ -287,14 +278,113 @@ class VmStressorParams(CommonStressorParams):
             result += f"vm-ops {self.vm_ops}\n"
         if self.vm_hang is not None:
             result += f"vm-hang {self.vm_hang}\n"
-        if self.vm_keep is not None:
-            result += f"vm-keep {self.vm_keep}\n"
-        if self.vm_locked is not None:
-            result += f"vm-locked {self.vm_locked}\n"
+        if self.vm_keep is True:
+            result += "vm-keep\n"
+        if self.vm_locked is True:
+            result += "vm-locked\n"
         if self.vm_method is not None:
             result += f"vm-method {VmMethod(self.vm_method)}\n"
-        if self.vm_populate is not None:
-            result += f"vm-populate {self.vm_populate}\n"
+        if self.vm_populate is True:
+            result += "vm-populate\n"
+        return result
+
+
+@dataclass
+class MmapStressorParams(CommonStressorParams):
+    mmap_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("mmap-ops"),
+        schema.name("Mmap Operations"),
+        schema.description("Stop mmap stress workers after N bogo operations"),
+    ] = None
+
+    mmap_async: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-async"),
+        schema.name("Mmap Async"),
+        schema.description(
+            "Enable file based memory mapping and use asynchronous msync'ing on each page"
+        ),
+    ] = None
+
+    mmap_bytes: typing.Annotated[
+        typing.Optional[str],
+        schema.id("mmap-bytes"),
+        schema.name("Mmap Bytes"),
+        schema.description(
+            "allocate N bytes per mmap stress worker, the default is 256MB"
+        ),
+    ] = None
+
+    mmap_file: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-file"),
+        schema.name("Mmap File"),
+        schema.description(
+            "Enable file based memory mapping and by default use synchronous "
+            "msync'ing on each page"
+        ),
+    ] = None
+
+    mmap_mmap2: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-mmap2"),
+        schema.name("Mmap mmap2"),
+        schema.description(
+            "Use mmap2 for 4K page aligned offsets if mmap2 is available, "
+            "otherwise fall back to mmap"
+        ),
+    ] = None
+
+    mmap_mprotect: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-mprotect"),
+        schema.name("Mmap mprotect"),
+        schema.description(
+            "Change protection settings on each page of memory; Each time "
+            "a page or a group of pages are mapped or remapped then this "
+            "option will make the pages read-only, write-only, exec-only, "
+            "and read-write"
+        ),
+    ] = None
+
+    mmap_odirect: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-odirect"),
+        schema.name("Mmap odirect"),
+        schema.description(
+            "Enable file based memory mapping and use O_DIRECT direct I/O"
+        ),
+    ] = None
+
+    mmap_osync: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-osync"),
+        schema.name("Mmap osync"),
+        schema.description(
+            "Enable file based memory mapping and used O_SYNC synchronous "
+            "I/O integrity completion"
+        ),
+    ] = None
+
+    def to_jobfile(self) -> str:
+        result = f"mmap {self.workers}\n"
+        if self.mmap_ops is not None:
+            result += f"mmap-ops {self.mmap_ops}\n"
+        if self.mmap_async is True:
+            result += "mmap-async\n"
+        if self.mmap_bytes is not None:
+            result += f"mmap-bytes {self.mmap_bytes}\n"
+        if self.mmap_file is True:
+            result += "mmap-file\n"
+        if self.mmap_mmap2 is True:
+            result += "mmap-mmap2\n"
+        if self.mmap_mprotect is True:
+            result += "mmap-mprotect\n"
+        if self.mmap_odirect is True:
+            result += "mmap-odirect\n"
+        if self.mmap_osync is True:
+            result += "mmap-osync\n"
         return result
 
 
@@ -310,8 +400,9 @@ class MatrixStressorParams(CommonStressorParams):
     ] = MatrixMethod.ALL
 
     def to_jobfile(self) -> str:
-        matrix = "matrix {}\n".format(self.workers)
-        result = matrix
+        result = f"matrix {self.workers}\n"
+        if self.matrix_method is not None:
+            result += f"matrix-method {self.matrix_method}\n"
         return result
 
 
@@ -376,6 +467,12 @@ class StressNGParams:
                     annotations.discriminator_value("vm"),
                     schema.name("VM Stressor Parameters"),
                     schema.description("Parameters for running the vm stressor"),
+                ],
+                typing.Annotated[
+                    MmapStressorParams,
+                    annotations.discriminator_value("mmap"),
+                    schema.name("Mmap Stressor Parameters"),
+                    schema.description("Parameters for running the mmap stressor"),
                 ],
                 typing.Annotated[
                     MatrixStressorParams,
@@ -672,6 +769,16 @@ vm_output_schema = plugin.build_object_schema(VMOutput)
 
 
 @dataclass
+class MmapOutput(CommonOutput):
+    """
+    This is the data structure that holds the results for the mmap stressor
+    """
+
+
+mmap_output_schema = plugin.build_object_schema(MmapOutput)
+
+
+@dataclass
 class CPUOutput(CommonOutput):
     """
     This is the data structure that holds the results for the CPU stressor
@@ -825,6 +932,12 @@ class WorkloadResults:
         typing.Optional[VMOutput],
         schema.name("VM Output"),
         schema.description("VM stressor output object"),
+    ] = None
+
+    mmapinfo: typing.Annotated[
+        typing.Optional[MmapOutput],
+        schema.name("Mmap Output"),
+        schema.description("mmap stressor output object"),
     ] = None
 
     cpuinfo: typing.Annotated[

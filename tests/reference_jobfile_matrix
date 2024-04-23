@@ -1,2 +1,3 @@
 timeout 5s
 matrix 1
+matrix-method all

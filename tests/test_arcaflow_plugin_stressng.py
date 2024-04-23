@@ -92,6 +92,32 @@ class StressNGTest(unittest.TestCase):
         self.assertEqual(res[1].vminfo.stressor, "vm")
         self.assertGreaterEqual(math.ceil(res[1].vminfo.wall_clock_time), 5)
 
+    def test_functional_mmap(self):
+        mmap = stressng_schema.MmapStressorParams(
+            stressor="mmap", workers=1, mmap_bytes="100m"
+        )
+
+        stress = stressng_schema.StressNGParams(timeout="5s", stressors=[mmap])
+
+        reference_jobfile = "tests/reference_jobfile_mmap"
+
+        result = stress.to_jobfile()
+
+        for item in stress.stressors:
+            result = result + item.to_jobfile()
+
+        with open(reference_jobfile, "r") as file:
+            try:
+                reference = yaml.safe_load(file)
+            except yaml.YAMLError as e:
+                print(e)
+
+        self.assertEqual(yaml.safe_load(result), reference)
+        res = stressng_plugin.stressng_run(self.id(), stress)
+        self.assertIn("success", res)
+        self.assertEqual(res[1].mmapinfo.stressor, "mmap")
+        self.assertGreaterEqual(math.ceil(res[1].mmapinfo.wall_clock_time), 5)
+
     def test_functional_matrix(self):
         matrix = stressng_schema.MatrixStressorParams(
             stressor="matrix",
