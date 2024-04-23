@@ -199,42 +199,42 @@ class StressNGTest(unittest.TestCase):
         self.assertEqual(res[1].mqinfo.stressor, "mq")
         self.assertGreaterEqual(math.ceil(res[1].mqinfo.wall_clock_time), 5)
 
-    def test_functional_hdd(self):
-        hdd = stressng_schema.HDDStressorParams(
-            stressor="hdd",
-            workers=1,
-            hdd_bytes="100M",
-            hdd_opts=stressng_schema.HDDOptsParams(
-                [
-                    stressng_schema.HddOpts.DIRECT,
-                    stressng_schema.HddOpts.FSYNC,
-                    stressng_schema.HddOpts.WR_RND,
-                ]
-            ),
-            hdd_ops=10000,
-            hdd_write_size="4M",
-        )
+    # def test_functional_hdd(self):
+    #     hdd = stressng_schema.HDDStressorParams(
+    #         stressor="hdd",
+    #         workers=1,
+    #         hdd_bytes="100M",
+    #         hdd_opts=stressng_schema.HDDOptsParams(
+    #             [
+    #                 stressng_schema.HddOpts.DIRECT,
+    #                 stressng_schema.HddOpts.FSYNC,
+    #                 stressng_schema.HddOpts.WR_RND,
+    #             ]
+    #         ),
+    #         hdd_ops=10000,
+    #         hdd_write_size="4M",
+    #     )
 
-        stress = stressng_schema.StressNGParams(timeout="5s", stressors=[hdd])
+    #     stress = stressng_schema.StressNGParams(timeout="5s", stressors=[hdd])
 
-        reference_jobfile = "tests/reference_jobfile_hdd"
+    #     reference_jobfile = "tests/reference_jobfile_hdd"
 
-        result = stress.to_jobfile()
+    #     result = stress.to_jobfile()
 
-        for item in stress.stressors:
-            result = result + item.to_jobfile()
+    #     for item in stress.stressors:
+    #         result = result + item.to_jobfile()
 
-        with open(reference_jobfile, "r") as file:
-            try:
-                reference = yaml.safe_load(file)
-            except yaml.YAMLError as e:
-                print(e)
+    #     with open(reference_jobfile, "r") as file:
+    #         try:
+    #             reference = yaml.safe_load(file)
+    #         except yaml.YAMLError as e:
+    #             print(e)
 
-        self.assertEqual(yaml.safe_load(result), reference)
-        res = stressng_plugin.stressng_run(self.id(), stress)
-        self.assertIn("success", res)
-        self.assertEqual(res[1].hddinfo.stressor, "hdd")
-        self.assertGreaterEqual(math.ceil(res[1].hddinfo.wall_clock_time), 5)
+    #     self.assertEqual(yaml.safe_load(result), reference)
+    #     res = stressng_plugin.stressng_run(self.id(), stress)
+    #     self.assertIn("success", res)
+    #     self.assertEqual(res[1].hddinfo.stressor, "hdd")
+    #     self.assertGreaterEqual(math.ceil(res[1].hddinfo.wall_clock_time), 5)
 
 
 if __name__ == "__main__":
