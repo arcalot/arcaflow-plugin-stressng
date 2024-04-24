@@ -1020,6 +1020,12 @@ hdd_output_schema = plugin.build_object_schema(HDDOutput)
 
 @dataclass
 class WorkloadResults:
+    test_config: typing.Annotated[
+        StressNGParams,
+        schema.name("Test configuration"),
+        schema.description("The stressng test parameters"),
+    ]
+
     systeminfo: typing.Annotated[
         SystemInfoOutput,
         schema.name("System Info"),

@@ -133,6 +133,7 @@ def stressng_run(
         os.remove(stressng_jobfile[1])
 
     return "success", WorkloadResults(
+        params,
         system_un,
         vminfo_un,
         mmapinfo_un,
