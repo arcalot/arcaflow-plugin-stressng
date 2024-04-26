@@ -8,6 +8,9 @@ import stressng_plugin
 from arcaflow_plugin_sdk import plugin
 
 
+test_time = 5
+
+
 class StressNGTest(unittest.TestCase):
     @staticmethod
     def test_serialization():
@@ -52,7 +55,7 @@ class StressNGTest(unittest.TestCase):
             cpu_method=stressng_schema.CpuMethod.ALL,
         )
 
-        stress = stressng_schema.StressNGParams(timeout="5s", stressors=[cpu])
+        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[cpu])
 
         reference_jobfile = "tests/reference_jobfile_cpu"
 
@@ -72,7 +75,7 @@ class StressNGTest(unittest.TestCase):
         print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].cpuinfo.stressor, "cpu")
-        self.assertGreaterEqual(math.ceil(res[1].cpuinfo.wall_clock_time), 5)
+        self.assertGreaterEqual(math.ceil(res[1].cpuinfo.wall_clock_time), test_time)
 
     def test_functional_vm(self):
         vm = stressng_schema.VmStressorParams(
@@ -87,7 +90,7 @@ class StressNGTest(unittest.TestCase):
             vm_populate=True,
         )
 
-        stress = stressng_schema.StressNGParams(timeout="5s", stressors=[vm])
+        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[vm])
 
         reference_jobfile = "tests/reference_jobfile_vm"
 
@@ -107,7 +110,7 @@ class StressNGTest(unittest.TestCase):
         print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].vminfo.stressor, "vm")
-        self.assertGreaterEqual(math.ceil(res[1].vminfo.wall_clock_time), 5)
+        self.assertGreaterEqual(math.ceil(res[1].vminfo.wall_clock_time), test_time)
 
     def test_functional_mmap(self):
         mmap = stressng_schema.MmapStressorParams(
@@ -123,7 +126,7 @@ class StressNGTest(unittest.TestCase):
             mmap_osync=True,
         )
 
-        stress = stressng_schema.StressNGParams(timeout="5s", stressors=[mmap])
+        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[mmap])
 
         reference_jobfile = "tests/reference_jobfile_mmap"
 
@@ -143,7 +146,7 @@ class StressNGTest(unittest.TestCase):
         print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].mmapinfo.stressor, "mmap")
-        self.assertGreaterEqual(math.ceil(res[1].mmapinfo.wall_clock_time), 5)
+        self.assertGreaterEqual(math.ceil(res[1].mmapinfo.wall_clock_time), test_time)
 
     def test_functional_matrix(self):
         matrix = stressng_schema.MatrixStressorParams(
@@ -155,9 +158,7 @@ class StressNGTest(unittest.TestCase):
             matrix_yx=True,
         )
 
-        stress = stressng_schema.StressNGParams(
-            timeout="5s", stressors=[matrix]
-        )
+        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[matrix])
 
         reference_jobfile = "tests/reference_jobfile_matrix"
 
@@ -177,14 +178,14 @@ class StressNGTest(unittest.TestCase):
         print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].matrixinfo.stressor, "matrix")
-        self.assertGreaterEqual(math.ceil(res[1].matrixinfo.wall_clock_time), 5)
+        self.assertGreaterEqual(math.ceil(res[1].matrixinfo.wall_clock_time), test_time)
 
     def test_functional_mq(self):
         mq = stressng_schema.MqStressorParams(
             stressor="mq", workers=1, mq_ops=10000000, mq_size=32
         )
 
-        stress = stressng_schema.StressNGParams(timeout="5s", stressors=[mq])
+        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[mq])
 
         reference_jobfile = "tests/reference_jobfile_mq"
 
@@ -204,7 +205,7 @@ class StressNGTest(unittest.TestCase):
         print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].mqinfo.stressor, "mq")
-        self.assertGreaterEqual(math.ceil(res[1].mqinfo.wall_clock_time), 5)
+        self.assertGreaterEqual(math.ceil(res[1].mqinfo.wall_clock_time), test_time)
 
     def test_functional_hdd(self):
         hdd = stressng_schema.HDDStressorParams(
@@ -220,7 +221,7 @@ class StressNGTest(unittest.TestCase):
             hdd_write_size="4M",
         )
 
-        stress = stressng_schema.StressNGParams(timeout="5s", stressors=[hdd])
+        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[hdd])
 
         reference_jobfile = "tests/reference_jobfile_hdd"
 
@@ -240,7 +241,7 @@ class StressNGTest(unittest.TestCase):
         print(res)
         self.assertIn("success", res)
         self.assertEqual(res[1].hddinfo.stressor, "hdd")
-        self.assertGreaterEqual(math.ceil(res[1].hddinfo.wall_clock_time), 5)
+        self.assertGreaterEqual(math.ceil(res[1].hddinfo.wall_clock_time), test_time)
 
 
 if __name__ == "__main__":

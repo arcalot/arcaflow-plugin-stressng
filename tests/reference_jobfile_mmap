@@ -1,4 +1,4 @@
-timeout 5s
+timeout 5
 mmap 1
 mmap-ops 10000000
 mmap-async

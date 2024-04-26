@@ -1,4 +1,4 @@
-timeout 5s
+timeout 5
 vm 1
 vm-bytes 100M
 vm-ops 1000

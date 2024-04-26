@@ -1,4 +1,4 @@
-timeout 5s
+timeout 5
 cpu 2
 cpu-ops 1000
 cpu-load 5
