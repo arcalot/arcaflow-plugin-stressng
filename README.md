@@ -70,12 +70,13 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Type:</th><td><code>one of[string]</code></td></tbody></table>
     </details>
 </td></tr></tbody></table>
-            </details><details><summary>timeout (<code>string</code>)</summary>
-                <table><tbody><tr><th>Name:</th><td>Runtime</td></tr><tr><th>Description:</th><td width="500">Time to run the benchmark test</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+            </details><details><summary>timeout (<code>int</code>)</summary>
+                <table><tbody><tr><th>Name:</th><td>Timeout</td></tr><tr><th>Description:</th><td width="500">Stop stress test after T seconds</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
             </details><details><summary>verbose (<code>bool</code>)</summary>
-                <table><tbody><tr><th>Name:</th><td>Verbose</td></tr><tr><th>Description:</th><td width="500">verbose output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>Verbose</td></tr><tr><th>Description:</th><td width="500">Verbose output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
             </details><details><summary>workdir (<code>string</code>)</summary>
-                <table><tbody><tr><th>Name:</th><td>Working Dir</td></tr><tr><th>Description:</th><td width="500">Path were stress-ng will be executed (example to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>Working Dir</td></tr><tr><th>Description:</th><td width="500">Directory in which stress-ng will be executed (for example, to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
             </details></td></tr>
 <tr><td colspan="2"><details><summary><strong>Objects</strong></summary><details><summary>CpuStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>cpu-load (<code>int</code>)</summary>
@@ -105,7 +106,7 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>HDDStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Write N bytes for each hdd process, the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Write N bytes for each hdd process; the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>hdd-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>HDD Operations</td></tr><tr><th>Description:</th><td width="500">Stop hdd stress workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -167,7 +168,7 @@ Run the stress-ng workload with the given parameters
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mmap-async (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap Async</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and use asynchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">allocate N bytes per mmap stress worker, the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Allocate N bytes per mmap stress worker; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>mmap-file (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap File</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and by default use synchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-mmap2 (<code>bool</code>)</summary>
@@ -224,12 +225,13 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Type:</th><td><code>one of[string]</code></td></tbody></table>
     </details>
 </td></tr></tbody></table>
-        </details><details><summary>timeout (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Runtime</td></tr><tr><th>Description:</th><td width="500">Time to run the benchmark test</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>timeout (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Timeout</td></tr><tr><th>Description:</th><td width="500">Stop stress test after T seconds</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
         </details><details><summary>verbose (<code>bool</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Verbose</td></tr><tr><th>Description:</th><td width="500">verbose output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Verbose</td></tr><tr><th>Description:</th><td width="500">Verbose output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>workdir (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Working Dir</td></tr><tr><th>Description:</th><td width="500">Path were stress-ng will be executed (example to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Working Dir</td></tr><tr><th>Description:</th><td width="500">Directory in which stress-ng will be executed (for example, to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>VmStressorParams (<code>object</code>)</summary>
@@ -241,9 +243,9 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>vm-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>VM Memory Bytes</td></tr><tr><th>Description:</th><td width="500">mmap N bytes per vm worker, the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>VM Memory Bytes</td></tr><tr><th>Description:</th><td width="500">mmap N bytes per vm worker; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>vm-hang (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>VM Hang</td></tr><tr><th>Description:</th><td width="500">Sleep N seconds before unmapping memory, the default is zero seconds</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>VM Hang</td></tr><tr><th>Description:</th><td width="500">Sleep N seconds before unmapping memory; the default is zero seconds</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>vm-keep (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>VM Keep</td></tr><tr><th>Description:</th><td width="500">Do not continually unmap and map memory, just keep on re-writing to it</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
@@ -260,7 +262,7 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>VM Operations</td></tr><tr><th>Description:</th><td width="500">Stop vm workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>vm-populate (<code>bool</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>VM Populate</td></tr><tr><th>Description:</th><td width="500">populate (prefault) page tables for the memory mappings; this can stress swapping</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>VM Populate</td></tr><tr><th>Description:</th><td width="500">Populate (prefault) page tables for the memory mappings; this can stress swapping</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -313,10 +315,10 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td width="500">Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">Real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-usr-sys-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in user and sys time</td></tr><tr><th>Description:</th><td width="500">The bogo-ops rate divided by the user &#43; system time. This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -368,10 +370,10 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td width="500">Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">Real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-usr-sys-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in user and sys time</td></tr><tr><th>Description:</th><td width="500">The bogo-ops rate divided by the user &#43; system time. This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -403,7 +405,7 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>HDDStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Write N bytes for each hdd process, the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Write N bytes for each hdd process; the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>hdd-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>HDD Operations</td></tr><tr><th>Description:</th><td width="500">Stop hdd stress workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -438,10 +440,10 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td width="500">Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">Real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-usr-sys-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in user and sys time</td></tr><tr><th>Description:</th><td width="500">The bogo-ops rate divided by the user &#43; system time. This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -470,10 +472,10 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td width="500">Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">Real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-usr-sys-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in user and sys time</td></tr><tr><th>Description:</th><td width="500">The bogo-ops rate divided by the user &#43; system time. This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>copy-matrix-ops-per-sec (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Copy matrix operations per second</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -566,10 +568,10 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td width="500">Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">Real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-usr-sys-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in user and sys time</td></tr><tr><th>Description:</th><td width="500">The bogo-ops rate divided by the user &#43; system time. This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -594,7 +596,7 @@ Run the stress-ng workload with the given parameters
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mmap-async (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap Async</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and use asynchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">allocate N bytes per mmap stress worker, the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Allocate N bytes per mmap stress worker; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>mmap-file (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap File</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and by default use synchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-mmap2 (<code>bool</code>)</summary>
@@ -651,73 +653,74 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Type:</th><td><code>one of[string]</code></td></tbody></table>
     </details>
 </td></tr></tbody></table>
-        </details><details><summary>timeout (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Runtime</td></tr><tr><th>Description:</th><td width="500">Time to run the benchmark test</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>timeout (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Timeout</td></tr><tr><th>Description:</th><td width="500">Stop stress test after T seconds</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
         </details><details><summary>verbose (<code>bool</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Verbose</td></tr><tr><th>Description:</th><td width="500">verbose output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Verbose</td></tr><tr><th>Description:</th><td width="500">Verbose output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>workdir (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Working Dir</td></tr><tr><th>Description:</th><td width="500">Path were stress-ng will be executed (example to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Working Dir</td></tr><tr><th>Description:</th><td width="500">Directory in which stress-ng will be executed (for example, to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>SystemInfoOutput (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>bufferram (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>bufferram</td></tr><tr><th>Description:</th><td width="500">amount of buffer RAM the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>bufferram</td></tr><tr><th>Description:</th><td width="500">Amount of buffer RAM the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>compiler (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>compiler</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>compiler</td></tr><tr><th>Description:</th><td width="500">Compiler used to build the stressng tool</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>cpus (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>cpus</td></tr><tr><th>Description:</th><td width="500">number of CPU cores the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>cpus</td></tr><tr><th>Description:</th><td width="500">Number of CPU cores the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>cpus-online (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>cpus_online</td></tr><tr><th>Description:</th><td width="500">number of online CPUs the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>cpus_online</td></tr><tr><th>Description:</th><td width="500">Number of online CPUs the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>date-yyyy-mm-dd (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>date</td></tr><tr><th>Description:</th><td width="500">date on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>date</td></tr><tr><th>Description:</th><td width="500">Date on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>epoch-secs (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>epoch</td></tr><tr><th>Description:</th><td width="500">epoch at which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>epoch</td></tr><tr><th>Description:</th><td width="500">Epoch at which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>freeram (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>freeram</td></tr><tr><th>Description:</th><td width="500">amount of free RAM the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>freeram</td></tr><tr><th>Description:</th><td width="500">Amount of free RAM the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>freeswap (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>freeswap</td></tr><tr><th>Description:</th><td width="500">amount of free swap the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>freeswap</td></tr><tr><th>Description:</th><td width="500">Amount of free swap the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>hostname (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>hostname</td></tr><tr><th>Description:</th><td width="500">host on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>hostname</td></tr><tr><th>Description:</th><td width="500">Host on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>machine (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>machine</td></tr><tr><th>Description:</th><td width="500">machine type on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>machine</td></tr><tr><th>Description:</th><td width="500">Machine type on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>nodename (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>nodename</td></tr><tr><th>Description:</th><td width="500">name of the node on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>nodename</td></tr><tr><th>Description:</th><td width="500">Name of the node on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>pagesize (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>pagesize</td></tr><tr><th>Description:</th><td width="500">memory page size the test machine used</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>pagesize</td></tr><tr><th>Description:</th><td width="500">Memory page size the test machine used</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>release (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>release</td></tr><tr><th>Description:</th><td width="500">kernel release on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>release</td></tr><tr><th>Description:</th><td width="500">Kernel release on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>run-by (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>run_by</td></tr><tr><th>Description:</th><td width="500">username of the person who ran the test</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>run_by</td></tr><tr><th>Description:</th><td width="500">Username of the person who ran the test</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>sharedram (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>sharedram</td></tr><tr><th>Description:</th><td width="500">amount of shared RAM the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>sharedram</td></tr><tr><th>Description:</th><td width="500">Amount of shared RAM the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>stress-ng-version (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>stress_ng_version</td></tr><tr><th>Description:</th><td width="500">version of the stressng tool used</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>stress_ng_version</td></tr><tr><th>Description:</th><td width="500">Version of the stressng tool used</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>sysname (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>system name</td></tr><tr><th>Description:</th><td width="500">System name</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>System name</td></tr><tr><th>Description:</th><td width="500">Name of the system on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>ticks-per-second (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>ticks_per_second</td></tr><tr><th>Description:</th><td width="500">ticks per second used on the test machine</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>ticks_per_second</td></tr><tr><th>Description:</th><td width="500">CPU ticks per second on the test machine</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>time-hh-mm-ss (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>time</td></tr><tr><th>Description:</th><td width="500">time at which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>time</td></tr><tr><th>Description:</th><td width="500">Time at which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>totalram (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>totalram</td></tr><tr><th>Description:</th><td width="500">total amount of RAM the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>totalram</td></tr><tr><th>Description:</th><td width="500">Total amount of RAM the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>totalswap (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>totalswap</td></tr><tr><th>Description:</th><td width="500">total amount of swap the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>totalswap</td></tr><tr><th>Description:</th><td width="500">Total amount of swap the test machine had</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>uptime (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>uptime</td></tr><tr><th>Description:</th><td width="500">uptime of the machine the test was run on</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>uptime</td></tr><tr><th>Description:</th><td width="500">Uptime of the machine the test was run on</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>version (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>version</td></tr><tr><th>Description:</th><td width="500">version on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>version</td></tr><tr><th>Description:</th><td width="500">Version on which the test was run</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>VMOutput (<code>object</code>)</summary>
@@ -725,10 +728,10 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td width="500">Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-real-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in real time</td></tr><tr><th>Description:</th><td width="500">Real time measurement is how long the run took based on the wall clock time (that is, the time the stressor took to run).</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>bogo-ops-per-second-usr-sys-time (<code>float</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bogus operations per second per user and sys time</td></tr><tr><th>Description:</th><td width="500">is the bogo-ops rate divided by the user &#43; system time.This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
+        <table><tbody><tr><th>Name:</th><td>Bogus operations per second in user and sys time</td></tr><tr><th>Description:</th><td width="500">The bogo-ops rate divided by the user &#43; system time. This is the real per CPU throughput taking into consideration all the CPUs used and all the time consumed by the stressor and kernel time.</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
 </tbody></table>
         </details><details><summary>cpu-usage-per-instance (<code>float</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>CPU usage per instance</td></tr><tr><th>Description:</th><td width="500">The amount of CPU used by each stressor instance</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>float</code></td>
@@ -758,9 +761,9 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>vm-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>VM Memory Bytes</td></tr><tr><th>Description:</th><td width="500">mmap N bytes per vm worker, the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>VM Memory Bytes</td></tr><tr><th>Description:</th><td width="500">mmap N bytes per vm worker; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>vm-hang (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>VM Hang</td></tr><tr><th>Description:</th><td width="500">Sleep N seconds before unmapping memory, the default is zero seconds</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>VM Hang</td></tr><tr><th>Description:</th><td width="500">Sleep N seconds before unmapping memory; the default is zero seconds</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>vm-keep (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>VM Keep</td></tr><tr><th>Description:</th><td width="500">Do not continually unmap and map memory, just keep on re-writing to it</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
@@ -777,7 +780,7 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>VM Operations</td></tr><tr><th>Description:</th><td width="500">Stop vm workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details><details><summary>vm-populate (<code>bool</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>VM Populate</td></tr><tr><th>Description:</th><td width="500">populate (prefault) page tables for the memory mappings; this can stress swapping</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>VM Populate</td></tr><tr><th>Description:</th><td width="500">Populate (prefault) page tables for the memory mappings; this can stress swapping</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
