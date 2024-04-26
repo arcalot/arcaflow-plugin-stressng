@@ -155,7 +155,9 @@ class StressNGTest(unittest.TestCase):
             matrix_yx=True,
         )
 
-        stress = stressng_schema.StressNGParams(timeout="5s", stressors=[matrix])
+        stress = stressng_schema.StressNGParams(
+            timeout="5s", stressors=[matrix]
+        )
 
         reference_jobfile = "tests/reference_jobfile_matrix"
 
@@ -209,12 +211,11 @@ class StressNGTest(unittest.TestCase):
             stressor="hdd",
             workers=1,
             hdd_bytes="100M",
-            hdd_opts=
-                [
-                    stressng_schema.HddOpts.DIRECT,
-                    stressng_schema.HddOpts.FSYNC,
-                    stressng_schema.HddOpts.WR_RND,
-                ],
+            hdd_opts=[
+                stressng_schema.HddOpts.DIRECT,
+                stressng_schema.HddOpts.FSYNC,
+                stressng_schema.HddOpts.WR_RND,
+            ],
             hdd_ops=10000,
             hdd_write_size="4M",
         )

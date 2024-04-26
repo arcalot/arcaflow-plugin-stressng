@@ -8,6 +8,22 @@ from arcaflow_plugin_sdk import plugin, schema
 from arcaflow_plugin_sdk import annotations
 
 
+def params_to_jobfile(params):
+    result = ""
+    for key, value in params.items():
+        if "stressor" not in key and "workers" not in key:
+            if isinstance(value, bool):
+                if value:
+                    result += f"{key}\n"
+                else:
+                    continue
+            elif isinstance(value, list):
+                result += f"{key} {','.join(value)}\n"
+            else:
+                result += f"{key} {value}\n"
+    return result
+
+
 class Stressors(str, enum.Enum):
     CPU = "cpu"
     VM = "vm"
@@ -217,13 +233,17 @@ class CpuStressorParams(CommonStressorParams):
     ] = CpuMethod.ALL
 
     def to_jobfile(self) -> str:
+        params = schema.build_object_schema(CpuStressorParams).serialize(
+            CpuStressorParams(
+                Stressors(self.stressor),
+                self.workers,
+                self.cpu_ops,
+                self.cpu_load,
+                CpuMethod(self.cpu_method),
+            )
+        )
         result = f"cpu {self.workers}\n"
-        if self.cpu_ops is not None:
-            result += f"cpu-ops {self.cpu_ops}\n"
-        if self.cpu_load is not None:
-            result += f"cpu-load {self.cpu_load}\n"
-        if self.cpu_method is not None:
-            result += f"cpu-method {CpuMethod(self.cpu_method)}\n"
+        result += params_to_jobfile(params)
         return result
 
 
@@ -292,21 +312,21 @@ class VmStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
+        params = schema.build_object_schema(VmStressorParams).serialize(
+            VmStressorParams(
+                Stressors(self.stressor),
+                self.workers,
+                self.vm_bytes,
+                self.vm_ops,
+                self.vm_hang,
+                self.vm_keep,
+                self.vm_locked,
+                VmMethod(self.vm_method),
+                self.vm_populate,
+            )
+        )
         result = f"vm {self.workers}\n"
-        if self.vm_bytes is not None:
-            result += f"vm-bytes {self.vm_bytes}\n"
-        if self.vm_ops is not None:
-            result += f"vm-ops {self.vm_ops}\n"
-        if self.vm_hang is not None:
-            result += f"vm-hang {self.vm_hang}\n"
-        if self.vm_keep is True:
-            result += "vm-keep\n"
-        if self.vm_locked is True:
-            result += "vm-locked\n"
-        if self.vm_method is not None:
-            result += f"vm-method {VmMethod(self.vm_method)}\n"
-        if self.vm_populate is True:
-            result += "vm-populate\n"
+        result += params_to_jobfile(params)
         return result
 
 
@@ -390,23 +410,22 @@ class MmapStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
+        params = schema.build_object_schema(MmapStressorParams).serialize(
+            MmapStressorParams(
+                Stressors(self.stressor),
+                self.workers,
+                self.mmap_ops,
+                self.mmap_async,
+                self.mmap_bytes,
+                self.mmap_file,
+                self.mmap_mmap2,
+                self.mmap_mprotect,
+                self.mmap_odirect,
+                self.mmap_osync,
+            )
+        )
         result = f"mmap {self.workers}\n"
-        if self.mmap_ops is not None:
-            result += f"mmap-ops {self.mmap_ops}\n"
-        if self.mmap_async is True:
-            result += "mmap-async\n"
-        if self.mmap_bytes is not None:
-            result += f"mmap-bytes {self.mmap_bytes}\n"
-        if self.mmap_file is True:
-            result += "mmap-file\n"
-        if self.mmap_mmap2 is True:
-            result += "mmap-mmap2\n"
-        if self.mmap_mprotect is True:
-            result += "mmap-mprotect\n"
-        if self.mmap_odirect is True:
-            result += "mmap-odirect\n"
-        if self.mmap_osync is True:
-            result += "mmap-osync\n"
+        result += params_to_jobfile(params)
         return result
 
 
@@ -416,7 +435,9 @@ class MatrixStressorParams(CommonStressorParams):
         typing.Optional[int],
         schema.id("matrix-ops"),
         schema.name("Matrix Operations"),
-        schema.description("Stop matrix stress workers after N bogo operations"),
+        schema.description(
+            "Stop matrix stress workers after N bogo operations"
+        ),
     ] = None
 
     matrix_method: typing.Annotated[
@@ -447,15 +468,18 @@ class MatrixStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
+        params = schema.build_object_schema(MatrixStressorParams).serialize(
+            MatrixStressorParams(
+                Stressors(self.stressor),
+                self.workers,
+                self.matrix_ops,
+                MatrixMethod(self.matrix_method),
+                self.matrix_size,
+                self.matrix_yx,
+            )
+        )
         result = f"matrix {self.workers}\n"
-        if self.matrix_ops is not None:
-            result += f"matrix-ops {self.matrix_ops}\n"
-        if self.matrix_method is not None:
-            result += f"matrix-method {self.matrix_method}\n"
-        if self.matrix_size is not None:
-            result += f"matrix-size {self.matrix_size}\n"
-        if self.matrix_yx is True:
-            result += "matrix-yx\n"
+        result += params_to_jobfile(params)
         return result
 
 
@@ -482,11 +506,16 @@ class MqStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
+        params = schema.build_object_schema(MqStressorParams).serialize(
+            MqStressorParams(
+                Stressors(self.stressor),
+                self.workers,
+                self.mq_ops,
+                self.mq_size,
+            )
+        )
         result = f"mq {self.workers}\n"
-        if self.mq_ops is not None:
-            result += f"mq-ops {self.mq_ops}\n"
-        if self.mq_size is not None:
-            result += f"mq-size {self.mq_size}\n"
+        result += params_to_jobfile(params)
         return result
 
 
@@ -496,7 +525,9 @@ class HDDStressorParams(CommonStressorParams):
         typing.Optional[str],
         schema.id("hdd-bytes"),
         schema.name("Bytes Per Worker"),
-        schema.description("Write N bytes for each hdd process, the default is 1 GB"),
+        schema.description(
+            "Write N bytes for each hdd process, the default is 1 GB"
+        ),
     ] = None
 
     hdd_opts: typing.Annotated[
@@ -521,16 +552,18 @@ class HDDStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
+        params = schema.build_object_schema(HDDStressorParams).serialize(
+            HDDStressorParams(
+                Stressors(self.stressor),
+                self.workers,
+                self.hdd_bytes,
+                self.hdd_opts,
+                self.hdd_ops,
+                self.hdd_write_size,
+            )
+        )
         result = f"hdd {self.workers}\n"
-        if self.hdd_bytes is not None:
-            result += f"hdd-bytes {self.hdd_bytes}\n"
-        if self.hdd_opts is not None:
-            hdd_opts_csv = ",".join(self.hdd_opts)
-            result += f"hdd-opts {hdd_opts_csv}\n"
-        if self.hdd_ops is not None:
-            result += f"hdd-ops {self.hdd_ops}\n"
-        if self.hdd_write_size is not None:
-            result += f"hdd-write-size {self.hdd_write_size}\n"
+        result += params_to_jobfile(params)
         return result
 
 
@@ -549,37 +582,49 @@ class StressNGParams:
                     CpuStressorParams,
                     annotations.discriminator_value("cpu"),
                     schema.name("CPU Stressor Parameters"),
-                    schema.description("Parameters for running the cpu stressor"),
+                    schema.description(
+                        "Parameters for running the cpu stressor"
+                    ),
                 ],
                 typing.Annotated[
                     VmStressorParams,
                     annotations.discriminator_value("vm"),
                     schema.name("VM Stressor Parameters"),
-                    schema.description("Parameters for running the vm stressor"),
+                    schema.description(
+                        "Parameters for running the vm stressor"
+                    ),
                 ],
                 typing.Annotated[
                     MmapStressorParams,
                     annotations.discriminator_value("mmap"),
                     schema.name("Mmap Stressor Parameters"),
-                    schema.description("Parameters for running the mmap stressor"),
+                    schema.description(
+                        "Parameters for running the mmap stressor"
+                    ),
                 ],
                 typing.Annotated[
                     MatrixStressorParams,
                     annotations.discriminator_value("matrix"),
                     schema.name("Matrix Stressor Parameters"),
-                    schema.description("Parameters for running the matrix stressor"),
+                    schema.description(
+                        "Parameters for running the matrix stressor"
+                    ),
                 ],
                 typing.Annotated[
                     MqStressorParams,
                     annotations.discriminator_value("mq"),
                     schema.name("MQ Stressor Parameters"),
-                    schema.description("Parameters for running the mq stressor"),
+                    schema.description(
+                        "Parameters for running the mq stressor"
+                    ),
                 ],
                 typing.Annotated[
                     HDDStressorParams,
                     annotations.discriminator_value("hdd"),
                     schema.name("HDD Stressor Parameters"),
-                    schema.description("Parameters for running the hdd stressor"),
+                    schema.description(
+                        "Parameters for running the hdd stressor"
+                    ),
                 ],
             ],
             annotations.discriminator("stressor", discriminator_inlined=True),
