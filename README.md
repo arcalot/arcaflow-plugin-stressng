@@ -103,27 +103,22 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details></td></tr>
 </tbody></table>
-        </details><details><summary>HDDOptsParams (<code>object</code>)</summary>
-            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd_opts (<code>enum[string]</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>HDD Options</td></tr><tr><th>Description:</th><td width="500">HDD stress test options</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
-        <details><summary>Values</summary>
-            <ul><li><strong><code>direct</code>:</strong> DIRECT</li><li><strong><code>dsync</code>:</strong> DSYNC</li><li><strong><code>fadv-dontneed</code>:</strong> FADV_DONTNEED</li><li><strong><code>fadv-noreuse</code>:</strong> FADV_NOREUSE</li><li><strong><code>fadv-normal</code>:</strong> FADV_NORMAL</li><li><strong><code>fadv-rnd</code>:</strong> FADV_RND</li><li><strong><code>fadv-seq</code>:</strong> FADV_SEQ</li><li><strong><code>fadv-willneed</code>:</strong> FADV_WILLNEED</li><li><strong><code>fdatasync</code>:</strong> FDATASYNC</li><li><strong><code>fsync</code>:</strong> FSYNC</li><li><strong><code>iovec</code>:</strong> IOVEC</li><li><strong><code>noatime</code>:</strong> NOATIME</li><li><strong><code>rd-rnd</code>:</strong> RD_RND</li><li><strong><code>rd-seq</code>:</strong> RD_SEQ</li><li><strong><code>sync</code>:</strong> SYNC</li><li><strong><code>syncfs</code>:</strong> SYNCFS</li><li><strong><code>utimes</code>:</strong> UTIMES</li><li><strong><code>wr-rnd</code>:</strong> WR_RND</li><li><strong><code>wr-seq</code>:</strong> WR_SEQ</li></ul>
-        </details>
-    </td>
-</tr></tbody></table>
-        </details></td></tr>
-</tbody></table>
         </details><details><summary>HDDStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd-bytes (<code>string</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Write N bytes for each hdd process, the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>hdd-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>HDD Operations</td></tr><tr><th>Description:</th><td width="500">Stop hdd stress workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
-        </details><details><summary>hdd-opts (<code>list[<code>reference[HDDOptsParams]</code>]</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>HDD Options</td></tr><tr><th>Description:</th><td width="500">Various stress test options as a list</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>list[<code>reference[HDDOptsParams]</code>]</code></td><tr><td colspan="2">
+        </details><details><summary>hdd-opts (<code>list[<code>enum[string]</code>]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>HDD Options</td></tr><tr><th>Description:</th><td width="500">Various stress test options as a list</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>list[<code>enum[string]</code>]</code></td><tr><td colspan="2">
     <details>
         <summary>List items</summary>
-        <table><tbody><tr><th>Type:</th><td><code>reference[HDDOptsParams]</code></td><tr><th>Referenced object:</th><td>HDDOptsParams</td></tr></tbody></table>
+        <table><tbody><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>direct</code>:</strong> DIRECT</li><li><strong><code>dsync</code>:</strong> DSYNC</li><li><strong><code>fadv-dontneed</code>:</strong> FADV_DONTNEED</li><li><strong><code>fadv-noreuse</code>:</strong> FADV_NOREUSE</li><li><strong><code>fadv-normal</code>:</strong> FADV_NORMAL</li><li><strong><code>fadv-rnd</code>:</strong> FADV_RND</li><li><strong><code>fadv-seq</code>:</strong> FADV_SEQ</li><li><strong><code>fadv-willneed</code>:</strong> FADV_WILLNEED</li><li><strong><code>fdatasync</code>:</strong> FDATASYNC</li><li><strong><code>fsync</code>:</strong> FSYNC</li><li><strong><code>iovec</code>:</strong> IOVEC</li><li><strong><code>noatime</code>:</strong> NOATIME</li><li><strong><code>rd-rnd</code>:</strong> RD_RND</li><li><strong><code>rd-seq</code>:</strong> RD_SEQ</li><li><strong><code>sync</code>:</strong> SYNC</li><li><strong><code>syncfs</code>:</strong> SYNCFS</li><li><strong><code>utimes</code>:</strong> UTIMES</li><li><strong><code>wr-rnd</code>:</strong> WR_RND</li><li><strong><code>wr-seq</code>:</strong> WR_SEQ</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
     </details>
 </td></tr></tbody></table>
         </details><details><summary>hdd-write-size (<code>string</code>)</summary>
@@ -368,16 +363,6 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details></td></tr>
 </tbody></table>
-        </details><details><summary>HDDOptsParams (<code>object</code>)</summary>
-            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd_opts (<code>enum[string]</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>HDD Options</td></tr><tr><th>Description:</th><td width="500">HDD stress test options</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
-        <details><summary>Values</summary>
-            <ul><li><strong><code>direct</code>:</strong> DIRECT</li><li><strong><code>dsync</code>:</strong> DSYNC</li><li><strong><code>fadv-dontneed</code>:</strong> FADV_DONTNEED</li><li><strong><code>fadv-noreuse</code>:</strong> FADV_NOREUSE</li><li><strong><code>fadv-normal</code>:</strong> FADV_NORMAL</li><li><strong><code>fadv-rnd</code>:</strong> FADV_RND</li><li><strong><code>fadv-seq</code>:</strong> FADV_SEQ</li><li><strong><code>fadv-willneed</code>:</strong> FADV_WILLNEED</li><li><strong><code>fdatasync</code>:</strong> FDATASYNC</li><li><strong><code>fsync</code>:</strong> FSYNC</li><li><strong><code>iovec</code>:</strong> IOVEC</li><li><strong><code>noatime</code>:</strong> NOATIME</li><li><strong><code>rd-rnd</code>:</strong> RD_RND</li><li><strong><code>rd-seq</code>:</strong> RD_SEQ</li><li><strong><code>sync</code>:</strong> SYNC</li><li><strong><code>syncfs</code>:</strong> SYNCFS</li><li><strong><code>utimes</code>:</strong> UTIMES</li><li><strong><code>wr-rnd</code>:</strong> WR_RND</li><li><strong><code>wr-seq</code>:</strong> WR_SEQ</li></ul>
-        </details>
-    </td>
-</tr></tbody></table>
-        </details></td></tr>
-</tbody></table>
         </details><details><summary>HDDOutput (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>bogo-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Bogus Operations</td></tr><tr><th>Description:</th><td width="500">Number of stressor loop iterations</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
@@ -422,11 +407,16 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>hdd-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>HDD Operations</td></tr><tr><th>Description:</th><td width="500">Stop hdd stress workers after N bogo operations</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
-        </details><details><summary>hdd-opts (<code>list[<code>reference[HDDOptsParams]</code>]</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>HDD Options</td></tr><tr><th>Description:</th><td width="500">Various stress test options as a list</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>list[<code>reference[HDDOptsParams]</code>]</code></td><tr><td colspan="2">
+        </details><details><summary>hdd-opts (<code>list[<code>enum[string]</code>]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>HDD Options</td></tr><tr><th>Description:</th><td width="500">Various stress test options as a list</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>list[<code>enum[string]</code>]</code></td><tr><td colspan="2">
     <details>
         <summary>List items</summary>
-        <table><tbody><tr><th>Type:</th><td><code>reference[HDDOptsParams]</code></td><tr><th>Referenced object:</th><td>HDDOptsParams</td></tr></tbody></table>
+        <table><tbody><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>direct</code>:</strong> DIRECT</li><li><strong><code>dsync</code>:</strong> DSYNC</li><li><strong><code>fadv-dontneed</code>:</strong> FADV_DONTNEED</li><li><strong><code>fadv-noreuse</code>:</strong> FADV_NOREUSE</li><li><strong><code>fadv-normal</code>:</strong> FADV_NORMAL</li><li><strong><code>fadv-rnd</code>:</strong> FADV_RND</li><li><strong><code>fadv-seq</code>:</strong> FADV_SEQ</li><li><strong><code>fadv-willneed</code>:</strong> FADV_WILLNEED</li><li><strong><code>fdatasync</code>:</strong> FDATASYNC</li><li><strong><code>fsync</code>:</strong> FSYNC</li><li><strong><code>iovec</code>:</strong> IOVEC</li><li><strong><code>noatime</code>:</strong> NOATIME</li><li><strong><code>rd-rnd</code>:</strong> RD_RND</li><li><strong><code>rd-seq</code>:</strong> RD_SEQ</li><li><strong><code>sync</code>:</strong> SYNC</li><li><strong><code>syncfs</code>:</strong> SYNCFS</li><li><strong><code>utimes</code>:</strong> UTIMES</li><li><strong><code>wr-rnd</code>:</strong> WR_RND</li><li><strong><code>wr-seq</code>:</strong> WR_SEQ</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
     </details>
 </td></tr></tbody></table>
         </details><details><summary>hdd-write-size (<code>string</code>)</summary>
