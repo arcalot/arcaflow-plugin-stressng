@@ -1,6 +1,6 @@
 timeout 5s
 hdd 1
 hdd-bytes 100M
-hdd-opts direct, fsync, wr-rnd
+hdd-opts direct,fsync,wr-rnd
 hdd-ops 10000
 hdd-write-size 4M

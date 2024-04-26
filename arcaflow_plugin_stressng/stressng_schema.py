@@ -491,15 +491,6 @@ class MqStressorParams(CommonStressorParams):
 
 
 @dataclass
-class HDDOptsParams:
-    hdd_opts: typing.Annotated[
-        typing.Optional[HddOpts],
-        schema.name("HDD Options"),
-        schema.description("HDD stress test options"),
-    ] = None
-
-
-@dataclass
 class HDDStressorParams(CommonStressorParams):
     hdd_bytes: typing.Annotated[
         typing.Optional[str],
@@ -509,7 +500,7 @@ class HDDStressorParams(CommonStressorParams):
     ] = None
 
     hdd_opts: typing.Annotated[
-        typing.Optional[typing.List[HDDOptsParams]],
+        typing.Optional[typing.List[HddOpts]],
         schema.id("hdd-opts"),
         schema.name("HDD Options"),
         schema.description("Various stress test options as a list"),
@@ -534,7 +525,7 @@ class HDDStressorParams(CommonStressorParams):
         if self.hdd_bytes is not None:
             result += f"hdd-bytes {self.hdd_bytes}\n"
         if self.hdd_opts is not None:
-            hdd_opts_csv = ", ".join(self.hdd_opts)
+            hdd_opts_csv = ",".join(self.hdd_opts)
             result += f"hdd-opts {hdd_opts_csv}\n"
         if self.hdd_ops is not None:
             result += f"hdd-ops {self.hdd_ops}\n"
