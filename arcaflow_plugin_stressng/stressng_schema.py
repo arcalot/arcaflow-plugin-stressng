@@ -591,37 +591,37 @@ class StressNGParams:
             typing.Union[
                 typing.Annotated[
                     CpuStressorParams,
-                    annotations.discriminator_value("cpu"),
+                    annotations.discriminator_value(Stressors.CPU.value),
                     schema.name("CPU Stressor Parameters"),
                     schema.description("Parameters for running the cpu stressor"),
                 ],
                 typing.Annotated[
                     VmStressorParams,
-                    annotations.discriminator_value("vm"),
+                    annotations.discriminator_value(Stressors.VM.value),
                     schema.name("VM Stressor Parameters"),
                     schema.description("Parameters for running the vm stressor"),
                 ],
                 typing.Annotated[
                     MmapStressorParams,
-                    annotations.discriminator_value("mmap"),
+                    annotations.discriminator_value(Stressors.MMAP.value),
                     schema.name("Mmap Stressor Parameters"),
                     schema.description("Parameters for running the mmap stressor"),
                 ],
                 typing.Annotated[
                     MatrixStressorParams,
-                    annotations.discriminator_value("matrix"),
+                    annotations.discriminator_value(Stressors.MATRIX.value),
                     schema.name("Matrix Stressor Parameters"),
                     schema.description("Parameters for running the matrix stressor"),
                 ],
                 typing.Annotated[
                     MqStressorParams,
-                    annotations.discriminator_value("mq"),
+                    annotations.discriminator_value(Stressors.MQ.value),
                     schema.name("MQ Stressor Parameters"),
                     schema.description("Parameters for running the mq stressor"),
                 ],
                 typing.Annotated[
                     HDDStressorParams,
-                    annotations.discriminator_value("hdd"),
+                    annotations.discriminator_value(Stressors.HDD.value),
                     schema.name("HDD Stressor Parameters"),
                     schema.description("Parameters for running the hdd stressor"),
                 ],
