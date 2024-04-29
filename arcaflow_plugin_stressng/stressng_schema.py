@@ -210,7 +210,9 @@ class CpuStressorParams(CommonStressorParams):
         typing.Optional[int],
         schema.id("cpu-ops"),
         schema.name("CPU Operations"),
-        schema.description("Stop CPU stress workers after N bogo operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the CPU stress workers"
+        ),
     ] = None
 
     cpu_load: typing.Annotated[
@@ -218,7 +220,7 @@ class CpuStressorParams(CommonStressorParams):
         schema.id("cpu-load"),
         schema.name("CPU Load"),
         schema.description(
-            "Load CPU with P percent loading for the CPU stress workers"
+            "Percentage per-worker loading for the CPU; 100 = 1 full CPU core"
         ),
     ] = None
 
@@ -253,14 +255,18 @@ class VmStressorParams(CommonStressorParams):
         typing.Optional[str],
         schema.id("vm-bytes"),
         schema.name("VM Memory Bytes"),
-        schema.description("mmap N bytes per vm worker; the default is 256MB"),
+        schema.description(
+            "Number of bytes per vm worker to mmap; the default is 256MB"
+        ),
     ] = None
 
     vm_ops: typing.Annotated[
         typing.Optional[int],
         schema.id("vm-ops"),
         schema.name("VM Operations"),
-        schema.description("Stop vm workers after N bogo operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the vm workers"
+        ),
     ] = None
 
     vm_hang: typing.Annotated[
@@ -268,7 +274,8 @@ class VmStressorParams(CommonStressorParams):
         schema.id("vm-hang"),
         schema.name("VM Hang"),
         schema.description(
-            "Sleep N seconds before unmapping memory; the default is zero seconds"
+            "Number of seconds to sleep before unmapping memory; "
+            "the default is zero seconds"
         ),
     ] = None
 
@@ -336,7 +343,9 @@ class MmapStressorParams(CommonStressorParams):
         typing.Optional[int],
         schema.id("mmap-ops"),
         schema.name("Mmap Operations"),
-        schema.description("Stop mmap stress workers after N bogo operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the mmap stress workers"
+        ),
     ] = None
 
     mmap_async: typing.Annotated[
@@ -354,7 +363,7 @@ class MmapStressorParams(CommonStressorParams):
         schema.id("mmap-bytes"),
         schema.name("Mmap Bytes"),
         schema.description(
-            "Allocate N bytes per mmap stress worker; the default is 256MB"
+            "Number of bytes per mmap stress worker to allocate the default is 256MB"
         ),
     ] = None
 
@@ -435,7 +444,9 @@ class MatrixStressorParams(CommonStressorParams):
         typing.Optional[int],
         schema.id("matrix-ops"),
         schema.name("Matrix Operations"),
-        schema.description("Stop matrix stress workers after N bogo operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the matrix stress workers"
+        ),
     ] = None
 
     matrix_method: typing.Annotated[
@@ -443,7 +454,7 @@ class MatrixStressorParams(CommonStressorParams):
         schema.id("matrix-method"),
         schema.name("Matrix Stressor Method"),
         schema.description(
-            "Fine grained control of which matrix stressors to use " "(add, copy, etc.)"
+            "Fine grained control of which matrix stressors to use (add, copy, etc.)"
         ),
     ] = MatrixMethod.ALL
 
@@ -451,7 +462,7 @@ class MatrixStressorParams(CommonStressorParams):
         typing.Optional[int],
         schema.id("matrix-size"),
         schema.name("Matrix Size"),
-        schema.description("Specify the N x N size of the matrices"),
+        schema.description("Size of the matrices (matrix_size x matrix_size)"),
     ] = None
 
     matrix_yx: typing.Annotated[
@@ -459,8 +470,8 @@ class MatrixStressorParams(CommonStressorParams):
         schema.id("matrix-yx"),
         schema.name("Matrix YX"),
         schema.description(
-            "Perform matrix operations in order y by x rather than the "
-            "default x by y"
+            "Perform matrix operations in order Y by X rather than the "
+            "default X by Y"
         ),
     ] = None
 
@@ -486,7 +497,10 @@ class MqStressorParams(CommonStressorParams):
         typing.Optional[int],
         schema.id("mq-ops"),
         schema.name("MQ Operations"),
-        schema.description("Stop after N bogo POSIX message send operations completed"),
+        schema.description(
+            "Number of bogo POSIX message send operations completed after which "
+            "to stop the mq stress workers"
+        ),
     ] = None
 
     mq_size: typing.Annotated[
@@ -520,7 +534,9 @@ class HDDStressorParams(CommonStressorParams):
         typing.Optional[str],
         schema.id("hdd-bytes"),
         schema.name("Bytes Per Worker"),
-        schema.description("Write N bytes for each hdd process; the default is 1 GB"),
+        schema.description(
+            "Number of bytes to write for each hdd process; the default is 1 GB"
+        ),
     ] = None
 
     hdd_opts: typing.Annotated[
@@ -534,7 +550,9 @@ class HDDStressorParams(CommonStressorParams):
         typing.Optional[int],
         schema.id("hdd-ops"),
         schema.name("HDD Operations"),
-        schema.description("Stop hdd stress workers after N bogo operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the hdd stress workers"
+        ),
     ] = None
 
     hdd_write_size: typing.Annotated[
@@ -565,7 +583,7 @@ class StressNGParams:
     timeout: typing.Annotated[
         int,
         schema.name("Timeout"),
-        schema.description("Stop stress test after T seconds"),
+        schema.description("Number of seconds after which to stop the stress test"),
     ]
 
     stressors: typing.List[
