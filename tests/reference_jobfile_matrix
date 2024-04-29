@@ -1,2 +1,6 @@
-timeout 10s
+timeout 5
 matrix 1
+matrix-ops 1000
+matrix-method all
+matrix-size 1000
+matrix-yx

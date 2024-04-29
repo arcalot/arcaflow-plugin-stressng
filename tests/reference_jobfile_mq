@@ -1,2 +1,4 @@
-timeout 10s
+timeout 5
 mq 1
+mq-ops 10000000
+mq-size 32

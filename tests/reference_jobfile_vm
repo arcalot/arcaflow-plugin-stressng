@@ -1,5 +1,9 @@
-timeout 10s
+timeout 5
 vm 1
-vm-bytes 100m
-mmap 1
-mmap-bytes 10m
+vm-bytes 100M
+vm-ops 1000
+vm-hang 1
+vm-keep
+vm-locked
+vm-method all
+vm-populate

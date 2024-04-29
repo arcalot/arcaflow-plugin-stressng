@@ -3,18 +3,19 @@
 import sys
 import typing
 import tempfile
-import yaml
 import subprocess
 import os
+import yaml
 
 from arcaflow_plugin_sdk import plugin
 from stressng_schema import (
-    WorkloadParams,
+    StressNGParams,
     WorkloadResults,
     WorkloadError,
     system_info_output_schema,
     cpu_output_schema,
     vm_output_schema,
+    mmap_output_schema,
     matrix_output_schema,
     mq_output_schema,
     hdd_output_schema,
@@ -28,13 +29,13 @@ from stressng_schema import (
     outputs={"success": WorkloadResults, "error": WorkloadError},
 )
 def stressng_run(
-    params: WorkloadParams,
+    params: StressNGParams,
 ) -> typing.Tuple[str, typing.Union[WorkloadResults, WorkloadError]]:
     print("==>> Generating temporary jobfile...")
     # generic parameters are in the StressNGParams class (e.g. the timeout)
-    result = params.StressNGParams.to_jobfile()
+    result = params.to_jobfile()
     # now we need to iterate of the list of stressors
-    for item in params.StressNGParams.stressors:
+    for item in params.stressors:
         result = result + item.to_jobfile()
 
     stressng_jobfile = tempfile.mkstemp()
@@ -65,8 +66,8 @@ def stressng_run(
 
     print("==>> Running stress-ng with the temporary jobfile...")
     workdir = "/tmp"
-    if params.StressNGParams.workdir is not None:
-        workdir = params.StressNGParams.workdir
+    if params.workdir is not None:
+        workdir = params.workdir
     try:
         print(
             subprocess.check_output(
@@ -103,6 +104,7 @@ def stressng_run(
     # allocate all stressor information with None in case they don't get called
     cpuinfo_un = None
     vminfo_un = None
+    mmapinfo_un = None
     matrixinfo_un = None
     mqinfo_un = None
     hddinfo_un = None
@@ -113,6 +115,8 @@ def stressng_run(
             cpuinfo_un = cpu_output_schema.unserialize(metric)
         if metric["stressor"] == "vm":
             vminfo_un = vm_output_schema.unserialize(metric)
+        if metric["stressor"] == "mmap":
+            mmapinfo_un = mmap_output_schema.unserialize(metric)
         if metric["stressor"] == "matrix":
             matrixinfo_un = matrix_output_schema.unserialize(metric)
         if metric["stressor"] == "mq":
@@ -129,8 +133,10 @@ def stressng_run(
         os.remove(stressng_jobfile[1])
 
     return "success", WorkloadResults(
+        params,
         system_un,
         vminfo_un,
+        mmapinfo_un,
         cpuinfo_un,
         matrixinfo_un,
         mqinfo_un,

@@ -2,19 +2,189 @@
 
 import typing
 import enum
-import dataclasses
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from arcaflow_plugin_sdk import plugin, schema
 from arcaflow_plugin_sdk import annotations
 
 
+def params_to_jobfile(params: dict) -> str:
+    result = ""
+    for key, value in params.items():
+        if not value:
+            continue
+        if isinstance(value, bool):
+            result += f"{key}\n"
+        elif isinstance(value, list):
+            result += f"{key} {','.join(value)}\n"
+        else:
+            result += f"{key} {value}\n"
+    return result
+
+
 class Stressors(str, enum.Enum):
     CPU = "cpu"
     VM = "vm"
+    MMAP = "mmap"
     MATRIX = "matrix"
     MQ = "mq"
     HDD = "hdd"
+
+
+class CpuMethod(str, enum.Enum):
+    ALL = "all"
+    ACKERMANN = "ackermann"
+    APERY = "apery"
+    BITOPS = "bitops"
+    CALLFUNC = "callfunc"
+    CFLOAT = "cfloat"
+    CDOUBLE = "cdouble"
+    CLONGDOUBLE = "clongdouble"
+    COLLATZ = "collatz"
+    CORRELATE = "correlate"
+    CPUID = "cpuid"
+    CRC16 = "crc16"
+    DECIMAL32 = "decimal32"
+    DECIMAL64 = "decimal64"
+    DECIMAL128 = "decimal128"
+    DITHER = "dither"
+    DIV64 = "div64"
+    DJB2A = "djb2a"
+    DOUBLE = "double"
+    EULER = "euler"
+    EXPLOG = "explog"
+    FACTORIAL = "factorial"
+    FIBONACCI = "fibonacci"
+    FFT = "fft"
+    FLETCHER16 = "fletcher16"
+    FLOAT = "float"
+    FLOAT16 = "float16"
+    FLOAT32 = "float32"
+    FLOAT80 = "float80"
+    FLOAT128 = "float128"
+    FLOATCONVERSION = "floatconversion"
+    FNV1A = "fnv1a"
+    GAMMA = "gamma"
+    GCD = "gcd"
+    GRAY = "gray"
+    HAMMING = "hamming"
+    HANOI = "hanoi"
+    HYPERBOLIC = "hyperbolic"
+    IDCT = "idct"
+    INT8 = "int8"
+    INT16 = "int16"
+    INT32 = "int32"
+    INT64 = "int64"
+    INT128 = "int128"
+    INT32FLOAT = "int32float"
+    INT32DOUBLE = "int32double"
+    INT32LONGDOUBLE = "int32longdouble"
+    INT64FLOAT = "int64float"
+    INT64DOUBLE = "int64double"
+    INT64LONGDOUBLE = "int64longdouble"
+    INT128FLOAT = "int128float"
+    INT128DOUBLE = "int128double"
+    INT128LONGDOUBLE = "int128longdouble"
+    INT128DECIMAL32 = "int128decimal32"
+    INT128DECIMAL64 = "int128decimal64"
+    INT128DECIMAL128 = "int128decimal128"
+    INTCONVERSION = "intconversion"
+    IPV4CHECKSUM = "ipv4checksum"
+    JENKIN = "jenkin"
+    JMP = "jmp"
+    LN2 = "ln2"
+    LONGDOUBLE = "longdouble"
+    LOOP = "loop"
+    MATRIXPROD = "matrixprod"
+    MURMUR3_32 = "murmur3_32"
+    NHASH = "nhash"
+    NSQRT = "nsqrt"
+    OMEGA = "omega"
+    PARITY = "parity"
+    PHI = "phi"
+    PI = "pi"
+    PJW = "pjw"
+    PRIME = "prime"
+    PSI = "psi"
+    QUEENS = "queens"
+    RAND = "rand"
+    RAND48 = "rand48"
+    RGB = "rgb"
+    SDBM = "sdbm"
+    SIEVE = "sieve"
+    STATS = "stats"
+    SQRT = "sqrt"
+    TRIG = "trig"
+    UNION = "union"
+    ZETA = "zeta"
+
+
+class MatrixMethod(str, enum.Enum):
+    ALL = "all"
+    ADD = "add"
+    COPY = "copy"
+    DIV = "div"
+    FROBENIUS = "frobenius"
+    HADAMARD = "hadamard"
+    IDENTITY = "identity"
+    MEAN = "mean"
+    MULT = "mult"
+    NEGATE = "negate"
+    PROD = "prod"
+    SUB = "sub"
+    SQUARE = "square"
+    TRANS = "trans"
+    ZERO = "zero"
+
+
+class VmMethod(str, enum.Enum):
+    ALL = "all"
+    FLIP = "flip"
+    GALPAT_0 = "galpat-0"
+    GALPAT_1 = "galpat-1"
+    GRAY = "gray"
+    INCDEC = "incdec"
+    INC_NYBBLE = "inc-nybble"
+    RAND_SET = "rand-set"
+    RAND_SUM = "rand-sum"
+    READ64 = "read64"
+    ROR = "ror"
+    SWAP = "swap"
+    MOVE_INV = "move-inv"
+    MODULO_X = "modulo-x"
+    PRIME_0 = "prime-0"
+    PRIME_1 = "prime-1"
+    PRIME_GRAY_0 = "prime-gray-0"
+    PRIME_GRAY_1 = "prime-gray-1"
+    ROWHAMMER = "rowhammer"
+    WALK_0D = "walk-0d"
+    WALK_1D = "walk-1d"
+    WALK_0A = "walk-0a"
+    WALK_1A = "walk-1a"
+    WRITE64 = "write64"
+    ZERO_ONE = "zero-one"
+
+
+class HddOpts(str, enum.Enum):
+    DIRECT = "direct"
+    DSYNC = "dsync"
+    FADV_DONTNEED = "fadv-dontneed"
+    FADV_NOREUSE = "fadv-noreuse"
+    FADV_NORMAL = "fadv-normal"
+    FADV_RND = "fadv-rnd"
+    FADV_SEQ = "fadv-seq"
+    FADV_WILLNEED = "fadv-willneed"
+    FSYNC = "fsync"
+    FDATASYNC = "fdatasync"
+    IOVEC = "iovec"
+    NOATIME = "noatime"
+    SYNC = "sync"
+    RD_RND = "rd-rnd"
+    RD_SEQ = "rd-seq"
+    SYNCFS = "syncfs"
+    UTIMES = "utimes"
+    WR_RND = "wr-rnd"
+    WR_SEQ = "wr-seq"
 
 
 @dataclass
@@ -25,415 +195,597 @@ class CommonStressorParams:
         schema.description("Stressor for the benchmark workload"),
     ]
 
+    workers: typing.Annotated[
+        int,
+        schema.name("Worker Count"),
+        schema.description(
+            "Number of workers for the stressor; 0 = match the number of on-line CPUs"
+        ),
+    ]
+
 
 @dataclass
 class CpuStressorParams(CommonStressorParams):
-    cpu_count: int = field(
-        metadata={
-            "name": "CPU count",
-            "description": "Number of CPU cores to be used (0 means all)",
-        }
-    )
-    cpu_method: typing.Optional[str] = field(
-        default="all",
-        metadata={
-            "name": "CPU stressor method",
-            "description": (
-                "fine grained control of which "
-                "cpu stressors to use (ackermann, "
-                "cfloat etc."
-            ),
-        },
-    )
+    cpu_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("cpu-ops"),
+        schema.name("CPU Operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the CPU stress workers"
+        ),
+    ] = None
 
-    cpu_load: typing.Optional[int] = field(
-        default=None,
-        metadata={
-            "name": "CPU load",
-            "description": "load CPU by percentage",
-        },
-    )
+    cpu_load: typing.Annotated[
+        typing.Optional[int],
+        schema.id("cpu-load"),
+        schema.name("CPU Load"),
+        schema.description(
+            "Percentage per-worker loading for the CPU; 100 = 1 full CPU core"
+        ),
+    ] = None
+
+    cpu_method: typing.Annotated[
+        typing.Optional[CpuMethod],
+        schema.id("cpu-method"),
+        schema.name("CPU Stressor Method"),
+        schema.description(
+            "Specify a cpu stress method; by default, all stress methods "
+            "are exercised sequentially"
+        ),
+    ] = CpuMethod.ALL
 
     def to_jobfile(self) -> str:
-        result = "cpu {}\n".format(self.cpu_count)
-        if self.cpu_method is not None:
-            result = result + "cpu-method {}\n".format(self.cpu_method)
-        if self.cpu_load is not None:
-            result = result + "cpu-load {}\n".format(self.cpu_load)
-        return result
+        return f"cpu {self.workers}\n" + params_to_jobfile(
+            {
+                "cpu-ops": self.cpu_ops,
+                "cpu-load": self.cpu_load,
+                "cpu-method": self.cpu_method,
+            }
+        )
 
 
 @dataclass
 class VmStressorParams(CommonStressorParams):
-    vm: int = field(
-        metadata={
-            "name": "VM count",
-            "description": (
-                "Number of VM stressors to be "
-                "run (0 means 1 stressor per CPU"
-            ),
-        }
-    )
-    vm_bytes: str = field(
-        metadata={
-            "name": "VM memory",
-            "description": "Amount of memory a single VM stressor will use",
-        }
-    )
+    vm_bytes: typing.Annotated[
+        typing.Optional[str],
+        schema.id("vm-bytes"),
+        schema.name("VM Memory Bytes"),
+        schema.description(
+            "Number of bytes per vm worker to mmap; the default is 256MB"
+        ),
+    ] = None
 
-    mmap: typing.Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "mmap",
-            "description": "Number of stressors per CPU",
-        },
-    )
-    mmap_bytes: typing.Optional[str] = field(
-        default=None, metadata={"name": "Allocation of memory per stressor"}
-    )
+    vm_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("vm-ops"),
+        schema.name("VM Operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the vm workers"
+        ),
+    ] = None
+
+    vm_hang: typing.Annotated[
+        typing.Optional[int],
+        schema.id("vm-hang"),
+        schema.name("VM Hang"),
+        schema.description(
+            "Number of seconds to sleep before unmapping memory; "
+            "the default is zero seconds"
+        ),
+    ] = None
+
+    vm_keep: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("vm-keep"),
+        schema.name("VM Keep"),
+        schema.description(
+            "Do not continually unmap and map memory, just keep on re-writing to it"
+        ),
+    ] = None
+
+    vm_locked: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("vm-locked"),
+        schema.name("VM Locked"),
+        schema.description(
+            "Lock the pages of the mapped region into memory using mmap "
+            "MAP_LOCKED (since Linux 2.5.37)"
+        ),
+    ] = None
+
+    vm_method: typing.Annotated[
+        typing.Optional[VmMethod],
+        schema.id("vm-method"),
+        schema.name("VM Method"),
+        schema.description(
+            "Specify a vm stress method; by default, all the stress methods "
+            "are exercised sequentially"
+        ),
+    ] = VmMethod.ALL
+
+    vm_populate: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("vm-populate"),
+        schema.name("VM Populate"),
+        schema.description(
+            "Populate (prefault) page tables for the memory mappings; "
+            "this can stress swapping"
+        ),
+    ] = None
 
     def to_jobfile(self) -> str:
-        vm = "vm {}\n".format(self.vm)
-        vm_bytes = "vm-bytes {}\n".format(self.vm_bytes)
-        result = vm + vm_bytes
-        if self.mmap is not None:
-            result = result + "mmap {}\n".format(self.mmap)
-        if self.mmap_bytes is not None:
-            result = result + "mmap-bytes {}\n".format(self.mmap_bytes)
-        return result
+        return f"vm {self.workers}\n" + params_to_jobfile(
+            {
+                "vm-bytes": self.vm_bytes,
+                "vm-ops": self.vm_ops,
+                "vm-hang": self.vm_hang,
+                "vm-keep": self.vm_keep,
+                "vm-locked": self.vm_locked,
+                "vm-method": self.vm_method,
+                "vm-populate": self.vm_populate,
+            }
+        )
+
+
+@dataclass
+class MmapStressorParams(CommonStressorParams):
+    mmap_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("mmap-ops"),
+        schema.name("Mmap Operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the mmap stress workers"
+        ),
+    ] = None
+
+    mmap_async: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-async"),
+        schema.name("Mmap Async"),
+        schema.description(
+            "Enable file based memory mapping and use asynchronous msync'ing "
+            "on each page"
+        ),
+    ] = None
+
+    mmap_bytes: typing.Annotated[
+        typing.Optional[str],
+        schema.id("mmap-bytes"),
+        schema.name("Mmap Bytes"),
+        schema.description(
+            "Number of bytes per mmap stress worker to allocate; the default is 256MB"
+        ),
+    ] = None
+
+    mmap_file: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-file"),
+        schema.name("Mmap File"),
+        schema.description(
+            "Enable file based memory mapping and by default use synchronous "
+            "msync'ing on each page"
+        ),
+    ] = None
+
+    mmap_mmap2: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-mmap2"),
+        schema.name("Mmap mmap2"),
+        schema.description(
+            "Use mmap2 for 4K page aligned offsets if mmap2 is available, "
+            "otherwise fall back to mmap"
+        ),
+    ] = None
+
+    mmap_mprotect: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-mprotect"),
+        schema.name("Mmap mprotect"),
+        schema.description(
+            "Change protection settings on each page of memory; Each time "
+            "a page or a group of pages are mapped or remapped then this "
+            "option will make the pages read-only, write-only, exec-only, "
+            "and read-write"
+        ),
+    ] = None
+
+    mmap_odirect: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-odirect"),
+        schema.name("Mmap odirect"),
+        schema.description(
+            "Enable file based memory mapping and use O_DIRECT direct I/O"
+        ),
+    ] = None
+
+    mmap_osync: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("mmap-osync"),
+        schema.name("Mmap osync"),
+        schema.description(
+            "Enable file based memory mapping and used O_SYNC synchronous "
+            "I/O integrity completion"
+        ),
+    ] = None
+
+    def to_jobfile(self) -> str:
+        return f"mmap {self.workers}\n" + params_to_jobfile(
+            {
+                "mmap-ops": self.mmap_ops,
+                "mmap-async": self.mmap_async,
+                "mmap-bytes": self.mmap_bytes,
+                "mmap-file": self.mmap_file,
+                "mmap-mmap2": self.mmap_mmap2,
+                "mmap-mprotect": self.mmap_mprotect,
+                "mmap-odirect": self.mmap_odirect,
+                "mmap-osync": self.mmap_osync,
+            }
+        )
 
 
 @dataclass
 class MatrixStressorParams(CommonStressorParams):
-    matrix: int = field(
-        metadata={
-            "name": "Matrix count",
-            "description": (
-                "Number of Matrix stressors to be "
-                "run (0 means 1 stressor per CPU"
-            ),
-        }
-    )
+    matrix_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("matrix-ops"),
+        schema.name("Matrix Operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the matrix stress workers"
+        ),
+    ] = None
+
+    matrix_method: typing.Annotated[
+        typing.Optional[MatrixMethod],
+        schema.id("matrix-method"),
+        schema.name("Matrix Stressor Method"),
+        schema.description(
+            "Fine grained control of which matrix stressors to use (add, copy, etc.)"
+        ),
+    ] = MatrixMethod.ALL
+
+    matrix_size: typing.Annotated[
+        typing.Optional[int],
+        schema.id("matrix-size"),
+        schema.name("Matrix Size"),
+        schema.description("Size of the matrices (matrix_size x matrix_size)"),
+    ] = None
+
+    matrix_yx: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("matrix-yx"),
+        schema.name("Matrix YX"),
+        schema.description(
+            "Perform matrix operations in order Y by X rather than the "
+            "default X by Y"
+        ),
+    ] = None
 
     def to_jobfile(self) -> str:
-        matrix = "matrix {}\n".format(self.matrix)
-        result = matrix
-        return result
+        return f"matrix {self.workers}\n" + params_to_jobfile(
+            {
+                "matrix-ops": self.matrix_ops,
+                "matrix-method": self.matrix_method,
+                "matrix-size": self.matrix_size,
+                "matrix-yx": self.matrix_yx,
+            }
+        )
 
 
 @dataclass
 class MqStressorParams(CommonStressorParams):
-    mq: int = field(
-        metadata={
-            "name": "MQ count",
-            "description": (
-                "Number of MQ stressors to be run "
-                "(0 means 1 stressor per CPU)"
-            ),
-        }
-    )
+    mq_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("mq-ops"),
+        schema.name("MQ Operations"),
+        schema.description(
+            "Number of bogo POSIX message send operations completed after which "
+            "to stop the mq stress workers"
+        ),
+    ] = None
+
+    mq_size: typing.Annotated[
+        typing.Optional[int],
+        schema.id("mq-size"),
+        schema.name("MQ Size"),
+        schema.description(
+            "Specify size of POSIX message queue; the default size is "
+            "10 messages and most Linux systems this is the maximum allowed "
+            "size for normal users"
+        ),
+    ] = None
 
     def to_jobfile(self) -> str:
-        mq = "mq {}\n".format(self.mq)
-        result = mq
-        return result
+        return f"mq {self.workers}\n" + params_to_jobfile(
+            {
+                "mq-ops": self.mq_ops,
+                "mq-size": self.mq_size,
+            }
+        )
 
 
 @dataclass
 class HDDStressorParams(CommonStressorParams):
-    hdd: int = field(
-        metadata={
-            "name": "HDD workers",
-            "description": (
-                "start N workers continually writing, "
-                "reading and removing temporary files"
-            ),
-        }
-    )
+    hdd_bytes: typing.Annotated[
+        typing.Optional[str],
+        schema.id("hdd-bytes"),
+        schema.name("Bytes Per Worker"),
+        schema.description(
+            "Number of bytes to write for each hdd process; the default is 1 GB"
+        ),
+    ] = None
 
-    hdd_bytes: str = field(
-        metadata={
-            "name": "Bytes per worker",
-            "description": (
-                "write  N  bytes for each hdd process, the default is 1 GB. "
-                "One can specify the size in units of Bytes, KBytes, "
-                "MBytes and GBytes using the suffix b, k, m or g."
-            ),
-        }
-    )
+    hdd_opts: typing.Annotated[
+        typing.Optional[typing.List[HddOpts]],
+        schema.id("hdd-opts"),
+        schema.name("HDD Options"),
+        schema.description("Various stress test options as a list"),
+    ] = None
 
-    hdd_write_size: str = field(
-        metadata={
-            "name": "Write Size",
-            "description": (
-                "specify size of each write "
-                "in bytes. Size can be from 1 byte to 4MB"
-                "One can specify the size in units of Bytes, KBytes, "
-                "MBytes using the suffix b, k, m"
-            ),
-        }
-    )
+    hdd_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("hdd-ops"),
+        schema.name("HDD Operations"),
+        schema.description(
+            "Number of bogo operations after which to stop the hdd stress workers"
+        ),
+    ] = None
+
+    hdd_write_size: typing.Annotated[
+        typing.Optional[str],
+        schema.id("hdd-write-size"),
+        schema.name("HDD Write Size"),
+        schema.description("Size of each write in bytes"),
+    ] = None
 
     def to_jobfile(self) -> str:
-        hdd = "hdd {}\n".format(self.hdd)
-        hdd_bytes = "hdd-bytes {}\n".format(self.hdd_bytes)
-        hdd_write_size = "hdd-write-size {}\n".format(self.hdd_write_size)
-        result = hdd + hdd_bytes + hdd_write_size
-        return result
+        return f"hdd {self.workers}\n" + params_to_jobfile(
+            {
+                "hdd-bytes": self.hdd_bytes,
+                "hdd-opts": self.hdd_opts,
+                "hdd-ops": self.hdd_ops,
+                "hdd-write-size": self.hdd_write_size,
+            }
+        )
 
 
 @dataclass
 class StressNGParams:
-    """
-    The parameters in this schema will be passed through to the stressng
-    command unchanged
-    """
-
-    timeout: str = field(
-        metadata={
-            "name": "Runtime",
-            "description": "Time to run the benchmark test",
-        }
-    )
+    timeout: typing.Annotated[
+        int,
+        schema.name("Timeout"),
+        schema.description("Number of seconds after which to stop the stress test"),
+    ]
 
     stressors: typing.List[
         typing.Annotated[
             typing.Union[
                 typing.Annotated[
                     CpuStressorParams,
-                    annotations.discriminator_value("cpu"),
+                    annotations.discriminator_value(Stressors.CPU.value),
                     schema.name("CPU Stressor Parameters"),
-                    schema.description(
-                        "Parameters for running the cpu stressor"
-                    ),
+                    schema.description("Parameters for running the cpu stressor"),
                 ],
                 typing.Annotated[
                     VmStressorParams,
-                    annotations.discriminator_value("vm"),
+                    annotations.discriminator_value(Stressors.VM.value),
                     schema.name("VM Stressor Parameters"),
-                    schema.description(
-                        "Parameters for running the vm stressor"
-                    ),
+                    schema.description("Parameters for running the vm stressor"),
+                ],
+                typing.Annotated[
+                    MmapStressorParams,
+                    annotations.discriminator_value(Stressors.MMAP.value),
+                    schema.name("Mmap Stressor Parameters"),
+                    schema.description("Parameters for running the mmap stressor"),
                 ],
                 typing.Annotated[
                     MatrixStressorParams,
-                    annotations.discriminator_value("matrix"),
+                    annotations.discriminator_value(Stressors.MATRIX.value),
                     schema.name("Matrix Stressor Parameters"),
-                    schema.description(
-                        "Parameters for running the matrix stressor"
-                    ),
+                    schema.description("Parameters for running the matrix stressor"),
                 ],
                 typing.Annotated[
                     MqStressorParams,
-                    annotations.discriminator_value("mq"),
+                    annotations.discriminator_value(Stressors.MQ.value),
                     schema.name("MQ Stressor Parameters"),
-                    schema.description(
-                        "Parameters for running the mq stressor"
-                    ),
+                    schema.description("Parameters for running the mq stressor"),
                 ],
                 typing.Annotated[
                     HDDStressorParams,
-                    annotations.discriminator_value("hdd"),
+                    annotations.discriminator_value(Stressors.HDD.value),
                     schema.name("HDD Stressor Parameters"),
-                    schema.description(
-                        "Parameters for running the hdd stressor"
-                    ),
+                    schema.description("Parameters for running the hdd stressor"),
                 ],
             ],
-            annotations.discriminator("stressor"),
+            annotations.discriminator("stressor", discriminator_inlined=True),
             schema.name("Stressors List"),
             schema.description("List of stress-ng stressors and parameters"),
         ]
     ]
-    verbose: typing.Optional[bool] = field(
-        default=None,
-        metadata={"name": "verbose", "description": "verbose output"},
-    )
-    metrics_brief: typing.Optional[bool] = field(
-        default=None,
-        metadata={
-            "name": "brief metrics",
-            "description": "Brief version of the metrics output",
-        },
-    )
 
-    workdir: typing.Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "Working Dir",
-            "description": (
-                "Path were stress-ng will be "
-                "executed (example to target a specific volume)"
-            ),
-        },
-    )
+    verbose: typing.Annotated[
+        typing.Optional[bool],
+        schema.name("Verbose"),
+        schema.description("Verbose output"),
+    ] = None
 
-    def to_jobfile(self) -> str:
-        result = "timeout {}\n".format(self.timeout)
-        if self.verbose is not None:
-            result = result + "verbose {}\n".format(self.verbose)
-        if self.metrics_brief is not None:
-            result = result + "metrics-brief {}\n".format(self.metrics_brief)
-        return result
+    metrics_brief: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("metrics-brief"),
+        schema.name("Brief Metrics"),
+        schema.description("Brief version of the metrics output"),
+    ] = None
 
-
-@dataclass
-class WorkloadParams:
-    StressNGParams: typing.Annotated[
-        StressNGParams,
-        schema.name("Stress-NG Job Parameters"),
+    workdir: typing.Annotated[
+        typing.Optional[str],
+        schema.name("Working Dir"),
         schema.description(
-            """
-            Global workload parameters and list of stressors
-            for the stress-ng job
-            """
+            "Directory in which stress-ng will be executed "
+            "(for example, to target a specific volume)"
         ),
-    ]
+    ] = None
+
     cleanup: typing.Annotated[
         typing.Optional[bool],
         schema.name("Cleanup"),
         schema.description("Cleanup artifacts after the plugin run"),
     ] = False
 
+    def to_jobfile(self) -> str:
+        return params_to_jobfile(
+            {
+                "timeout": self.timeout,
+                "verbose": self.verbose,
+                "metrics-brief": self.metrics_brief,
+            }
+        )
+
 
 @dataclass
 class SystemInfoOutput:
-    stress_ng_version: str = dataclasses.field(
-        metadata={
-            "id": "stress-ng-version",
-            "name": "stress_ng_version",
-            "description": "version of the stressng tool used",
-        }
-    )
-    run_by: str = dataclasses.field(
-        metadata={
-            "id": "run-by",
-            "name": "run_by",
-            "description": "username of the person who ran the test",
-        }
-    )
-    date: str = dataclasses.field(
-        metadata={
-            "id": "date-yyyy-mm-dd",
-            "name": "date",
-            "description": "date on which the test was run",
-        }
-    )
-    time: str = dataclasses.field(
-        metadata={
-            "id": "time-hh-mm-ss",
-            "name": "time",
-            "description": "time at which the test was run",
-        }
-    )
-    epoch: int = dataclasses.field(
-        metadata={
-            "id": "epoch-secs",
-            "name": "epoch",
-            "description": "epoch at which the test was run",
-        }
-    )
-    hostname: str = field(
-        metadata={
-            "name": "hostname",
-            "description": "host on which the test was run",
-        }
-    )
-    sysname: str = field(
-        metadata={"name": "system name", "description": "System name"}
-    )
-    nodename: str = field(
-        metadata={
-            "name": "nodename",
-            "description": "name of the node on which the test was run",
-        }
-    )
-    release: str = field(
-        metadata={
-            "name": "release",
-            "description": "kernel release on which the test was run",
-        }
-    )
-    version: str = field(
-        metadata={
-            "name": "version",
-            "description": "version on which the test was run",
-        }
-    )
-    machine: str = field(
-        metadata={
-            "name": "machine",
-            "description": "machine type on which the test was run",
-        }
-    )
-    uptime: int = field(
-        metadata={
-            "name": "uptime",
-            "description": "uptime of the machine the test was run on",
-        }
-    )
-    totalram: int = field(
-        metadata={
-            "name": "totalram",
-            "description": "total amount of RAM the test machine had",
-        }
-    )
-    freeram: int = field(
-        metadata={
-            "name": "freeram",
-            "description": "amount of free RAM the test machine had",
-        }
-    )
-    sharedram: int = field(
-        metadata={
-            "name": "sharedram",
-            "description": "amount of shared RAM the test machine had",
-        }
-    )
-    bufferram: int = field(
-        metadata={
-            "name": "bufferram",
-            "description": "amount of buffer RAM the test machine had",
-        }
-    )
-    totalswap: int = field(
-        metadata={
-            "name": "totalswap",
-            "description": "total amount of swap the test machine had",
-        }
-    )
-    freeswap: int = field(
-        metadata={
-            "name": "freeswap",
-            "description": "amount of free swap the test machine had",
-        }
-    )
-    pagesize: int = field(
-        metadata={
-            "name": "pagesize",
-            "description": "memory page size the test machine used",
-        }
-    )
-    cpus: int = field(
-        metadata={
-            "name": "cpus",
-            "description": "number of CPU cores the test machine had",
-        }
-    )
-    cpus_online: int = dataclasses.field(
-        metadata={
-            "id": "cpus-online",
-            "name": "cpus_online",
-            "description": "number of online CPUs the test machine had",
-        }
-    )
-    ticks_per_second: int = dataclasses.field(
-        metadata={
-            "id": "ticks-per-second",
-            "name": "ticks_per_second",
-            "description": "ticks per second used on the test machine",
-        }
-    )
+    stress_ng_version: typing.Annotated[
+        str,
+        schema.id("stress-ng-version"),
+        schema.name("stress_ng_version"),
+        schema.description("Version of the stressng tool used"),
+    ]
+
+    compiler: typing.Annotated[
+        str,
+        schema.name("compiler"),
+        schema.description("Compiler used to build the stressng tool"),
+    ]
+
+    run_by: typing.Annotated[
+        str,
+        schema.id("run-by"),
+        schema.name("run_by"),
+        schema.description("Username of the person who ran the test"),
+    ]
+
+    date: typing.Annotated[
+        str,
+        schema.id("date-yyyy-mm-dd"),
+        schema.name("date"),
+        schema.description("Date on which the test was run"),
+    ]
+
+    time: typing.Annotated[
+        str,
+        schema.id("time-hh-mm-ss"),
+        schema.name("time"),
+        schema.description("Time at which the test was run"),
+    ]
+
+    epoch: typing.Annotated[
+        int,
+        schema.id("epoch-secs"),
+        schema.name("epoch"),
+        schema.description("Epoch at which the test was run"),
+    ]
+
+    hostname: typing.Annotated[
+        str,
+        schema.name("hostname"),
+        schema.description("Host on which the test was run"),
+    ]
+
+    sysname: typing.Annotated[
+        str,
+        schema.name("System name"),
+        schema.description("Name of the system on which the test was run"),
+    ]
+
+    nodename: typing.Annotated[
+        str,
+        schema.name("nodename"),
+        schema.description("Name of the node on which the test was run"),
+    ]
+
+    release: typing.Annotated[
+        str,
+        schema.name("release"),
+        schema.description("Kernel release on which the test was run"),
+    ]
+
+    version: typing.Annotated[
+        str,
+        schema.name("version"),
+        schema.description("Version on which the test was run"),
+    ]
+
+    machine: typing.Annotated[
+        str,
+        schema.name("machine"),
+        schema.description("Machine type on which the test was run"),
+    ]
+
+    uptime: typing.Annotated[
+        int,
+        schema.name("uptime"),
+        schema.description("Uptime of the machine the test was run on"),
+    ]
+
+    totalram: typing.Annotated[
+        int,
+        schema.name("totalram"),
+        schema.description("Total amount of RAM the test machine had"),
+    ]
+
+    freeram: typing.Annotated[
+        int,
+        schema.name("freeram"),
+        schema.description("Amount of free RAM the test machine had"),
+    ]
+
+    sharedram: typing.Annotated[
+        int,
+        schema.name("sharedram"),
+        schema.description("Amount of shared RAM the test machine had"),
+    ]
+
+    bufferram: typing.Annotated[
+        int,
+        schema.name("bufferram"),
+        schema.description("Amount of buffer RAM the test machine had"),
+    ]
+
+    totalswap: typing.Annotated[
+        int,
+        schema.name("totalswap"),
+        schema.description("Total amount of swap the test machine had"),
+    ]
+
+    freeswap: typing.Annotated[
+        int,
+        schema.name("freeswap"),
+        schema.description("Amount of free swap the test machine had"),
+    ]
+
+    pagesize: typing.Annotated[
+        int,
+        schema.name("pagesize"),
+        schema.description("Memory page size the test machine used"),
+    ]
+
+    cpus: typing.Annotated[
+        int,
+        schema.name("cpus"),
+        schema.description("Number of CPU cores the test machine had"),
+    ]
+
+    cpus_online: typing.Annotated[
+        int,
+        schema.id("cpus-online"),
+        schema.name("cpus_online"),
+        schema.description("Number of online CPUs the test machine had"),
+    ]
+
+    ticks_per_second: typing.Annotated[
+        int,
+        schema.id("ticks-per-second"),
+        schema.name("ticks_per_second"),
+        schema.description("CPU ticks per second on the test machine"),
+    ]
 
 
 system_info_output_schema = plugin.build_object_schema(SystemInfoOutput)
@@ -441,80 +793,74 @@ system_info_output_schema = plugin.build_object_schema(SystemInfoOutput)
 
 @dataclass
 class CommonOutput:
-    stressor: str = dataclasses.field(
-        metadata={
-            "name": "Stressor",
-            "description": "Type of stressor for workload",
-        }
-    )
-    max_rss: int = dataclasses.field(
-        metadata={
-            "id": "max-rss",
-            "name": "Max RSS",
-            "description": "Maximum resident set size",
-        }
-    )
-    bogo_ops: int = dataclasses.field(
-        metadata={
-            "id": "bogo-ops",
-            "name": "Bogus Operations",
-            "description": "Number of stressor loop iterations",
-        }
-    )
-    bogo_ops_per_second_usr_sys_time: float = dataclasses.field(
-        metadata={
-            "id": "bogo-ops-per-second-usr-sys-time",
-            "name": "Bogus operations per second per user and sys time",
-            "description": (
-                "is the bogo-ops rate divided by the user + system time."
-                "This is the real per CPU throughput "
-                "taking into consideration "
-                "all the CPUs used and all the time consumed "
-                "by the stressor and kernel time."
-            ),
-        }
-    )
-    bogo_ops_per_second_real_time: float = dataclasses.field(
-        metadata={
-            "id": "bogo-ops-per-second-real-time",
-            "name": "Bogus operations per second in real time",
-            "description": (
-                "real time measurement is how long the run took based "
-                "on the wall clock time "
-                "(that is, the time the stressor took to run)."
-            ),
-        }
-    )
-    wall_clock_time: float = dataclasses.field(
-        metadata={
-            "id": "wall-clock-time",
-            "name": "Wall Clock Time",
-            "description": "The time the stressor took to run",
-        }
-    )
-    user_time: float = dataclasses.field(
-        metadata={
-            "id": "user-time",
-            "name": "CPU User Time",
-            "description": "The CPU time spent in user space",
-        }
-    )
-    system_time: float = dataclasses.field(
-        metadata={
-            "id": "system-time",
-            "name": "CPU System Time",
-            "description": "The CPU time spent in kernel space",
-        }
-    )
-    cpu_usage_per_instance: float = dataclasses.field(
-        metadata={
-            "id": "cpu-usage-per-instance",
-            "name": "CPU usage per instance",
-            "description": (
-                "is the amount of CPU " "used by each stressor instance"
-            ),
-        }
-    )
+    stressor: typing.Annotated[
+        str,
+        schema.name("Stressor"),
+        schema.description("Type of stressor for workload"),
+    ]
+
+    max_rss: typing.Annotated[
+        int,
+        schema.id("max-rss"),
+        schema.name("Max RSS"),
+        schema.description("Maximum resident set size"),
+    ]
+
+    bogo_ops: typing.Annotated[
+        int,
+        schema.id("bogo-ops"),
+        schema.name("Bogus Operations"),
+        schema.description("Number of iterations of the stressor during the run"),
+    ]
+
+    bogo_ops_per_second_usr_sys_time: typing.Annotated[
+        float,
+        schema.id("bogo-ops-per-second-usr-sys-time"),
+        schema.name("Bogus operations per second in user and sys time"),
+        schema.description(
+            "Total bogo operations per second based on cumulative user and system time"
+        ),
+    ]
+
+    bogo_ops_per_second_real_time: typing.Annotated[
+        float,
+        schema.id("bogo-ops-per-second-real-time"),
+        schema.name("Bogus operations per second in real time"),
+        schema.description(
+            "Total bogo operations per second based on wall clock run time"
+        ),
+    ]
+
+    wall_clock_time: typing.Annotated[
+        float,
+        schema.id("wall-clock-time"),
+        schema.name("Wall Clock Time"),
+        schema.description("The time the stressor took to run"),
+    ]
+
+    user_time: typing.Annotated[
+        float,
+        schema.id("user-time"),
+        schema.name("CPU User Time"),
+        schema.description("The CPU time spent in user space"),
+    ]
+
+    system_time: typing.Annotated[
+        float,
+        schema.id("system-time"),
+        schema.name("CPU System Time"),
+        schema.description("The CPU time spent in kernel space"),
+    ]
+
+    cpu_usage_per_instance: typing.Annotated[
+        float,
+        schema.id("cpu-usage-per-instance"),
+        schema.name("CPU usage per instance"),
+        schema.description(
+            "Total percentage of CPU used divided by number of stressor instances; "
+            "100% is 1 full CPU"
+        ),
+    ]
 
 
 @dataclass
@@ -525,6 +871,16 @@ class VMOutput(CommonOutput):
 
 
 vm_output_schema = plugin.build_object_schema(VMOutput)
+
+
+@dataclass
+class MmapOutput(CommonOutput):
+    """
+    This is the data structure that holds the results for the mmap stressor
+    """
+
+
+mmap_output_schema = plugin.build_object_schema(MmapOutput)
 
 
 @dataclass
@@ -542,6 +898,90 @@ class MatrixOutput(CommonOutput):
     """
     This is the data structure that holds the results for the Matrix stressor
     """
+
+    add_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("add-matrix-ops-per-sec"),
+        schema.name("Add matrix operations per second"),
+    ] = None
+
+    copy_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("copy-matrix-ops-per-sec"),
+        schema.name("Copy matrix operations per second"),
+    ] = None
+
+    div_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("div-matrix-ops-per-sec"),
+        schema.name("Div matrix operations per second"),
+    ] = None
+
+    frobenius_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("frobenius-matrix-ops-per-sec"),
+        schema.name("Frobenius matrix operations per second"),
+    ] = None
+
+    hadamard_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("hadamard-matrix-ops-per-sec"),
+        schema.name("Hadamard matrix operations per second"),
+    ] = None
+
+    identity_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("identity-matrix-ops-per-sec"),
+        schema.name("Identity matrix operations per second"),
+    ] = None
+
+    mean_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("mean-matrix-ops-per-sec"),
+        schema.name("Mean matrix operations per second"),
+    ] = None
+
+    mult_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("mult-matrix-ops-per-sec"),
+        schema.name("Mult matrix operations per second"),
+    ] = None
+
+    negate_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("negate-matrix-ops-per-sec"),
+        schema.name("Negate matrix operations per second"),
+    ] = None
+
+    prod_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("prod-matrix-ops-per-sec"),
+        schema.name("Prod matrix operations per second"),
+    ] = None
+
+    sub_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("sub-matrix-ops-per-sec"),
+        schema.name("Sub matrix operations per second"),
+    ] = None
+
+    square_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("square-matrix-ops-per-sec"),
+        schema.name("Square matrix operations per second"),
+    ] = None
+
+    trans_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("trans-matrix-ops-per-sec"),
+        schema.name("Trans matrix operations per second"),
+    ] = None
+
+    zero_matrix_ops_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("zero-matrix-ops-per-sec"),
+        schema.name("Zero matrix operations per second"),
+    ] = None
 
 
 matrix_output_schema = plugin.build_object_schema(MatrixOutput)
@@ -563,37 +1003,72 @@ class HDDOutput(CommonOutput):
     This is the data structure that holds the results for the HDD stressor
     """
 
+    mbsec_read_rate: typing.Annotated[
+        float,
+        schema.id("mbsec-read-rate"),
+        schema.name("Read rate in MB/s"),
+    ]
+
+    mbsec_write_rate: typing.Annotated[
+        float,
+        schema.id("mbsec-write-rate"),
+        schema.name("Write rate in MB/s"),
+    ]
+
+    mbsec_readwrite_combined_rate: typing.Annotated[
+        float,
+        schema.id("mbsec-readwrite-combined-rate"),
+        schema.name("Read-write combined rate in MB/s"),
+    ]
+
 
 hdd_output_schema = plugin.build_object_schema(HDDOutput)
 
 
 @dataclass
 class WorkloadResults:
+    test_config: typing.Annotated[
+        StressNGParams,
+        schema.name("Test configuration"),
+        schema.description("The stressng test parameters"),
+    ]
+
     systeminfo: typing.Annotated[
         SystemInfoOutput,
         schema.name("System Info"),
         schema.description("System info output object"),
     ]
+
     vminfo: typing.Annotated[
         typing.Optional[VMOutput],
         schema.name("VM Output"),
         schema.description("VM stressor output object"),
     ] = None
+
+    mmapinfo: typing.Annotated[
+        typing.Optional[MmapOutput],
+        schema.name("Mmap Output"),
+        schema.description("mmap stressor output object"),
+    ] = None
+
     cpuinfo: typing.Annotated[
         typing.Optional[CPUOutput],
         schema.name("CPU Output"),
         schema.description("CPU stressor output object"),
     ] = None
+
     matrixinfo: typing.Annotated[
         typing.Optional[MatrixOutput],
         schema.name("Matrix Output"),
         schema.description("Matrix stressor output object"),
     ] = None
+
     mqinfo: typing.Annotated[
         typing.Optional[MQOutput],
         schema.name("MQ Output"),
         schema.description("MQ stressor output object"),
     ] = None
+
     hddinfo: typing.Annotated[
         typing.Optional[HDDOutput],
         schema.name("HDD Output"),
