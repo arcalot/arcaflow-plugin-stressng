@@ -353,7 +353,7 @@ class MmapStressorParams(CommonStressorParams):
         schema.id("mmap-bytes"),
         schema.name("Mmap Bytes"),
         schema.description(
-            "Number of bytes per mmap stress worker to allocate the default is 256MB"
+            "Number of bytes per mmap stress worker to allocate; the default is 256MB"
         ),
     ] = None
 
