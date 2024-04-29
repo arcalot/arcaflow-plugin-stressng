@@ -100,7 +100,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -132,7 +132,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -160,7 +160,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -190,7 +190,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -209,7 +209,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -264,7 +264,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>vm-populate (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>VM Populate</td></tr><tr><th>Description:</th><td width="500">Populate (prefault) page tables for the memory mappings; this can stress swapping</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -361,7 +361,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -431,7 +431,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -559,7 +559,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -618,7 +618,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -637,7 +637,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
@@ -782,7 +782,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>vm-populate (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>VM Populate</td></tr><tr><th>Description:</th><td width="500">Populate (prefault) page tables for the memory mappings; this can stress swapping</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>workers (<code>int</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
         </details></td></tr>
 </tbody></table>
