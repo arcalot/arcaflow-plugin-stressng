@@ -198,7 +198,9 @@ class CommonStressorParams:
     workers: typing.Annotated[
         int,
         schema.name("Worker Count"),
-        schema.description("Number of workers for the stressor"),
+        schema.description(
+            "Number of workers for the stressor; 0 = match the number of on-line CPUs"
+        ),
     ]
 
 
