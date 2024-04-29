@@ -8,19 +8,18 @@ from arcaflow_plugin_sdk import plugin, schema
 from arcaflow_plugin_sdk import annotations
 
 
-def params_to_jobfile(params):
+def params_to_jobfile(params: dict) -> str:
     result = ""
     for key, value in params.items():
-        if "stressor" not in key and "workers" not in key:
-            if isinstance(value, bool):
-                if value:
-                    result += f"{key}\n"
-                else:
-                    continue
-            elif isinstance(value, list):
-                result += f"{key} {','.join(value)}\n"
-            else:
-                result += f"{key} {value}\n"
+        if not value or key in ("stressor", "workers"):
+            continue
+        if isinstance(value, bool):
+            if value:
+                result += f"{key}\n"
+        elif isinstance(value, list):
+            result += f"{key} {','.join(value)}\n"
+        else:
+            result += f"{key} {value}\n"
     return result
 
 
@@ -235,18 +234,13 @@ class CpuStressorParams(CommonStressorParams):
     ] = CpuMethod.ALL
 
     def to_jobfile(self) -> str:
-        params = schema.build_object_schema(CpuStressorParams).serialize(
-            CpuStressorParams(
-                Stressors(self.stressor),
-                self.workers,
-                self.cpu_ops,
-                self.cpu_load,
-                CpuMethod(self.cpu_method),
-            )
+        return f"cpu {self.workers}\n" + params_to_jobfile(
+            {
+                "cpu-ops": self.cpu_ops,
+                "cpu-load": self.cpu_load,
+                "cpu-method": CpuMethod(self.cpu_method),
+            }
         )
-        result = f"cpu {self.workers}\n"
-        result += params_to_jobfile(params)
-        return result
 
 
 @dataclass
@@ -319,22 +313,17 @@ class VmStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
-        params = schema.build_object_schema(VmStressorParams).serialize(
-            VmStressorParams(
-                Stressors(self.stressor),
-                self.workers,
-                self.vm_bytes,
-                self.vm_ops,
-                self.vm_hang,
-                self.vm_keep,
-                self.vm_locked,
-                VmMethod(self.vm_method),
-                self.vm_populate,
-            )
+        return f"vm {self.workers}\n" + params_to_jobfile(
+            {
+                "vm-bytes": self.vm_bytes,
+                "vm-ops": self.vm_ops,
+                "vm-hang": self.vm_hang,
+                "vm-keep": self.vm_keep,
+                "vm-locked": self.vm_locked,
+                "vm-method": VmMethod(self.vm_method),
+                "vm-populate": self.vm_populate,
+            }
         )
-        result = f"vm {self.workers}\n"
-        result += params_to_jobfile(params)
-        return result
 
 
 @dataclass
@@ -419,23 +408,18 @@ class MmapStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
-        params = schema.build_object_schema(MmapStressorParams).serialize(
-            MmapStressorParams(
-                Stressors(self.stressor),
-                self.workers,
-                self.mmap_ops,
-                self.mmap_async,
-                self.mmap_bytes,
-                self.mmap_file,
-                self.mmap_mmap2,
-                self.mmap_mprotect,
-                self.mmap_odirect,
-                self.mmap_osync,
-            )
+        return f"mmap {self.workers}\n" + params_to_jobfile(
+            {
+                "mmap-ops": self.mmap_ops,
+                "mmap-async": self.mmap_async,
+                "mmap-bytes": self.mmap_bytes,
+                "mmap-file": self.mmap_file,
+                "mmap-mmap2": self.mmap_mmap2,
+                "mmap-mprotect": self.mmap_mprotect,
+                "mmap-odirect": self.mmap_odirect,
+                "mmap-osync": self.mmap_osync,
+            }
         )
-        result = f"mmap {self.workers}\n"
-        result += params_to_jobfile(params)
-        return result
 
 
 @dataclass
@@ -476,19 +460,14 @@ class MatrixStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
-        params = schema.build_object_schema(MatrixStressorParams).serialize(
-            MatrixStressorParams(
-                Stressors(self.stressor),
-                self.workers,
-                self.matrix_ops,
-                MatrixMethod(self.matrix_method),
-                self.matrix_size,
-                self.matrix_yx,
-            )
+        return f"matrix {self.workers}\n" + params_to_jobfile(
+            {
+                "matrix-ops": self.matrix_ops,
+                "matrix-method": MatrixMethod(self.matrix_method),
+                "matrix-size": self.matrix_size,
+                "matrix-yx": self.matrix_yx,
+            }
         )
-        result = f"matrix {self.workers}\n"
-        result += params_to_jobfile(params)
-        return result
 
 
 @dataclass
@@ -515,17 +494,12 @@ class MqStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
-        params = schema.build_object_schema(MqStressorParams).serialize(
-            MqStressorParams(
-                Stressors(self.stressor),
-                self.workers,
-                self.mq_ops,
-                self.mq_size,
-            )
+        return f"mq {self.workers}\n" + params_to_jobfile(
+            {
+                "mq-ops": self.mq_ops,
+                "mq-size": self.mq_size,
+            }
         )
-        result = f"mq {self.workers}\n"
-        result += params_to_jobfile(params)
-        return result
 
 
 @dataclass
@@ -563,19 +537,14 @@ class HDDStressorParams(CommonStressorParams):
     ] = None
 
     def to_jobfile(self) -> str:
-        params = schema.build_object_schema(HDDStressorParams).serialize(
-            HDDStressorParams(
-                Stressors(self.stressor),
-                self.workers,
-                self.hdd_bytes,
-                self.hdd_opts,
-                self.hdd_ops,
-                self.hdd_write_size,
-            )
+        return f"hdd {self.workers}\n" + params_to_jobfile(
+            {
+                "hdd-bytes": self.hdd_bytes,
+                "hdd-opts": self.hdd_opts,
+                "hdd-ops": self.hdd_ops,
+                "hdd-write-size": self.hdd_write_size,
+            }
         )
-        result = f"hdd {self.workers}\n"
-        result += params_to_jobfile(params)
-        return result
 
 
 @dataclass
@@ -640,6 +609,7 @@ class StressNGParams:
 
     metrics_brief: typing.Annotated[
         typing.Optional[bool],
+        schema.id("metrics-brief"),
         schema.name("Brief Metrics"),
         schema.description("Brief version of the metrics output"),
     ] = None
@@ -660,12 +630,13 @@ class StressNGParams:
     ] = False
 
     def to_jobfile(self) -> str:
-        result = f"timeout {self.timeout}\n"
-        if self.verbose is not None:
-            result += f"verbose {self.verbose}\n"
-        if self.metrics_brief is not None:
-            result += f"metrics-brief {self.metrics_brief}\n"
-        return result
+        return params_to_jobfile(
+            {
+                "timeout": self.timeout,
+                "verbose": self.verbose,
+                "metrics-brief": self.metrics_brief,
+            }
+        )
 
 
 @dataclass
@@ -838,7 +809,7 @@ class CommonOutput:
         int,
         schema.id("bogo-ops"),
         schema.name("Bogus Operations"),
-        schema.description("Number of stressor loop iterations"),
+        schema.description("Number of iterations of the stressor during the run"),
     ]
 
     bogo_ops_per_second_usr_sys_time: typing.Annotated[
@@ -846,11 +817,7 @@ class CommonOutput:
         schema.id("bogo-ops-per-second-usr-sys-time"),
         schema.name("Bogus operations per second in user and sys time"),
         schema.description(
-            "The bogo-ops rate divided by the user + system time. "
-            "This is the real per CPU throughput "
-            "taking into consideration "
-            "all the CPUs used and all the time consumed "
-            "by the stressor and kernel time."
+            "Total bogo operations per second based on cumulative user and system time"
         ),
     ]
 
@@ -859,9 +826,7 @@ class CommonOutput:
         schema.id("bogo-ops-per-second-real-time"),
         schema.name("Bogus operations per second in real time"),
         schema.description(
-            "Real time measurement is how long the run took based "
-            "on the wall clock time "
-            "(that is, the time the stressor took to run)."
+            "Total bogo operations per second based on wall clock run time"
         ),
     ]
 
@@ -890,7 +855,10 @@ class CommonOutput:
         float,
         schema.id("cpu-usage-per-instance"),
         schema.name("CPU usage per instance"),
-        schema.description("The amount of CPU used by each stressor instance"),
+        schema.description(
+            "Total percentage of CPU used divided by number of stressor instances; "
+            "100% is 1 full CPU"
+        ),
     ]
 
 

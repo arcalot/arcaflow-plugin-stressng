@@ -65,10 +65,7 @@ class StressNGTest(unittest.TestCase):
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
-            try:
-                reference = yaml.safe_load(file)
-            except yaml.YAMLError as e:
-                print(e)
+            reference = yaml.safe_load(file)
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
@@ -100,10 +97,7 @@ class StressNGTest(unittest.TestCase):
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
-            try:
-                reference = yaml.safe_load(file)
-            except yaml.YAMLError as e:
-                print(e)
+            reference = yaml.safe_load(file)
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
@@ -136,10 +130,7 @@ class StressNGTest(unittest.TestCase):
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
-            try:
-                reference = yaml.safe_load(file)
-            except yaml.YAMLError as e:
-                print(e)
+            reference = yaml.safe_load(file)
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
@@ -168,10 +159,7 @@ class StressNGTest(unittest.TestCase):
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
-            try:
-                reference = yaml.safe_load(file)
-            except yaml.YAMLError as e:
-                print(e)
+            reference = yaml.safe_load(file)
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
@@ -195,10 +183,7 @@ class StressNGTest(unittest.TestCase):
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
-            try:
-                reference = yaml.safe_load(file)
-            except yaml.YAMLError as e:
-                print(e)
+            reference = yaml.safe_load(file)
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
@@ -231,10 +216,7 @@ class StressNGTest(unittest.TestCase):
             result = result + item.to_jobfile()
 
         with open(reference_jobfile, "r") as file:
-            try:
-                reference = yaml.safe_load(file)
-            except yaml.YAMLError as e:
-                print(e)
+            reference = yaml.safe_load(file)
 
         self.assertEqual(yaml.safe_load(result), reference)
         res = stressng_plugin.stressng_run(self.id(), stress)
