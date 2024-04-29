@@ -14,8 +14,7 @@ def params_to_jobfile(params: dict) -> str:
         if not value or key in ("stressor", "workers"):
             continue
         if isinstance(value, bool):
-            if value:
-                result += f"{key}\n"
+            result += f"{key}\n"
         elif isinstance(value, list):
             result += f"{key} {','.join(value)}\n"
         else:
