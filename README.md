@@ -168,7 +168,7 @@ Run the stress-ng workload with the given parameters
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mmap-async (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap Async</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and use asynchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes per mmap stress worker to allocate the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes per mmap stress worker to allocate; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>mmap-file (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap File</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and by default use synchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-mmap2 (<code>bool</code>)</summary>
@@ -596,7 +596,7 @@ Run the stress-ng workload with the given parameters
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mmap-async (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap Async</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and use asynchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes per mmap stress worker to allocate the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes per mmap stress worker to allocate; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details><details><summary>mmap-file (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap File</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and by default use synchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-mmap2 (<code>bool</code>)</summary>
