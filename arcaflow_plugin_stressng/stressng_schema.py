@@ -11,7 +11,7 @@ from arcaflow_plugin_sdk import annotations
 def params_to_jobfile(params: dict) -> str:
     result = ""
     for key, value in params.items():
-        if not value or key in ("stressor", "workers"):
+        if not value:
             continue
         if isinstance(value, bool):
             result += f"{key}\n"
@@ -239,7 +239,7 @@ class CpuStressorParams(CommonStressorParams):
             {
                 "cpu-ops": self.cpu_ops,
                 "cpu-load": self.cpu_load,
-                "cpu-method": CpuMethod(self.cpu_method),
+                "cpu-method": self.cpu_method,
             }
         )
 
@@ -321,7 +321,7 @@ class VmStressorParams(CommonStressorParams):
                 "vm-hang": self.vm_hang,
                 "vm-keep": self.vm_keep,
                 "vm-locked": self.vm_locked,
-                "vm-method": VmMethod(self.vm_method),
+                "vm-method": self.vm_method,
                 "vm-populate": self.vm_populate,
             }
         )
@@ -464,7 +464,7 @@ class MatrixStressorParams(CommonStressorParams):
         return f"matrix {self.workers}\n" + params_to_jobfile(
             {
                 "matrix-ops": self.matrix_ops,
-                "matrix-method": MatrixMethod(self.matrix_method),
+                "matrix-method": self.matrix_method,
                 "matrix-size": self.matrix_size,
                 "matrix-yx": self.matrix_yx,
             }
