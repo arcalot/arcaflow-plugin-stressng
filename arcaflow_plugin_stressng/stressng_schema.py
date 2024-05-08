@@ -29,6 +29,7 @@ class Stressors(str, enum.Enum):
     MATRIX = "matrix"
     MQ = "mq"
     HDD = "hdd"
+    IOMIX = "iomix"
 
 
 class CpuMethod(str, enum.Enum):
@@ -549,6 +550,35 @@ class HDDStressorParams(CommonStressorParams):
 
 
 @dataclass
+class IomixStressorParams(CommonStressorParams):
+    iomix_bytes: typing.Annotated[
+        typing.Optional[str],
+        schema.id("iomix-bytes"),
+        schema.name("IOMix bytes"),
+        schema.description(
+            "Number of bytes to write for each iomix worker process; the default is 1 GB"
+        ),
+    ] = None
+
+    iomix_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("iomix-ops"),
+        schema.name("IOMix operations"),
+        schema.description(
+            "Number of bogo iomix I/O operations after which to stop the stress workers"
+        ),
+    ] = None
+
+    def to_jobfile(self) -> str:
+        return f"iomix {self.workers}\n" + params_to_jobfile(
+            {
+                "iomix-bytes": self.iomix_bytes,
+                "iomix-ops": self.iomix_ops,
+            }
+        )
+
+
+@dataclass
 class StressNGParams:
     timeout: typing.Annotated[
         int,
@@ -594,6 +624,12 @@ class StressNGParams:
                     annotations.discriminator_value(Stressors.HDD.value),
                     schema.name("HDD Stressor Parameters"),
                     schema.description("Parameters for running the hdd stressor"),
+                ],
+                typing.Annotated[
+                    IomixStressorParams,
+                    annotations.discriminator_value(Stressors.IOMIX.value),
+                    schema.name("IOMix Stressor Parameters"),
+                    schema.description("Parameters for running the iomix stressor"),
                 ],
             ],
             annotations.discriminator("stressor", discriminator_inlined=True),
