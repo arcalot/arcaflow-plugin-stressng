@@ -556,7 +556,8 @@ class IomixStressorParams(CommonStressorParams):
         schema.id("iomix-bytes"),
         schema.name("IOMix bytes"),
         schema.description(
-            "Number of bytes to write for each iomix worker process; the default is 1 GB"
+            "Number of bytes to write for each iomix worker process; "
+            "the default is 1 GB"
         ),
     ] = None
 
