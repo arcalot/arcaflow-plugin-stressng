@@ -63,6 +63,8 @@ Run the stress-ng workload with the given parameters
                 <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td width="500">Cleanup artifacts after the plugin run</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>false</code></pre></td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
             </details><details><summary>metrics-brief (<code>bool</code>)</summary>
                 <table><tbody><tr><th>Name:</th><td>Brief Metrics</td></tr><tr><th>Description:</th><td width="500">Brief version of the metrics output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+            </details><details><summary>page-in (<code>bool</code>)</summary>
+                <table><tbody><tr><th>Name:</th><td>Page in</td></tr><tr><th>Description:</th><td width="500">Touch allocated pages that are not in core, forcing them to be paged back in. This is a useful option to force all the allocated pages to be paged in when using the bigheap, mmap and vm stressors.</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
             </details><details><summary>stressors (<code>list[<code>one of[string]</code>]</code>)</summary>
                 <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>list[<code>one of[string]</code>]</code></td><tr><td colspan="2">
     <details>
@@ -236,6 +238,8 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td width="500">Cleanup artifacts after the plugin run</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>false</code></pre></td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>metrics-brief (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Brief Metrics</td></tr><tr><th>Description:</th><td width="500">Brief version of the metrics output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>page-in (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Page in</td></tr><tr><th>Description:</th><td width="500">Touch allocated pages that are not in core, forcing them to be paged back in. This is a useful option to force all the allocated pages to be paged in when using the bigheap, mmap and vm stressors.</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>stressors (<code>list[<code>one of[string]</code>]</code>)</summary>
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>list[<code>one of[string]</code>]</code></td><tr><td colspan="2">
     <details>
@@ -682,6 +686,8 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Name:</th><td>Cleanup</td></tr><tr><th>Description:</th><td width="500">Cleanup artifacts after the plugin run</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>false</code></pre></td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>metrics-brief (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Brief Metrics</td></tr><tr><th>Description:</th><td width="500">Brief version of the metrics output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
+        </details><details><summary>page-in (<code>bool</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Page in</td></tr><tr><th>Description:</th><td width="500">Touch allocated pages that are not in core, forcing them to be paged back in. This is a useful option to force all the allocated pages to be paged in when using the bigheap, mmap and vm stressors.</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>stressors (<code>list[<code>one of[string]</code>]</code>)</summary>
         <table><tbody><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>list[<code>one of[string]</code>]</code></td><tr><td colspan="2">
     <details>
