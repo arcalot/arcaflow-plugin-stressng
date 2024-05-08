@@ -95,7 +95,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -127,7 +127,25 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
+        </details><details><summary>workers (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details></td></tr>
+</tbody></table>
+        </details><details><summary>IomixStressorParams (<code>object</code>)</summary>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>iomix-bytes (<code>string</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>IOMix bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes to write for each iomix worker process; the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>iomix-ops (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>IOMix operations</td></tr><tr><th>Description:</th><td width="500">Number of bogo iomix I/O operations after which to stop the stress workers</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -155,7 +173,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -185,7 +203,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -204,7 +222,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -238,7 +256,7 @@ Run the stress-ng workload with the given parameters
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -356,7 +374,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -426,7 +444,25 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+        </details>
+    </td>
+</tr></tbody></table>
+        </details><details><summary>workers (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Worker Count</td></tr><tr><th>Description:</th><td width="500">Number of workers for the stressor; 0 = match the number of on-line CPUs</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details></td></tr>
+</tbody></table>
+        </details><details><summary>IomixStressorParams (<code>object</code>)</summary>
+            <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>iomix-bytes (<code>string</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>IOMix bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes to write for each iomix worker process; the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        </details><details><summary>iomix-ops (<code>int</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>IOMix operations</td></tr><tr><th>Description:</th><td width="500">Number of bogo iomix I/O operations after which to stop the stress workers</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
+</tbody></table>
+        </details><details><summary>stressor (<code>enum[string]</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
+        <details><summary>Values</summary>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -554,7 +590,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -613,7 +649,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -632,7 +668,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
@@ -756,7 +792,7 @@ Run the stress-ng workload with the given parameters
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>stressor (<code>enum[string]</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Stressor</td></tr><tr><th>Description:</th><td width="500">Stressor for the benchmark workload</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>enum[string]</code></td><tr><td colspan="2">
         <details><summary>Values</summary>
-            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
+            <ul><li><strong><code>cpu</code>:</strong> CPU</li><li><strong><code>hdd</code>:</strong> HDD</li><li><strong><code>iomix</code>:</strong> IOMIX</li><li><strong><code>matrix</code>:</strong> MATRIX</li><li><strong><code>mmap</code>:</strong> MMAP</li><li><strong><code>mq</code>:</strong> MQ</li><li><strong><code>vm</code>:</strong> VM</li></ul>
         </details>
     </td>
 </tr></tbody></table>
