@@ -639,6 +639,17 @@ class StressNGParams:
         ]
     ]
 
+    page_in: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("page-in"),
+        schema.name("Page in"),
+        schema.description(
+            "Touch allocated pages that are not in core, forcing them to be paged "
+            "back in. This is a useful option to force all the allocated pages to "
+            "be paged in when using the bigheap, mmap and vm stressors."
+        ),
+    ] = None
+
     verbose: typing.Annotated[
         typing.Optional[bool],
         schema.name("Verbose"),
