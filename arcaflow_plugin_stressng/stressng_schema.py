@@ -30,6 +30,7 @@ class Stressors(str, enum.Enum):
     MQ = "mq"
     HDD = "hdd"
     IOMIX = "iomix"
+    SOCK = "sock"
 
 
 class CpuMethod(str, enum.Enum):
@@ -578,7 +579,44 @@ class IomixStressorParams(CommonStressorParams):
             }
         )
 
+@dataclass
+class SockStressorParams(CommonStressorParams):
+    sock_domain: typing.Annotated[
+        typing.Optional[str],
+        schema.id("sock-domain"),
+        schema.name("Sock domain"),
+        schema.description(
+            "Specify the domain to use, the default is ipv4. Currently ipv4, ipv6 and unix are supported "
+        ),
+    ] = None
 
+    sock_opts: typing.Annotated[
+        typing.Optional[str],
+        schema.id("sock-opts"),
+        schema.name("Sock opts"),
+        schema.description(
+            "This option allows one to specify the sending method using send(2),sendmsg(2) or sendmmsg(2)"
+        ),
+    ] = None
+
+    sock_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("sock-ops"),
+        schema.name("Sock operations"),
+        schema.description(
+            "Number of bogo sock operations after which to stop socket stress workers"
+        ),
+    ] = None
+
+    def to_jobfile(self) -> str:
+        return f"sock {self.workers}\n" + params_to_jobfile(
+            {
+                "sock-domain": self.sock_domain,
+                "sock-opts": self.sock_opts,
+                "sock-ops": self.sock_ops,
+            }
+        )
+    
 @dataclass
 class StressNGParams:
     timeout: typing.Annotated[
@@ -631,6 +669,12 @@ class StressNGParams:
                     annotations.discriminator_value(Stressors.IOMIX.value),
                     schema.name("IOMix Stressor Parameters"),
                     schema.description("Parameters for running the iomix stressor"),
+                ],
+                typing.Annotated[
+                    SockStressorParams,
+                    annotations.discriminator_value(Stressors.SOCK.value),
+                    schema.name("Sock Stressor Parameters"),
+                    schema.description("Parameters for running the socket stressor"),
                 ],
             ],
             annotations.discriminator("stressor", discriminator_inlined=True),
