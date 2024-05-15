@@ -722,6 +722,7 @@ class StressNGParams:
         schema.description("Cleanup artifacts after the plugin run"),
     ] = False
 
+
     def to_jobfile(self) -> str:
         return params_to_jobfile(
             {
@@ -1116,6 +1117,23 @@ class HDDOutput(CommonOutput):
 
 hdd_output_schema = plugin.build_object_schema(HDDOutput)
 
+@dataclass
+class IOMixOutput(CommonOutput):
+    """
+    This is the data structure that holds the results for the IOMix stressor
+    """
+
+
+iomix_output_schema = plugin.build_object_schema(IOMixOutput)
+
+@dataclass
+class SockOutput(CommonOutput):
+    """
+    This is the data structure that holds the results for the Sock stressor
+    """
+
+
+sock_output_schema = plugin.build_object_schema(SockOutput)
 
 @dataclass
 class WorkloadResults:
@@ -1167,6 +1185,17 @@ class WorkloadResults:
         schema.description("HDD stressor output object"),
     ] = None
 
+    iomixinfo: typing.Annotated[
+        typing.Optional[IOMixOutput],
+        schema.name("IOMix Output"),
+        schema.description("IOMix stressor output object"),
+    ] = None
+
+    sockinfo: typing.Annotated[
+        typing.Optional[SockOutput],
+        schema.name("Sock Output"),
+        schema.description("Sock stressor output object"),
+    ] = None
 
 @dataclass
 class WorkloadError:
