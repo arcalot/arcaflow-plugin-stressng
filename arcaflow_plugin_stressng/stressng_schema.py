@@ -188,6 +188,15 @@ class HddOpts(str, enum.Enum):
     WR_RND = "wr-rnd"
     WR_SEQ = "wr-seq"
 
+class SockDomain(str, enum.Enum):
+    IPV4 = "ipv4"
+    IPV6 = "ipv6"
+    UNIX = "unix"
+
+class SockOpts(str, enum.Enum):
+    SEND = "send"
+    SENDMSG = "sendmsg"
+    SENDMMSG = "sendmmsg"
 
 @dataclass
 class CommonStressorParams:
@@ -588,7 +597,7 @@ class SockStressorParams(CommonStressorParams):
         schema.description(
             "Specify the domain to use, the default is ipv4. Currently ipv4, ipv6 and unix are supported "
         ),
-    ] = None
+    ] = SockDomain.IPV4
 
     sock_opts: typing.Annotated[
         typing.Optional[str],
@@ -597,7 +606,7 @@ class SockStressorParams(CommonStressorParams):
         schema.description(
             "This option allows one to specify the sending method using send(2),sendmsg(2) or sendmmsg(2)"
         ),
-    ] = None
+    ] = SockOpts.SEND
 
     sock_ops: typing.Annotated[
         typing.Optional[int],
