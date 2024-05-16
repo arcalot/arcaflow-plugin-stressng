@@ -19,6 +19,8 @@ from stressng_schema import (
     matrix_output_schema,
     mq_output_schema,
     hdd_output_schema,
+    iomix_output_schema,
+    sock_output_schema
 )
 
 
@@ -108,6 +110,8 @@ def stressng_run(
     matrixinfo_un = None
     mqinfo_un = None
     hddinfo_un = None
+    iomixinfo_un = None
+    sockinfo_un = None
 
     system_un = system_info_output_schema.unserialize(system_info)
     for metric in metrics:
@@ -123,6 +127,10 @@ def stressng_run(
             mqinfo_un = mq_output_schema.unserialize(metric)
         if metric["stressor"] == "hdd":
             hddinfo_un = hdd_output_schema.unserialize(metric)
+        if metric["stressor"] == "iomix":
+            hddinfo_un = iomix_output_schema.unserialize(metric)
+        if metric["stressor"] == "sock":
+            hddinfo_un = sock_output_schema.unserialize(metric)
 
     print("==>> Workload run complete!")
     os.close(stressng_jobfile[0])
@@ -141,6 +149,8 @@ def stressng_run(
         matrixinfo_un,
         mqinfo_un,
         hddinfo_un,
+        iomixinfo_un,
+        sockinfo_un,
     )
 
 
