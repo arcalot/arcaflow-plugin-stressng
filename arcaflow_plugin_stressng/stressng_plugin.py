@@ -20,7 +20,7 @@ from stressng_schema import (
     mq_output_schema,
     hdd_output_schema,
     iomix_output_schema,
-    sock_output_schema
+    sock_output_schema,
 )
 
 
