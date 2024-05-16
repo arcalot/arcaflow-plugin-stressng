@@ -1141,7 +1141,24 @@ class SockOutput(CommonOutput):
     This is the data structure that holds the results for the Sock stressor
     """
 
+    messages_sent_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("messages-sent-per-sec"),
+        schema.name("Messages sent per second"),
+    ] = None
 
+    byte_average_out_queue_length: typing.Annotated[
+        typing.Optional[float],
+        schema.id("byte-average-out-queue-length"),
+        schema.name("Byte average out queue length"),
+    ] = None
+
+    byte_average_in_queue_length: typing.Annotated[
+        typing.Optional[float],
+        schema.id("byte-average-in-queue-length"),
+        schema.name("Byte average in queue length"),
+    ] = None
+    
 sock_output_schema = plugin.build_object_schema(SockOutput)
 
 @dataclass
