@@ -591,7 +591,7 @@ class IomixStressorParams(CommonStressorParams):
 @dataclass
 class SockStressorParams(CommonStressorParams):
     sock_domain: typing.Annotated[
-        typing.Optional[str],
+        typing.Optional[SockDomain],
         schema.id("sock-domain"),
         schema.name("Sock domain"),
         schema.description(
@@ -600,7 +600,7 @@ class SockStressorParams(CommonStressorParams):
     ] = SockDomain.IPV4
 
     sock_opts: typing.Annotated[
-        typing.Optional[str],
+        typing.Optional[SockOpts],
         schema.id("sock-opts"),
         schema.name("Sock opts"),
         schema.description(
