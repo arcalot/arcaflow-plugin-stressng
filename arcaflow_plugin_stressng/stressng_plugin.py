@@ -128,9 +128,9 @@ def stressng_run(
         if metric["stressor"] == "hdd":
             hddinfo_un = hdd_output_schema.unserialize(metric)
         if metric["stressor"] == "iomix":
-            hddinfo_un = iomix_output_schema.unserialize(metric)
+            iomixinfo_un = iomix_output_schema.unserialize(metric)
         if metric["stressor"] == "sock":
-            hddinfo_un = sock_output_schema.unserialize(metric)
+            sockinfo_un = sock_output_schema.unserialize(metric)
 
     print("==>> Workload run complete!")
     os.close(stressng_jobfile[0])
