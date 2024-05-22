@@ -33,6 +33,11 @@ class Stressors(str, enum.Enum):
     SOCK = "sock"
 
 
+# Mapping of Stressors to their corresponding output schemas (each schema
+# definition is added as it is defined, below).
+stressor_schemas = {}
+
+
 class CpuMethod(str, enum.Enum):
     ALL = "all"
     ACKERMANN = "ackermann"
@@ -188,15 +193,18 @@ class HddOpts(str, enum.Enum):
     WR_RND = "wr-rnd"
     WR_SEQ = "wr-seq"
 
+
 class SockDomain(str, enum.Enum):
     IPV4 = "ipv4"
     IPV6 = "ipv6"
     UNIX = "unix"
 
+
 class SockOpts(str, enum.Enum):
     SEND = "send"
     SENDMSG = "sendmsg"
     SENDMMSG = "sendmmsg"
+
 
 @dataclass
 class CommonStressorParams:
@@ -588,6 +596,7 @@ class IomixStressorParams(CommonStressorParams):
             }
         )
 
+
 @dataclass
 class SockStressorParams(CommonStressorParams):
     sock_domain: typing.Annotated[
@@ -625,7 +634,8 @@ class SockStressorParams(CommonStressorParams):
                 "sock-ops": self.sock_ops,
             }
         )
-    
+
+
 @dataclass
 class StressNGParams:
     timeout: typing.Annotated[
@@ -730,7 +740,6 @@ class StressNGParams:
         schema.name("Cleanup"),
         schema.description("Cleanup artifacts after the plugin run"),
     ] = False
-
 
     def to_jobfile(self) -> str:
         return params_to_jobfile(
@@ -972,7 +981,7 @@ class VMOutput(CommonOutput):
     """
 
 
-vm_output_schema = plugin.build_object_schema(VMOutput)
+stressor_schemas[Stressors.VM] = plugin.build_object_schema(VMOutput)
 
 
 @dataclass
@@ -982,7 +991,7 @@ class MmapOutput(CommonOutput):
     """
 
 
-mmap_output_schema = plugin.build_object_schema(MmapOutput)
+stressor_schemas[Stressors.MMAP] = plugin.build_object_schema(MmapOutput)
 
 
 @dataclass
@@ -992,7 +1001,7 @@ class CPUOutput(CommonOutput):
     """
 
 
-cpu_output_schema = plugin.build_object_schema(CPUOutput)
+stressor_schemas[Stressors.CPU] = plugin.build_object_schema(CPUOutput)
 
 
 @dataclass
@@ -1086,7 +1095,7 @@ class MatrixOutput(CommonOutput):
     ] = None
 
 
-matrix_output_schema = plugin.build_object_schema(MatrixOutput)
+stressor_schemas[Stressors.MATRIX] = plugin.build_object_schema(MatrixOutput)
 
 
 @dataclass
@@ -1096,7 +1105,7 @@ class MQOutput(CommonOutput):
     """
 
 
-mq_output_schema = plugin.build_object_schema(MQOutput)
+stressor_schemas[Stressors.MQ] = plugin.build_object_schema(MQOutput)
 
 
 @dataclass
@@ -1124,7 +1133,8 @@ class HDDOutput(CommonOutput):
     ]
 
 
-hdd_output_schema = plugin.build_object_schema(HDDOutput)
+stressor_schemas[Stressors.HDD] = plugin.build_object_schema(HDDOutput)
+
 
 @dataclass
 class IOMixOutput(CommonOutput):
@@ -1133,7 +1143,8 @@ class IOMixOutput(CommonOutput):
     """
 
 
-iomix_output_schema = plugin.build_object_schema(IOMixOutput)
+stressor_schemas[Stressors.IOMIX] = plugin.build_object_schema(IOMixOutput)
+
 
 @dataclass
 class SockOutput(CommonOutput):
@@ -1158,8 +1169,10 @@ class SockOutput(CommonOutput):
         schema.id("byte-average-in-queue-length"),
         schema.name("Byte average in queue length"),
     ] = None
-    
-sock_output_schema = plugin.build_object_schema(SockOutput)
+
+
+stressor_schemas[Stressors.SOCK] = plugin.build_object_schema(SockOutput)
+
 
 @dataclass
 class WorkloadResults:
@@ -1222,6 +1235,7 @@ class WorkloadResults:
         schema.name("Sock Output"),
         schema.description("Sock stressor output object"),
     ] = None
+
 
 @dataclass
 class WorkloadError:
