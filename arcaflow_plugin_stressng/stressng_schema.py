@@ -604,7 +604,7 @@ class SockStressorParams(CommonStressorParams):
         schema.id("sock-domain"),
         schema.name("Sock domain"),
         schema.description(
-            "Specify the domain to use, the default is ipv4. Currently ipv4, ipv6 and unix are supported "
+            "Specifies the domain to use ('ipv4', 'ipv6', or 'unix'); the default is 'ipv4'"
         ),
     ] = SockDomain.IPV4
 
@@ -613,7 +613,7 @@ class SockStressorParams(CommonStressorParams):
         schema.id("sock-opts"),
         schema.name("Sock opts"),
         schema.description(
-            "This option allows one to specify the sending method using send(2),sendmsg(2) or sendmmsg(2)"
+            "Specifies the sending method ('send', 'sendmsg', or 'sendmmsg'); the default is 'send'"
         ),
     ] = SockOpts.SEND
 
