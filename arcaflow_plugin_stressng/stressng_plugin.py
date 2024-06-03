@@ -98,7 +98,9 @@ def stressng_run(
     metrics = stressng_yaml["metrics"]
 
     system_un = system_info_output_schema.unserialize(system_info)
-    un = {
+    # Unserialize the result from each metric and cache it keyed by the
+    # name of the stressor which generated it.
+    results = {
         m["stressor"]: stressor_schemas[m["stressor"]].unserialize(m) for m in metrics
     }
 
@@ -113,12 +115,12 @@ def stressng_run(
     return "success", WorkloadResults(
         test_config=params,
         systeminfo=system_un,
-        vminfo=un.get(Stressors.VM),
-        mmapinfo=un.get(Stressors.MMAP),
-        cpuinfo=un.get(Stressors.CPU),
-        matrixinfo=un.get(Stressors.MATRIX),
-        mqinfo=un.get(Stressors.MQ),
-        hddinfo=un.get(Stressors.HDD),
+        vminfo=results.get(Stressors.VM),
+        mmapinfo=results.get(Stressors.MMAP),
+        cpuinfo=results.get(Stressors.CPU),
+        matrixinfo=results.get(Stressors.MATRIX),
+        mqinfo=results.get(Stressors.MQ),
+        hddinfo=results.get(Stressors.HDD),
     )
 
 
