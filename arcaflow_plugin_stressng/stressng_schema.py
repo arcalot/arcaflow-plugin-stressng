@@ -32,6 +32,11 @@ class Stressors(str, enum.Enum):
     IOMIX = "iomix"
 
 
+# Mapping of Stressors to their corresponding output schemas (each schema
+# definition is added as it is defined, below).
+stressor_schemas = {}
+
+
 class CpuMethod(str, enum.Enum):
     ALL = "all"
     ACKERMANN = "ackermann"
@@ -918,7 +923,7 @@ class VMOutput(CommonOutput):
     """
 
 
-vm_output_schema = plugin.build_object_schema(VMOutput)
+stressor_schemas[Stressors.VM] = plugin.build_object_schema(VMOutput)
 
 
 @dataclass
@@ -928,7 +933,7 @@ class MmapOutput(CommonOutput):
     """
 
 
-mmap_output_schema = plugin.build_object_schema(MmapOutput)
+stressor_schemas[Stressors.MMAP] = plugin.build_object_schema(MmapOutput)
 
 
 @dataclass
@@ -938,7 +943,7 @@ class CPUOutput(CommonOutput):
     """
 
 
-cpu_output_schema = plugin.build_object_schema(CPUOutput)
+stressor_schemas[Stressors.CPU] = plugin.build_object_schema(CPUOutput)
 
 
 @dataclass
@@ -1032,7 +1037,7 @@ class MatrixOutput(CommonOutput):
     ] = None
 
 
-matrix_output_schema = plugin.build_object_schema(MatrixOutput)
+stressor_schemas[Stressors.MATRIX] = plugin.build_object_schema(MatrixOutput)
 
 
 @dataclass
@@ -1042,7 +1047,7 @@ class MQOutput(CommonOutput):
     """
 
 
-mq_output_schema = plugin.build_object_schema(MQOutput)
+stressor_schemas[Stressors.MQ] = plugin.build_object_schema(MQOutput)
 
 
 @dataclass
@@ -1070,7 +1075,7 @@ class HDDOutput(CommonOutput):
     ]
 
 
-hdd_output_schema = plugin.build_object_schema(HDDOutput)
+stressor_schemas[Stressors.HDD] = plugin.build_object_schema(HDDOutput)
 
 
 @dataclass
