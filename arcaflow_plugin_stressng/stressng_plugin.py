@@ -9,18 +9,12 @@ import yaml
 
 from arcaflow_plugin_sdk import plugin
 from stressng_schema import (
+    Stressors,
     StressNGParams,
     WorkloadResults,
     WorkloadError,
     system_info_output_schema,
-    cpu_output_schema,
-    vm_output_schema,
-    mmap_output_schema,
-    matrix_output_schema,
-    mq_output_schema,
-    hdd_output_schema,
-    iomix_output_schema,
-    sock_output_schema,
+    stressor_schemas,
 )
 
 
@@ -103,34 +97,10 @@ def stressng_run(
     system_info = stressng_yaml["system-info"]
     metrics = stressng_yaml["metrics"]
 
-    # allocate all stressor information with None in case they don't get called
-    cpuinfo_un = None
-    vminfo_un = None
-    mmapinfo_un = None
-    matrixinfo_un = None
-    mqinfo_un = None
-    hddinfo_un = None
-    iomixinfo_un = None
-    sockinfo_un = None
-
     system_un = system_info_output_schema.unserialize(system_info)
-    for metric in metrics:
-        if metric["stressor"] == "cpu":
-            cpuinfo_un = cpu_output_schema.unserialize(metric)
-        if metric["stressor"] == "vm":
-            vminfo_un = vm_output_schema.unserialize(metric)
-        if metric["stressor"] == "mmap":
-            mmapinfo_un = mmap_output_schema.unserialize(metric)
-        if metric["stressor"] == "matrix":
-            matrixinfo_un = matrix_output_schema.unserialize(metric)
-        if metric["stressor"] == "mq":
-            mqinfo_un = mq_output_schema.unserialize(metric)
-        if metric["stressor"] == "hdd":
-            hddinfo_un = hdd_output_schema.unserialize(metric)
-        if metric["stressor"] == "iomix":
-            iomixinfo_un = iomix_output_schema.unserialize(metric)
-        if metric["stressor"] == "sock":
-            sockinfo_un = sock_output_schema.unserialize(metric)
+    un = {
+        m["stressor"]: stressor_schemas[m["stressor"]].unserialize(m) for m in metrics
+    }
 
     print("==>> Workload run complete!")
     os.close(stressng_jobfile[0])
@@ -141,16 +111,16 @@ def stressng_run(
         os.remove(stressng_jobfile[1])
 
     return "success", WorkloadResults(
-        params,
-        system_un,
-        vminfo_un,
-        mmapinfo_un,
-        cpuinfo_un,
-        matrixinfo_un,
-        mqinfo_un,
-        hddinfo_un,
-        iomixinfo_un,
-        sockinfo_un,
+        test_config=params,
+        systeminfo=system_un,
+        vminfo=un.get(Stressors.VM),
+        mmapinfo=un.get(Stressors.MMAP),
+        cpuinfo=un.get(Stressors.CPU),
+        matrixinfo=un.get(Stressors.MATRIX),
+        mqinfo=un.get(Stressors.MQ),
+        hddinfo=un.get(Stressors.HDD),
+        iomixinfo=un.get(Stressors.IOMIX),
+        sockinfo=un.get(Stressors.SOCK),
     )
 
 
