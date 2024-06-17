@@ -11,6 +11,8 @@ This plugin provides the functionality of [stress-ng](https://github.com/ColinIa
 - matrix
 - mq
 - hdd
+- iomix
+- sock
 
 ## Input structure
 

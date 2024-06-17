@@ -30,6 +30,12 @@ class Stressors(str, enum.Enum):
     MQ = "mq"
     HDD = "hdd"
     IOMIX = "iomix"
+    SOCK = "sock"
+
+
+# Mapping of Stressors to their corresponding output schemas (each schema
+# definition is added as it is defined, below).
+stressor_schemas = {}
 
 
 # Mapping of Stressors to their corresponding output schemas (each schema
@@ -191,6 +197,18 @@ class HddOpts(str, enum.Enum):
     UTIMES = "utimes"
     WR_RND = "wr-rnd"
     WR_SEQ = "wr-seq"
+
+
+class SockDomain(str, enum.Enum):
+    IPV4 = "ipv4"
+    IPV6 = "ipv6"
+    UNIX = "unix"
+
+
+class SockOpts(str, enum.Enum):
+    SEND = "send"
+    SENDMSG = "sendmsg"
+    SENDMMSG = "sendmmsg"
 
 
 @dataclass
@@ -585,6 +603,45 @@ class IomixStressorParams(CommonStressorParams):
 
 
 @dataclass
+class SockStressorParams(CommonStressorParams):
+    sock_domain: typing.Annotated[
+        typing.Optional[SockDomain],
+        schema.id("sock-domain"),
+        schema.name("Sock domain"),
+        schema.description(
+            "Specifies the domain to use ('ipv4', 'ipv6', or 'unix'); the default is 'ipv4'"
+        ),
+    ] = SockDomain.IPV4
+
+    sock_opts: typing.Annotated[
+        typing.Optional[SockOpts],
+        schema.id("sock-opts"),
+        schema.name("Sock opts"),
+        schema.description(
+            "Specifies the sending method ('send', 'sendmsg', or 'sendmmsg'); the default is 'send'"
+        ),
+    ] = SockOpts.SEND
+
+    sock_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("sock-ops"),
+        schema.name("Sock operations"),
+        schema.description(
+            "Number of bogo sock operations after which to stop socket stress workers"
+        ),
+    ] = None
+
+    def to_jobfile(self) -> str:
+        return f"sock {self.workers}\n" + params_to_jobfile(
+            {
+                "sock-domain": self.sock_domain,
+                "sock-opts": self.sock_opts,
+                "sock-ops": self.sock_ops,
+            }
+        )
+
+
+@dataclass
 class StressNGParams:
     timeout: typing.Annotated[
         int,
@@ -636,6 +693,12 @@ class StressNGParams:
                     annotations.discriminator_value(Stressors.IOMIX.value),
                     schema.name("IOMix Stressor Parameters"),
                     schema.description("Parameters for running the iomix stressor"),
+                ],
+                typing.Annotated[
+                    SockStressorParams,
+                    annotations.discriminator_value(Stressors.SOCK.value),
+                    schema.name("Sock Stressor Parameters"),
+                    schema.description("Parameters for running the socket stressor"),
                 ],
             ],
             annotations.discriminator("stressor", discriminator_inlined=True),
@@ -1079,6 +1142,44 @@ stressor_schemas[Stressors.HDD] = plugin.build_object_schema(HDDOutput)
 
 
 @dataclass
+class IOMixOutput(CommonOutput):
+    """
+    This is the data structure that holds the results for the IOMix stressor
+    """
+
+
+stressor_schemas[Stressors.IOMIX] = plugin.build_object_schema(IOMixOutput)
+
+
+@dataclass
+class SockOutput(CommonOutput):
+    """
+    This is the data structure that holds the results for the Sock stressor
+    """
+
+    messages_sent_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("messages-sent-per-sec"),
+        schema.name("Messages sent per second"),
+    ] = None
+
+    byte_average_out_queue_length: typing.Annotated[
+        typing.Optional[float],
+        schema.id("byte-average-out-queue-length"),
+        schema.name("Byte average out queue length"),
+    ] = None
+
+    byte_average_in_queue_length: typing.Annotated[
+        typing.Optional[float],
+        schema.id("byte-average-in-queue-length"),
+        schema.name("Byte average in queue length"),
+    ] = None
+
+
+stressor_schemas[Stressors.SOCK] = plugin.build_object_schema(SockOutput)
+
+
+@dataclass
 class WorkloadResults:
     test_config: typing.Annotated[
         StressNGParams,
@@ -1126,6 +1227,18 @@ class WorkloadResults:
         typing.Optional[HDDOutput],
         schema.name("HDD Output"),
         schema.description("HDD stressor output object"),
+    ] = None
+
+    iomixinfo: typing.Annotated[
+        typing.Optional[IOMixOutput],
+        schema.name("IOMix Output"),
+        schema.description("IOMix stressor output object"),
+    ] = None
+
+    sockinfo: typing.Annotated[
+        typing.Optional[SockOutput],
+        schema.name("Sock Output"),
+        schema.description("Sock stressor output object"),
     ] = None
 
 
