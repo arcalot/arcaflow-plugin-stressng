@@ -29,6 +29,18 @@ class Stressors(str, enum.Enum):
     MATRIX = "matrix"
     MQ = "mq"
     HDD = "hdd"
+    IOMIX = "iomix"
+    SOCK = "sock"
+
+
+# Mapping of Stressors to their corresponding output schemas (each schema
+# definition is added as it is defined, below).
+stressor_schemas = {}
+
+
+# Mapping of Stressors to their corresponding output schemas (each schema
+# definition is added as it is defined, below).
+stressor_schemas = {}
 
 
 class CpuMethod(str, enum.Enum):
@@ -185,6 +197,18 @@ class HddOpts(str, enum.Enum):
     UTIMES = "utimes"
     WR_RND = "wr-rnd"
     WR_SEQ = "wr-seq"
+
+
+class SockDomain(str, enum.Enum):
+    IPV4 = "ipv4"
+    IPV6 = "ipv6"
+    UNIX = "unix"
+
+
+class SockOpts(str, enum.Enum):
+    SEND = "send"
+    SENDMSG = "sendmsg"
+    SENDMMSG = "sendmmsg"
 
 
 @dataclass
@@ -549,6 +573,77 @@ class HDDStressorParams(CommonStressorParams):
 
 
 @dataclass
+class IomixStressorParams(CommonStressorParams):
+    iomix_bytes: typing.Annotated[
+        typing.Optional[str],
+        schema.id("iomix-bytes"),
+        schema.name("IOMix bytes"),
+        schema.description(
+            "Number of bytes to write for each iomix worker process; "
+            "the default is 1 GB"
+        ),
+    ] = None
+
+    iomix_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("iomix-ops"),
+        schema.name("IOMix operations"),
+        schema.description(
+            "Number of bogo iomix I/O operations after which to stop the stress workers"
+        ),
+    ] = None
+
+    def to_jobfile(self) -> str:
+        return f"iomix {self.workers}\n" + params_to_jobfile(
+            {
+                "iomix-bytes": self.iomix_bytes,
+                "iomix-ops": self.iomix_ops,
+            }
+        )
+
+
+@dataclass
+class SockStressorParams(CommonStressorParams):
+    sock_domain: typing.Annotated[
+        typing.Optional[SockDomain],
+        schema.id("sock-domain"),
+        schema.name("Sock domain"),
+        schema.description(
+            "Specifies the domain to use ('ipv4', 'ipv6', or 'unix'); the default is "
+            "'ipv4'"
+        ),
+    ] = SockDomain.IPV4
+
+    sock_opts: typing.Annotated[
+        typing.Optional[SockOpts],
+        schema.id("sock-opts"),
+        schema.name("Sock opts"),
+        schema.description(
+            "Specifies the sending method ('send', 'sendmsg', or 'sendmmsg'); the "
+            "default is 'send'"
+        ),
+    ] = SockOpts.SEND
+
+    sock_ops: typing.Annotated[
+        typing.Optional[int],
+        schema.id("sock-ops"),
+        schema.name("Sock operations"),
+        schema.description(
+            "Number of bogo sock operations after which to stop socket stress workers"
+        ),
+    ] = None
+
+    def to_jobfile(self) -> str:
+        return f"sock {self.workers}\n" + params_to_jobfile(
+            {
+                "sock-domain": self.sock_domain,
+                "sock-opts": self.sock_opts,
+                "sock-ops": self.sock_ops,
+            }
+        )
+
+
+@dataclass
 class StressNGParams:
     timeout: typing.Annotated[
         int,
@@ -595,12 +690,35 @@ class StressNGParams:
                     schema.name("HDD Stressor Parameters"),
                     schema.description("Parameters for running the hdd stressor"),
                 ],
+                typing.Annotated[
+                    IomixStressorParams,
+                    annotations.discriminator_value(Stressors.IOMIX.value),
+                    schema.name("IOMix Stressor Parameters"),
+                    schema.description("Parameters for running the iomix stressor"),
+                ],
+                typing.Annotated[
+                    SockStressorParams,
+                    annotations.discriminator_value(Stressors.SOCK.value),
+                    schema.name("Sock Stressor Parameters"),
+                    schema.description("Parameters for running the socket stressor"),
+                ],
             ],
             annotations.discriminator("stressor", discriminator_inlined=True),
             schema.name("Stressors List"),
             schema.description("List of stress-ng stressors and parameters"),
         ]
     ]
+
+    page_in: typing.Annotated[
+        typing.Optional[bool],
+        schema.id("page-in"),
+        schema.name("Page in"),
+        schema.description(
+            "Touch allocated pages that are not in core, forcing them to be paged "
+            "back in. This is a useful option to force all the allocated pages to "
+            "be paged in when using the bigheap, mmap and vm stressors."
+        ),
+    ] = None
 
     verbose: typing.Annotated[
         typing.Optional[bool],
@@ -870,7 +988,7 @@ class VMOutput(CommonOutput):
     """
 
 
-vm_output_schema = plugin.build_object_schema(VMOutput)
+stressor_schemas[Stressors.VM] = plugin.build_object_schema(VMOutput)
 
 
 @dataclass
@@ -880,7 +998,7 @@ class MmapOutput(CommonOutput):
     """
 
 
-mmap_output_schema = plugin.build_object_schema(MmapOutput)
+stressor_schemas[Stressors.MMAP] = plugin.build_object_schema(MmapOutput)
 
 
 @dataclass
@@ -890,7 +1008,7 @@ class CPUOutput(CommonOutput):
     """
 
 
-cpu_output_schema = plugin.build_object_schema(CPUOutput)
+stressor_schemas[Stressors.CPU] = plugin.build_object_schema(CPUOutput)
 
 
 @dataclass
@@ -984,7 +1102,7 @@ class MatrixOutput(CommonOutput):
     ] = None
 
 
-matrix_output_schema = plugin.build_object_schema(MatrixOutput)
+stressor_schemas[Stressors.MATRIX] = plugin.build_object_schema(MatrixOutput)
 
 
 @dataclass
@@ -994,7 +1112,7 @@ class MQOutput(CommonOutput):
     """
 
 
-mq_output_schema = plugin.build_object_schema(MQOutput)
+stressor_schemas[Stressors.MQ] = plugin.build_object_schema(MQOutput)
 
 
 @dataclass
@@ -1022,7 +1140,45 @@ class HDDOutput(CommonOutput):
     ]
 
 
-hdd_output_schema = plugin.build_object_schema(HDDOutput)
+stressor_schemas[Stressors.HDD] = plugin.build_object_schema(HDDOutput)
+
+
+@dataclass
+class IOMixOutput(CommonOutput):
+    """
+    This is the data structure that holds the results for the IOMix stressor
+    """
+
+
+stressor_schemas[Stressors.IOMIX] = plugin.build_object_schema(IOMixOutput)
+
+
+@dataclass
+class SockOutput(CommonOutput):
+    """
+    This is the data structure that holds the results for the Sock stressor
+    """
+
+    messages_sent_per_sec: typing.Annotated[
+        typing.Optional[float],
+        schema.id("messages-sent-per-sec"),
+        schema.name("Messages sent per second"),
+    ] = None
+
+    byte_average_out_queue_length: typing.Annotated[
+        typing.Optional[float],
+        schema.id("byte-average-out-queue-length"),
+        schema.name("Byte average out queue length"),
+    ] = None
+
+    byte_average_in_queue_length: typing.Annotated[
+        typing.Optional[float],
+        schema.id("byte-average-in-queue-length"),
+        schema.name("Byte average in queue length"),
+    ] = None
+
+
+stressor_schemas[Stressors.SOCK] = plugin.build_object_schema(SockOutput)
 
 
 @dataclass
@@ -1073,6 +1229,18 @@ class WorkloadResults:
         typing.Optional[HDDOutput],
         schema.name("HDD Output"),
         schema.description("HDD stressor output object"),
+    ] = None
+
+    iomixinfo: typing.Annotated[
+        typing.Optional[IOMixOutput],
+        schema.name("IOMix Output"),
+        schema.description("IOMix stressor output object"),
+    ] = None
+
+    sockinfo: typing.Annotated[
+        typing.Optional[SockOutput],
+        schema.name("Sock Output"),
+        schema.description("Sock stressor output object"),
     ] = None
 
 
