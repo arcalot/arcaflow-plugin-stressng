@@ -2,10 +2,14 @@
 
 import typing
 import enum
+import re
 from dataclasses import dataclass
 
-from arcaflow_plugin_sdk import plugin, schema
+from arcaflow_plugin_sdk import plugin, schema, validation
 from arcaflow_plugin_sdk import annotations
+
+
+bytes_pattern = re.compile(r"^[1-9]\d*\.?\d*[KkMmGgTt]$")
 
 
 def params_to_jobfile(params: dict) -> str:
@@ -272,6 +276,7 @@ class CpuStressorParams(CommonStressorParams):
 class VmStressorParams(CommonStressorParams):
     vm_bytes: typing.Annotated[
         typing.Optional[str],
+        validation.pattern(bytes_pattern),
         schema.id("vm-bytes"),
         schema.name("VM Memory Bytes"),
         schema.description(
@@ -374,6 +379,7 @@ class MmapStressorParams(CommonStressorParams):
 
     mmap_bytes: typing.Annotated[
         typing.Optional[str],
+        validation.pattern(bytes_pattern),
         schema.id("mmap-bytes"),
         schema.name("Mmap Bytes"),
         schema.description(
@@ -531,6 +537,7 @@ class MqStressorParams(CommonStressorParams):
 class HDDStressorParams(CommonStressorParams):
     hdd_bytes: typing.Annotated[
         typing.Optional[str],
+        validation.pattern(bytes_pattern),
         schema.id("hdd-bytes"),
         schema.name("Bytes Per Worker"),
         schema.description(
@@ -576,6 +583,7 @@ class HDDStressorParams(CommonStressorParams):
 class IomixStressorParams(CommonStressorParams):
     iomix_bytes: typing.Annotated[
         typing.Optional[str],
+        validation.pattern(bytes_pattern),
         schema.id("iomix-bytes"),
         schema.name("IOMix bytes"),
         schema.description(
