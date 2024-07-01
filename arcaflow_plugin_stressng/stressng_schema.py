@@ -11,6 +11,7 @@ from arcaflow_plugin_sdk import annotations
 
 bytes_pattern = re.compile(r"^[1-9]\d*\.?\d*[KkMmGgTt]$")
 
+
 def params_to_jobfile(params: dict) -> str:
     result = ""
     for key, value in params.items():
