@@ -731,6 +731,17 @@ class StressNGParams:
         ),
     ] = None
 
+    taskset: typing.Annotated[
+        typing.Optional[str],
+        validation.pattern(re.compile(r"((\d{1,3})(\,|\-))*\d{1,3}")),
+        schema.name("Taskset"),
+        schema.description(
+            "Bind stress-ng to use only the CPUs provided. The CPUs to be used are "
+            "specified by a comma separated list (0 to N-1). A range of CPUs can be "
+            "specified by using  '-'"
+        ),
+    ] = None
+
     verbose: typing.Annotated[
         typing.Optional[bool],
         schema.name("Verbose"),

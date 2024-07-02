@@ -15,6 +15,30 @@ class StressNGTest(unittest.TestCase):
     @staticmethod
     def test_serialization():
         plugin.test_object_serialization(
+            stressng_schema.StressNGParams(
+                timeout=10,
+                stressors=[
+                    stressng_schema.CpuStressorParams(
+                        stressor=stressng_schema.Stressors.CPU,
+                        workers=2,
+                    ),
+                    stressng_schema.VmStressorParams(
+                        stressor=stressng_schema.Stressors.VM,
+                        workers=2,
+                        vm_bytes="2G",
+                        vm_method=stressng_schema.VmMethod.ALL,
+                    ),
+                ],
+                page_in=True,
+                taskset="0,2-3,6,7-11",
+                verbose=True,
+                metrics_brief=True,
+                workdir="/tmp",
+                cleanup=True,
+            )
+        )
+
+        plugin.test_object_serialization(
             stressng_schema.CpuStressorParams(
                 stressor=stressng_schema.Stressors.CPU, workers=2
             )
@@ -34,6 +58,7 @@ class StressNGTest(unittest.TestCase):
                 stressor=stressng_schema.Stressors.MATRIX, workers=2
             )
         )
+
         plugin.test_object_serialization(
             stressng_schema.MqStressorParams(
                 stressor=stressng_schema.Stressors.MQ, workers=2
