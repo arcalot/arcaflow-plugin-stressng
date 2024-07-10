@@ -750,9 +750,10 @@ class StressNGParams:
         ),
     ] = None
 
+    taskgroup = r"(?:\d{1,3}|\d{1,3}-\d{1,3})"
     taskset: typing.Annotated[
         typing.Optional[str],
-        validation.pattern(re.compile(r"((\d{1,3})(\,|\-))*\d{1,3}")),
+        validation.pattern(re.compile(f"^{taskgroup}(?:,{taskgroup})*$")),
         schema.name("Taskset"),
         schema.description(
             "Bind stress-ng to use only the CPUs provided. The value is a "
