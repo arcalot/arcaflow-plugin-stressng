@@ -40,7 +40,10 @@ class StressNGTest(unittest.TestCase):
 
         plugin.test_object_serialization(
             stressng_schema.CpuStressorParams(
-                stressor=stressng_schema.Stressors.CPU, workers=2
+                stressor=stressng_schema.Stressors.CPU,
+                workers=2,
+                cpu_load=50,
+                cpu_method=stressng_schema.CpuMethod.FFT,
             )
         )
 
@@ -54,14 +57,55 @@ class StressNGTest(unittest.TestCase):
         )
 
         plugin.test_object_serialization(
+            stressng_schema.MmapStressorParams(
+                stressor=stressng_schema.Stressors.MMAP,
+                workers=2,
+                mmap_bytes="20%",
+                mmap_async=True,
+            )
+        )
+
+        plugin.test_object_serialization(
             stressng_schema.MatrixStressorParams(
-                stressor=stressng_schema.Stressors.MATRIX, workers=2
+                stressor=stressng_schema.Stressors.MATRIX,
+                workers=2,
+                matrix_method=stressng_schema.MatrixMethod.ADD,
             )
         )
 
         plugin.test_object_serialization(
             stressng_schema.MqStressorParams(
-                stressor=stressng_schema.Stressors.MQ, workers=2
+                stressor=stressng_schema.Stressors.MQ,
+                workers=2,
+                mq_ops=4,
+            )
+        )
+
+        plugin.test_object_serialization(
+            stressng_schema.HDDStressorParams(
+                stressor=stressng_schema.Stressors.HDD,
+                workers=2,
+                hdd_opts=[
+                    stressng_schema.HddOpts.DIRECT,
+                    stressng_schema.HddOpts.SYNC,
+                ],
+            )
+        )
+
+        plugin.test_object_serialization(
+            stressng_schema.IomixStressorParams(
+                stressor=stressng_schema.Stressors.IOMIX,
+                workers=2,
+                iomix_bytes="50g",
+            )
+        )
+
+        plugin.test_object_serialization(
+            stressng_schema.SockStressorParams(
+                stressor=stressng_schema.Stressors.SOCK,
+                workers=2,
+                sock_domain=stressng_schema.SockDomain.IPV4,
+                sock_opts=stressng_schema.SockOpts.SEND,
             )
         )
 
@@ -195,7 +239,10 @@ class StressNGTest(unittest.TestCase):
 
     def test_functional_mq(self):
         mq = stressng_schema.MqStressorParams(
-            stressor="mq", workers=1, mq_ops=10000000, mq_size=32
+            stressor="mq",
+            workers=1,
+            mq_ops=10000000,
+            mq_size=32,
         )
 
         stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[mq])
@@ -249,6 +296,60 @@ class StressNGTest(unittest.TestCase):
         self.assertIn("success", res)
         self.assertEqual(res[1].hddinfo.stressor, "hdd")
         self.assertGreaterEqual(math.ceil(res[1].hddinfo.wall_clock_time), test_time)
+
+    def test_functional_iomix(self):
+        iomix = stressng_schema.IomixStressorParams(
+            stressor="iomix",
+            workers=1,
+            iomix_bytes="100M",
+            iomix_ops=1000000,
+        )
+
+        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[iomix])
+
+        reference_jobfile = "tests/reference_jobfile_iomix"
+
+        result = stress.to_jobfile()
+
+        for item in stress.stressors:
+            result = result + item.to_jobfile()
+
+        with open(reference_jobfile, "r") as file:
+            reference = yaml.safe_load(file)
+
+        self.assertEqual(yaml.safe_load(result), reference)
+        res = stressng_plugin.stressng_run(self.id(), stress)
+        print(res)
+        self.assertIn("success", res)
+        self.assertEqual(res[1].iomixinfo.stressor, "iomix")
+        self.assertGreaterEqual(math.ceil(res[1].iomixinfo.wall_clock_time), test_time)
+
+    def test_functional_sock(self):
+        sock = stressng_schema.SockStressorParams(
+            stressor="sock",
+            workers=1,
+            sock_domain=stressng_schema.SockDomain.IPV4,
+            sock_opts=stressng_schema.SockOpts.SEND,
+        )
+
+        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[sock])
+
+        reference_jobfile = "tests/reference_jobfile_sock"
+
+        result = stress.to_jobfile()
+
+        for item in stress.stressors:
+            result = result + item.to_jobfile()
+
+        with open(reference_jobfile, "r") as file:
+            reference = yaml.safe_load(file)
+
+        self.assertEqual(yaml.safe_load(result), reference)
+        res = stressng_plugin.stressng_run(self.id(), stress)
+        print(res)
+        self.assertIn("success", res)
+        self.assertEqual(res[1].sockinfo.stressor, "sock")
+        self.assertGreaterEqual(math.ceil(res[1].sockinfo.wall_clock_time), test_time)
 
 
 if __name__ == "__main__":

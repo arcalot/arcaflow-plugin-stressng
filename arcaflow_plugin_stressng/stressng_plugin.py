@@ -115,12 +115,14 @@ def stressng_run(
     return "success", WorkloadResults(
         test_config=params,
         systeminfo=system_un,
+        cpuinfo=results.get(Stressors.CPU),
         vminfo=results.get(Stressors.VM),
         mmapinfo=results.get(Stressors.MMAP),
-        cpuinfo=results.get(Stressors.CPU),
         matrixinfo=results.get(Stressors.MATRIX),
         mqinfo=results.get(Stressors.MQ),
         hddinfo=results.get(Stressors.HDD),
+        iomixinfo=results.get(Stressors.IOMIX),
+        sockinfo=results.get(Stressors.SOCK),
     )
 
 

@@ -1,0 +1,4 @@
+timeout 5
+iomix 1
+iomix-bytes 100M
+iomix-ops 1000000

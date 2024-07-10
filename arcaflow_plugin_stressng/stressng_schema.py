@@ -720,6 +720,25 @@ class StressNGParams:
         ]
     ]
 
+    # The workdir and cleanup items are plugin-internal parameters that are not passed
+    # to the stress-ng command
+    workdir: typing.Annotated[
+        typing.Optional[str],
+        schema.name("Working Dir"),
+        schema.description(
+            "Directory in which stress-ng will be executed "
+            "(for example, to target a specific volume)"
+        ),
+    ] = None
+
+    cleanup: typing.Annotated[
+        typing.Optional[bool],
+        schema.name("Cleanup"),
+        schema.description("Cleanup artifacts after the plugin run"),
+    ] = False
+
+    # The below items need to be included in the to_jobfile function below so that the
+    # parameters are passed directly through to stress-ng as root parameters
     page_in: typing.Annotated[
         typing.Optional[bool],
         schema.id("page-in"),
@@ -736,9 +755,9 @@ class StressNGParams:
         validation.pattern(re.compile(r"((\d{1,3})(\,|\-))*\d{1,3}")),
         schema.name("Taskset"),
         schema.description(
-            "Bind stress-ng to use only the CPUs provided. The CPUs to be used are "
-            "specified by a comma separated list (0 to N-1). A range of CPUs can be "
-            "specified by using  '-'"
+            "Bind stress-ng to use only the CPUs provided. The value is a "
+            "comma-separated list (no spaces) of CPU numbers (0 to N-1) or CPU-ranges "
+            "(2-4)."
         ),
     ] = None
 
@@ -755,25 +774,12 @@ class StressNGParams:
         schema.description("Brief version of the metrics output"),
     ] = None
 
-    workdir: typing.Annotated[
-        typing.Optional[str],
-        schema.name("Working Dir"),
-        schema.description(
-            "Directory in which stress-ng will be executed "
-            "(for example, to target a specific volume)"
-        ),
-    ] = None
-
-    cleanup: typing.Annotated[
-        typing.Optional[bool],
-        schema.name("Cleanup"),
-        schema.description("Cleanup artifacts after the plugin run"),
-    ] = False
-
     def to_jobfile(self) -> str:
         return params_to_jobfile(
             {
                 "timeout": self.timeout,
+                "page-in": self.page_in,
+                "taskset": self.taskset,
                 "verbose": self.verbose,
                 "metrics-brief": self.metrics_brief,
             }
