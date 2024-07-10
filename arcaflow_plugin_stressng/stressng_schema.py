@@ -9,7 +9,7 @@ from arcaflow_plugin_sdk import plugin, schema, validation
 from arcaflow_plugin_sdk import annotations
 
 
-bytes_pattern = re.compile(r"^[1-9]\d*\.?\d*[KkMmGgTt]$")
+bytes_or_percent_pattern = re.compile(r"^[1-9]\d*\.?\d*[KkMmGgTt%]$")
 
 
 def params_to_jobfile(params: dict) -> str:
@@ -276,11 +276,12 @@ class CpuStressorParams(CommonStressorParams):
 class VmStressorParams(CommonStressorParams):
     vm_bytes: typing.Annotated[
         typing.Optional[str],
-        validation.pattern(bytes_pattern),
+        validation.pattern(bytes_or_percent_pattern),
         schema.id("vm-bytes"),
         schema.name("VM Memory Bytes"),
         schema.description(
-            "Number of bytes per vm worker to mmap; the default is 256MB"
+            "Number of bytes (with K, M, G, or T unit suffix) or percent (with % "
+            "suffix) per vm worker to allocate; the default is 256MB"
         ),
     ] = None
 
@@ -379,11 +380,12 @@ class MmapStressorParams(CommonStressorParams):
 
     mmap_bytes: typing.Annotated[
         typing.Optional[str],
-        validation.pattern(bytes_pattern),
+        validation.pattern(bytes_or_percent_pattern),
         schema.id("mmap-bytes"),
         schema.name("Mmap Bytes"),
         schema.description(
-            "Number of bytes per mmap stress worker to allocate; the default is 256MB"
+            "Number of bytes (with K, M, G, or T unit suffix) or percent (with % "
+            "suffix) per mmap worker to allocate; the default is 256MB"
         ),
     ] = None
 
@@ -537,11 +539,12 @@ class MqStressorParams(CommonStressorParams):
 class HDDStressorParams(CommonStressorParams):
     hdd_bytes: typing.Annotated[
         typing.Optional[str],
-        validation.pattern(bytes_pattern),
+        validation.pattern(bytes_or_percent_pattern),
         schema.id("hdd-bytes"),
         schema.name("Bytes Per Worker"),
         schema.description(
-            "Number of bytes to write for each hdd process; the default is 1 GB"
+            "Number of bytes (with K, M, G, or T unit suffix) or percent (with % "
+            "suffix) per hdd worker to write; the default is 1GB"
         ),
     ] = None
 
@@ -583,12 +586,12 @@ class HDDStressorParams(CommonStressorParams):
 class IomixStressorParams(CommonStressorParams):
     iomix_bytes: typing.Annotated[
         typing.Optional[str],
-        validation.pattern(bytes_pattern),
+        validation.pattern(bytes_or_percent_pattern),
         schema.id("iomix-bytes"),
         schema.name("IOMix bytes"),
         schema.description(
-            "Number of bytes to write for each iomix worker process; "
-            "the default is 1 GB"
+            "Number of bytes (with K, M, G, or T unit suffix) or percent (with % "
+            "suffix) per iomix worker to process; the default is 1GB"
         ),
     ] = None
 
