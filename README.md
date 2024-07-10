@@ -110,7 +110,7 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>HDDStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Number of bytes to write for each hdd process; the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt]$</code></td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Number of bytes (with K, M, G, or T unit suffix) or percent (with % suffix) per hdd worker to write; the default is 1GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt%]$</code></td></tr></tbody></table>
         </details><details><summary>hdd-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>HDD Operations</td></tr><tr><th>Description:</th><td width="500">Number of bogo operations after which to stop the hdd stress workers</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -142,7 +142,7 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>IomixStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>iomix-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>IOMix bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes to write for each iomix worker process; the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt]$</code></td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>IOMix bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes (with K, M, G, or T unit suffix) or percent (with % suffix) per iomix worker to process; the default is 1GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt%]$</code></td></tr></tbody></table>
         </details><details><summary>iomix-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>IOMix operations</td></tr><tr><th>Description:</th><td width="500">Number of bogo iomix I/O operations after which to stop the stress workers</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -190,7 +190,7 @@ Run the stress-ng workload with the given parameters
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mmap-async (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap Async</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and use asynchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes per mmap stress worker to allocate; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt]$</code></td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes (with K, M, G, or T unit suffix) or percent (with % suffix) per mmap worker to allocate; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt%]$</code></td></tr></tbody></table>
         </details><details><summary>mmap-file (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap File</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and by default use synchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-mmap2 (<code>bool</code>)</summary>
@@ -297,7 +297,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>vm-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>VM Memory Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes per vm worker to mmap; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt]$</code></td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>VM Memory Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes (with K, M, G, or T unit suffix) or percent (with % suffix) per vm worker to allocate; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt%]$</code></td></tr></tbody></table>
         </details><details><summary>vm-hang (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>VM Hang</td></tr><tr><th>Description:</th><td width="500">Number of seconds to sleep before unmapping memory; the default is zero seconds</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -463,7 +463,7 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>HDDStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>hdd-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Number of bytes to write for each hdd process; the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt]$</code></td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Bytes Per Worker</td></tr><tr><th>Description:</th><td width="500">Number of bytes (with K, M, G, or T unit suffix) or percent (with % suffix) per hdd worker to write; the default is 1GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt%]$</code></td></tr></tbody></table>
         </details><details><summary>hdd-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>HDD Operations</td></tr><tr><th>Description:</th><td width="500">Number of bogo operations after which to stop the hdd stress workers</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -524,7 +524,7 @@ Run the stress-ng workload with the given parameters
 </tbody></table>
         </details><details><summary>IomixStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>iomix-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>IOMix bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes to write for each iomix worker process; the default is 1 GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt]$</code></td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>IOMix bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes (with K, M, G, or T unit suffix) or percent (with % suffix) per iomix worker to process; the default is 1GB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt%]$</code></td></tr></tbody></table>
         </details><details><summary>iomix-ops (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>IOMix operations</td></tr><tr><th>Description:</th><td width="500">Number of bogo iomix I/O operations after which to stop the stress workers</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -701,7 +701,7 @@ Run the stress-ng workload with the given parameters
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>mmap-async (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap Async</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and use asynchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes per mmap stress worker to allocate; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt]$</code></td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Mmap Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes (with K, M, G, or T unit suffix) or percent (with % suffix) per mmap worker to allocate; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt%]$</code></td></tr></tbody></table>
         </details><details><summary>mmap-file (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Mmap File</td></tr><tr><th>Description:</th><td width="500">Enable file based memory mapping and by default use synchronous msync&#39;ing on each page</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>mmap-mmap2 (<code>bool</code>)</summary>
@@ -936,7 +936,7 @@ Run the stress-ng workload with the given parameters
     </td>
 </tr></tbody></table>
         </details><details><summary>vm-bytes (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>VM Memory Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes per vm worker to mmap; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt]$</code></td></tr></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>VM Memory Bytes</td></tr><tr><th>Description:</th><td width="500">Number of bytes (with K, M, G, or T unit suffix) or percent (with % suffix) per vm worker to allocate; the default is 256MB</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>^[1-9]\d*\.?\d*[KkMmGgTt%]$</code></td></tr></tbody></table>
         </details><details><summary>vm-hang (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>VM Hang</td></tr><tr><th>Description:</th><td width="500">Number of seconds to sleep before unmapping memory; the default is zero seconds</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
