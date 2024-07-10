@@ -74,6 +74,8 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Type:</th><td><code>one of[string]</code></td></tbody></table>
     </details>
 </td></tr></tbody></table>
+            </details><details><summary>taskset (<code>string</code>)</summary>
+                <table><tbody><tr><th>Name:</th><td>Taskset</td></tr><tr><th>Description:</th><td width="500">Bind stress-ng to use only the CPUs provided. The CPUs to be used are specified by a comma separated list (0 to N-1). A range of CPUs can be specified by using  &#39;-&#39;</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>((\d{1,3})(\,|\-))*\d{1,3}</code></td></tr></tbody></table>
             </details><details><summary>timeout (<code>int</code>)</summary>
                 <table><tbody><tr><th>Name:</th><td>Timeout</td></tr><tr><th>Description:</th><td width="500">Number of seconds after which to stop the stress test</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -279,6 +281,8 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Type:</th><td><code>one of[string]</code></td></tbody></table>
     </details>
 </td></tr></tbody></table>
+        </details><details><summary>taskset (<code>string</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Taskset</td></tr><tr><th>Description:</th><td width="500">Bind stress-ng to use only the CPUs provided. The CPUs to be used are specified by a comma separated list (0 to N-1). A range of CPUs can be specified by using  &#39;-&#39;</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>((\d{1,3})(\,|\-))*\d{1,3}</code></td></tr></tbody></table>
         </details><details><summary>timeout (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Timeout</td></tr><tr><th>Description:</th><td width="500">Number of seconds after which to stop the stress test</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
@@ -828,6 +832,8 @@ Run the stress-ng workload with the given parameters
         <table><tbody><tr><th>Type:</th><td><code>one of[string]</code></td></tbody></table>
     </details>
 </td></tr></tbody></table>
+        </details><details><summary>taskset (<code>string</code>)</summary>
+        <table><tbody><tr><th>Name:</th><td>Taskset</td></tr><tr><th>Description:</th><td width="500">Bind stress-ng to use only the CPUs provided. The CPUs to be used are specified by a comma separated list (0 to N-1). A range of CPUs can be specified by using  &#39;-&#39;</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>string</code></td><tr><th>Must match pattern:</th><td><code>((\d{1,3})(\,|\-))*\d{1,3}</code></td></tr></tbody></table>
         </details><details><summary>timeout (<code>int</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Timeout</td></tr><tr><th>Description:</th><td width="500">Number of seconds after which to stop the stress test</td></tr><tr><th>Required:</th><td>Yes</td></tr><tr><th>Type:</th><td><code>int</code></td>
 </tbody></table>
