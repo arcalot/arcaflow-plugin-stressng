@@ -1,0 +1,4 @@
+timeout 5
+sock 1
+sock-domain ipv4
+sock-opts send

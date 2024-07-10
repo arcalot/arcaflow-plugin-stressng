@@ -42,11 +42,6 @@ class Stressors(str, enum.Enum):
 stressor_schemas = {}
 
 
-# Mapping of Stressors to their corresponding output schemas (each schema
-# definition is added as it is defined, below).
-stressor_schemas = {}
-
-
 class CpuMethod(str, enum.Enum):
     ALL = "all"
     ACKERMANN = "ackermann"
@@ -720,6 +715,25 @@ class StressNGParams:
         ]
     ]
 
+    # The workdir and cleanup items are plugin-internal parameters that are not passed
+    # to the stress-ng command
+    workdir: typing.Annotated[
+        typing.Optional[str],
+        schema.name("Working Directory"),
+        schema.description(
+            "Directory in which stress-ng will be executed "
+            "(for example, to target a specific volume)"
+        ),
+    ] = "."
+
+    cleanup: typing.Annotated[
+        typing.Optional[bool],
+        schema.name("Cleanup"),
+        schema.description("Cleanup artifacts after the plugin run"),
+    ] = False
+
+    # The below items need to be included in the to_jobfile function below so that the
+    # parameters are passed directly through to stress-ng as root parameters
     page_in: typing.Annotated[
         typing.Optional[bool],
         schema.id("page-in"),
@@ -728,6 +742,18 @@ class StressNGParams:
             "Touch allocated pages that are not in core, forcing them to be paged "
             "back in. This is a useful option to force all the allocated pages to "
             "be paged in when using the bigheap, mmap and vm stressors."
+        ),
+    ] = None
+
+    taskgroup = r"\d{1,3}|\d{1,3}-\d{1,3}"
+    taskset: typing.Annotated[
+        typing.Optional[str],
+        validation.pattern(re.compile(f"^(?:{taskgroup})(?:,(?:{taskgroup}))*$")),
+        schema.name("Taskset"),
+        schema.description(
+            "Bind stress-ng to use only the CPUs provided. The value is a "
+            "comma-separated list (no spaces) of CPU numbers (0 to N-1) or CPU-ranges "
+            "(2-4)."
         ),
     ] = None
 
@@ -744,25 +770,12 @@ class StressNGParams:
         schema.description("Brief version of the metrics output"),
     ] = None
 
-    workdir: typing.Annotated[
-        typing.Optional[str],
-        schema.name("Working Dir"),
-        schema.description(
-            "Directory in which stress-ng will be executed "
-            "(for example, to target a specific volume)"
-        ),
-    ] = None
-
-    cleanup: typing.Annotated[
-        typing.Optional[bool],
-        schema.name("Cleanup"),
-        schema.description("Cleanup artifacts after the plugin run"),
-    ] = False
-
     def to_jobfile(self) -> str:
         return params_to_jobfile(
             {
                 "timeout": self.timeout,
+                "page-in": self.page_in,
+                "taskset": self.taskset,
                 "verbose": self.verbose,
                 "metrics-brief": self.metrics_brief,
             }

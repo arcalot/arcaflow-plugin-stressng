@@ -1,4 +1,5 @@
 timeout 5
+verbose
 matrix 1
 matrix-ops 1000
 matrix-method all

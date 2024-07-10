@@ -61,14 +61,11 @@ def stressng_run(
     ]
 
     print("==>> Running stress-ng with the temporary jobfile...")
-    workdir = "/tmp"
-    if params.workdir is not None:
-        workdir = params.workdir
     try:
         print(
             subprocess.check_output(
                 stressng_command,
-                cwd=workdir,
+                cwd=params.workdir,
                 text=True,
                 stderr=subprocess.STDOUT,
             )
@@ -115,12 +112,14 @@ def stressng_run(
     return "success", WorkloadResults(
         test_config=params,
         systeminfo=system_un,
+        cpuinfo=results.get(Stressors.CPU),
         vminfo=results.get(Stressors.VM),
         mmapinfo=results.get(Stressors.MMAP),
-        cpuinfo=results.get(Stressors.CPU),
         matrixinfo=results.get(Stressors.MATRIX),
         mqinfo=results.get(Stressors.MQ),
         hddinfo=results.get(Stressors.HDD),
+        iomixinfo=results.get(Stressors.IOMIX),
+        sockinfo=results.get(Stressors.SOCK),
     )
 
 

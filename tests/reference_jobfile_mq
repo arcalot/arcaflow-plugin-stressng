@@ -1,4 +1,5 @@
 timeout 5
+metrics-brief
 mq 1
 mq-ops 10000000
 mq-size 32
