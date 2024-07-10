@@ -124,7 +124,11 @@ class StressNGTest(unittest.TestCase):
             cpu_method=stressng_schema.CpuMethod.ALL,
         )
 
-        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[cpu])
+        stress = stressng_schema.StressNGParams(
+            timeout=test_time,
+            stressors=[cpu],
+            taskset="0,1-2",
+        )
 
         reference_jobfile = "tests/reference_jobfile_cpu"
 
@@ -156,7 +160,11 @@ class StressNGTest(unittest.TestCase):
             vm_populate=True,
         )
 
-        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[vm])
+        stress = stressng_schema.StressNGParams(
+            timeout=test_time,
+            stressors=[vm],
+            page_in=True,
+        )
 
         reference_jobfile = "tests/reference_jobfile_vm"
 
@@ -189,7 +197,11 @@ class StressNGTest(unittest.TestCase):
             mmap_osync=True,
         )
 
-        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[mmap])
+        stress = stressng_schema.StressNGParams(
+            timeout=test_time,
+            stressors=[mmap],
+            cleanup=True,
+        )
 
         reference_jobfile = "tests/reference_jobfile_mmap"
 
@@ -218,7 +230,11 @@ class StressNGTest(unittest.TestCase):
             matrix_yx=True,
         )
 
-        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[matrix])
+        stress = stressng_schema.StressNGParams(
+            timeout=test_time,
+            stressors=[matrix],
+            verbose=True,
+        )
 
         reference_jobfile = "tests/reference_jobfile_matrix"
 
@@ -245,7 +261,11 @@ class StressNGTest(unittest.TestCase):
             mq_size=32,
         )
 
-        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[mq])
+        stress = stressng_schema.StressNGParams(
+            timeout=test_time,
+            stressors=[mq],
+            metrics_brief=True,
+        )
 
         reference_jobfile = "tests/reference_jobfile_mq"
 
@@ -278,7 +298,11 @@ class StressNGTest(unittest.TestCase):
             hdd_write_size="4M",
         )
 
-        stress = stressng_schema.StressNGParams(timeout=test_time, stressors=[hdd])
+        stress = stressng_schema.StressNGParams(
+            timeout=test_time,
+            stressors=[hdd],
+            workdir="/",
+        )
 
         reference_jobfile = "tests/reference_jobfile_hdd"
 

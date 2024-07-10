@@ -1,4 +1,5 @@
 timeout 5
+page-in
 vm 1
 vm-bytes 100M
 vm-ops 1000

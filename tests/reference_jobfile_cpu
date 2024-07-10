@@ -1,4 +1,5 @@
 timeout 5
+taskset 0,1-2
 cpu 2
 cpu-ops 1000
 cpu-load 5
