@@ -42,11 +42,6 @@ class Stressors(str, enum.Enum):
 stressor_schemas = {}
 
 
-# Mapping of Stressors to their corresponding output schemas (each schema
-# definition is added as it is defined, below).
-stressor_schemas = {}
-
-
 class CpuMethod(str, enum.Enum):
     ALL = "all"
     ACKERMANN = "ackermann"
