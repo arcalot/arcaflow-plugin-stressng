@@ -61,14 +61,11 @@ def stressng_run(
     ]
 
     print("==>> Running stress-ng with the temporary jobfile...")
-    workdir = "/tmp"
-    if params.workdir is not None:
-        workdir = params.workdir
     try:
         print(
             subprocess.check_output(
                 stressng_command,
-                cwd=workdir,
+                cwd=params.workdir,
                 text=True,
                 stderr=subprocess.STDOUT,
             )

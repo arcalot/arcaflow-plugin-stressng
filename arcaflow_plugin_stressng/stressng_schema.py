@@ -724,12 +724,12 @@ class StressNGParams:
     # to the stress-ng command
     workdir: typing.Annotated[
         typing.Optional[str],
-        schema.name("Working Dir"),
+        schema.name("Working Directory"),
         schema.description(
             "Directory in which stress-ng will be executed "
             "(for example, to target a specific volume)"
         ),
-    ] = None
+    ] = "."
 
     cleanup: typing.Annotated[
         typing.Optional[bool],
@@ -750,10 +750,10 @@ class StressNGParams:
         ),
     ] = None
 
-    taskgroup = r"(?:\d{1,3}|\d{1,3}-\d{1,3})"
+    taskgroup = r"\d{1,3}|\d{1,3}-\d{1,3}"
     taskset: typing.Annotated[
         typing.Optional[str],
-        validation.pattern(re.compile(f"^{taskgroup}(?:,{taskgroup})*$")),
+        validation.pattern(re.compile(f"^(?:{taskgroup})(?:,{taskgroup})*$")),
         schema.name("Taskset"),
         schema.description(
             "Bind stress-ng to use only the CPUs provided. The value is a "
