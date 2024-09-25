@@ -82,7 +82,7 @@ Run the stress-ng workload with the given parameters
             </details><details><summary>verbose (<code>bool</code>)</summary>
                 <table><tbody><tr><th>Name:</th><td>Verbose</td></tr><tr><th>Description:</th><td width="500">Verbose output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
             </details><details><summary>workdir (<code>string</code>)</summary>
-                <table><tbody><tr><th>Name:</th><td>Working Directory</td></tr><tr><th>Description:</th><td width="500">Directory in which stress-ng will be executed (for example, to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;.&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+                <table><tbody><tr><th>Name:</th><td>Working Directory</td></tr><tr><th>Description:</th><td width="500">Directory in which stress-ng will be executed (for example, to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;/tmp&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
             </details></td></tr>
 <tr><td colspan="2"><details><summary><strong>Objects</strong></summary><details><summary>CpuStressorParams (<code>object</code>)</summary>
             <table><tbody><tr><th>Type:</th><td><code>object</code></td><tr><th>Properties</th><td><details><summary>cpu-load (<code>int</code>)</summary>
@@ -289,7 +289,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>verbose (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Verbose</td></tr><tr><th>Description:</th><td width="500">Verbose output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>workdir (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Working Directory</td></tr><tr><th>Description:</th><td width="500">Directory in which stress-ng will be executed (for example, to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;.&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Working Directory</td></tr><tr><th>Description:</th><td width="500">Directory in which stress-ng will be executed (for example, to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;/tmp&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>VmStressorParams (<code>object</code>)</summary>
@@ -840,7 +840,7 @@ Run the stress-ng workload with the given parameters
         </details><details><summary>verbose (<code>bool</code>)</summary>
         <table><tbody><tr><th>Name:</th><td>Verbose</td></tr><tr><th>Description:</th><td width="500">Verbose output</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Type:</th><td><code>bool</code></td></tbody></table>
         </details><details><summary>workdir (<code>string</code>)</summary>
-        <table><tbody><tr><th>Name:</th><td>Working Directory</td></tr><tr><th>Description:</th><td width="500">Directory in which stress-ng will be executed (for example, to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;.&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
+        <table><tbody><tr><th>Name:</th><td>Working Directory</td></tr><tr><th>Description:</th><td width="500">Directory in which stress-ng will be executed (for example, to target a specific volume)</td></tr><tr><th>Required:</th><td>No</td></tr><tr><th>Default (JSON encoded):</th><td><pre><code>&#34;/tmp&#34;</code></pre></td></tr><tr><th>Type:</th><td><code>string</code></td></tbody></table>
         </details></td></tr>
 </tbody></table>
         </details><details><summary>SystemInfoOutput (<code>object</code>)</summary>

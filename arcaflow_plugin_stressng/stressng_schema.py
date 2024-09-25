@@ -3,6 +3,7 @@
 import typing
 import enum
 import re
+import tempfile
 from dataclasses import dataclass
 
 from arcaflow_plugin_sdk import plugin, schema, validation
@@ -724,7 +725,7 @@ class StressNGParams:
             "Directory in which stress-ng will be executed "
             "(for example, to target a specific volume)"
         ),
-    ] = "."
+    ] = tempfile.gettempdir()
 
     cleanup: typing.Annotated[
         typing.Optional[bool],
